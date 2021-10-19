@@ -1,0 +1,1 @@
+{"nodes":{"master":{"name":"HCP4_uC2_1","timebase":10,"jitter":0.9},"slave":["HVH_L","KJS1","KJS2","KLE_1","KLE_2","MVH_L","PTC1","WP_1a"]}}

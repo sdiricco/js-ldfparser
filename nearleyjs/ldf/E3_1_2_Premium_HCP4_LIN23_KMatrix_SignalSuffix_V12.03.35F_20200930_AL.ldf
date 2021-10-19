@@ -1,0 +1,3005 @@
+/* ***********************************************************************/
+/*                                                                       */
+/*  LIN DESCRIPTION FILE                                                 */
+/*                                                                       */
+/*  Date:          30.09.2020                                            */
+/*  Project:       E3_1_2_Premium                                        */
+/*  Version:       V12.03.35F                                            */
+/*                                                                       */
+/*  Network:       HCP4_LIN23                                            */
+/*  Slave(s):      HVH_L               Hochvoltheizer Luft               */
+/*                 KJS1                Steuerbarer Kühlerlufteintritt    */
+/*                                     (Kühlerjalousie) 1                */
+/*                 KJS2                Steuerbarer Kühlerlufteintritt    */
+/*                                     (Kühlerjalousie) 2                */
+/*                 KLE_1               Kühlerlüfterelektronik 1          */
+/*                 KLE_2               Kühlerlüfterelektronik 2          */
+/*                 MVH_L               Steuergerät für                   */
+/*                                     Luftzusatzheizung/PTC3            */
+/*                 PTC1                DFL-Kürzel : PTC                  */
+/*                 WP_1a               elektrische Wasserpumpe für       */
+/*                                     Kühlung Antriebsstrang 1          */
+/*  Master:        HCP4_uC2_1          Thermomanagement                  */
+/*                                                                       */
+/*  Ersteller:     DFL@Audi.de VAG                                       */
+/*                                                                       */
+/* ***********************************************************************/
+/*                                                                       */
+/*  SYSTEMPARAMETER                                                      */
+/*                                                                       */
+/*  Spannungsversorgung:       HCP4_uC2_1          Kl.30                 */
+/*                             HVH_L               Kl.30                 */
+/*                             KJS1                Kl.30                 */
+/*                             KJS2                Kl.30                 */
+/*                             KLE_1               Kl.30                 */
+/*                             KLE_2               Kl.30                 */
+/*                             MVH_L               Kl.30                 */
+/*                             PTC1                Kl.30                 */
+/*                             WP_1a               Kl.30                 */
+/*                                                                       */
+/*  Sleep / WakeUp:            HCP4_uC2_1          Nein                  */
+/*                             HVH_L               Nein                  */
+/*                             KJS1                Nein                  */
+/*                             KJS2                Nein                  */
+/*                             KLE_1               Nein                  */
+/*                             KLE_2               Nein                  */
+/*                             MVH_L               Nein                  */
+/*                             PTC1                Nein                  */
+/*                             WP_1a               Nein                  */
+/*                                                                       */
+/*  Diagnoseklasse/Adresse:    HCP4_uC2_1          4     0x00C5          */
+/*                             HVH_L               2F    0x0757          */
+/*                             KJS1                1     0x0712          */
+/*                             KJS2                1     0x0713          */
+/*                             KLE_1               1     0x072A          */
+/*                             KLE_2               1     0x0737          */
+/*                             MVH_L               1     0x07B7          */
+/*                             PTC1                      0x0629          */
+/*                             WP_1a               2F    0x0789          */
+/*                                                                       */
+/*  ScheduleTable:             ST_HVH_L                                  */
+/*                             ST_KickDown                               */
+/*                             ST_MVH_L                                  */
+/*                             ST_NV_PTC                                 */
+/*                             DiagFunktionalerRequest                   */
+/*                             FlashRequest                              */
+/*                             FlashResponse                             */
+/*                             DiagRequest                               */
+/*                             DiagResponse                              */
+/*                                                                       */
+/* ***********************************************************************/
+LIN_description_file;
+LIN_protocol_version = "2.0";
+LIN_language_version = "2.0";
+LIN_speed = 19.2 kbps;
+Nodes {
+	Master: HCP4_uC2_1, 10 ms, 0.9 ms;
+	Slaves: HVH_L, KJS1, KJS2, KLE_1, KLE_2, MVH_L, PTC1, WP_1a;
+}
+Signals {
+	HV_HL_Err_Heizkreis_1_TNCTOC: 1, 0, HVH_L, HCP4_uC2_1;
+	HV_HL_Err_Heizkreis_2_TNCTOC: 1, 0, HVH_L, HCP4_uC2_1;
+	HV_HL_Err_Heizkreis_3_TNCTOC: 1, 0, HVH_L, HCP4_uC2_1;
+	HV_HL_Err_Heizkreis_4_TNCTOC: 1, 0, HVH_L, HCP4_uC2_1;
+	HV_HL_Err_intern: 1, 0, HVH_L, HCP4_uC2_1;
+	HV_HL_Err_Intern_TNCTOC: 1, 0, HVH_L, HCP4_uC2_1;
+	HV_HL_Err_Leckagestrom: 1, 0, HVH_L, HCP4_uC2_1;
+	HV_HL_Err_Leckagestrom_TNCTOC: 1, 0, HVH_L, HCP4_uC2_1;
+	HV_HL_Err_Temp_HK1_1_TNCTOC: 1, 0, HVH_L, HCP4_uC2_1;
+	HV_HL_Err_Temp_HK1_2_TNCTOC: 1, 0, HVH_L, HCP4_uC2_1;
+	HV_HL_Err_Temp_HK2_1_TNCTOC: 1, 0, HVH_L, HCP4_uC2_1;
+	HV_HL_Err_Temp_HK2_2_TNCTOC: 1, 0, HVH_L, HCP4_uC2_1;
+	HV_HL_Err_Temp_HK3_1_TNCTOC: 1, 0, HVH_L, HCP4_uC2_1;
+	HV_HL_Err_Temp_HK3_2_TNCTOC: 1, 0, HVH_L, HCP4_uC2_1;
+	HV_HL_Err_Temp_HK4_1_TNCTOC: 1, 0, HVH_L, HCP4_uC2_1;
+	HV_HL_Err_Temp_HK4_2_TNCTOC: 1, 0, HVH_L, HCP4_uC2_1;
+	HV_HL_Err_Temp_PCB_TNCTOC: 1, 0, HVH_L, HCP4_uC2_1;
+	HV_HL_Err_Temp_Sens1_TNCTOC: 1, 0, HVH_L, HCP4_uC2_1;
+	HV_HL_Err_Temperaturschutz: 1, 0, HVH_L, HCP4_uC2_1;
+	HV_HL_Err_TempSchutz_TNCTOC: 1, 0, HVH_L, HCP4_uC2_1;
+	HV_HL_Err_Ueberstromabs_TNCTOC: 1, 0, HVH_L, HCP4_uC2_1;
+	HV_HL_Err_Ueberstromabschaltung: 1, 0, HVH_L, HCP4_uC2_1;
+	HV_HL_ErrMem_State: 2, 0, HVH_L, HCP4_uC2_1;
+	HV_HL_Fehlerstatus: 3, 7, HVH_L, HCP4_uC2_1;
+	HV_HL_HK1_HV_I_ist: 8, 254, HVH_L, HCP4_uC2_1;
+	HV_HL_HK1_maxAnst: 1, 0, HVH_L, HCP4_uC2_1;
+	HV_HL_HK2_HV_I_ist: 8, 254, HVH_L, HCP4_uC2_1;
+	HV_HL_HK2_maxAnst: 1, 0, HVH_L, HCP4_uC2_1;
+	HV_HL_HK3_HV_I_ist: 8, 254, HVH_L, HCP4_uC2_1;
+	HV_HL_HK3_maxAnst: 1, 0, HVH_L, HCP4_uC2_1;
+	HV_HL_HK4_HV_I_ist: 8, 254, HVH_L, HCP4_uC2_1;
+	HV_HL_HK4_maxAnst: 1, 0, HVH_L, HCP4_uC2_1;
+	HV_HL_HV_ERR: 2, 3, HVH_L, HCP4_uC2_1;
+	HV_HL_HV_I_ist: 8, 254, HVH_L, HCP4_uC2_1;
+	HV_HL_HV_UBattNV_TNCTOC: 1, 0, HVH_L, HCP4_uC2_1;
+	HV_HL_HV_Voltage: 8, 254, HVH_L, HCP4_uC2_1;
+	HV_HL_HV_Voltage_TNCTOC: 1, 0, HVH_L, HCP4_uC2_1;
+	HV_HL_Istmodus: 1, 0, HVH_L, HCP4_uC2_1;
+	HV_HL_Mode_HK1: 3, 0, HVH_L, HCP4_uC2_1;
+	HV_HL_Mode_HK2: 3, 0, HVH_L, HCP4_uC2_1;
+	HV_HL_Mode_HK3: 3, 0, HVH_L, HCP4_uC2_1;
+	HV_HL_Mode_HK4: 3, 0, HVH_L, HCP4_uC2_1;
+	HV_HL_ParameterChange: 1, 0, HVH_L, HCP4_uC2_1;
+	HV_HL_ResponseError_TNCTOC: 1, 0, HVH_L, HCP4_uC2_1;
+	HV_HL_Status_UBatt: 2, 3, HVH_L, HCP4_uC2_1;
+	HV_HL_Temp_HK1_1: 8, 254, HVH_L, HCP4_uC2_1;
+	HV_HL_Temp_HK1_2: 8, 254, HVH_L, HCP4_uC2_1;
+	HV_HL_Temp_HK2_1: 8, 254, HVH_L, HCP4_uC2_1;
+	HV_HL_Temp_HK2_2: 8, 254, HVH_L, HCP4_uC2_1;
+	HV_HL_Temp_HK3_1: 8, 254, HVH_L, HCP4_uC2_1;
+	HV_HL_Temp_HK3_2: 8, 254, HVH_L, HCP4_uC2_1;
+	HV_HL_Temp_HK4_1: 8, 254, HVH_L, HCP4_uC2_1;
+	HV_HL_Temp_HK4_2: 8, 254, HVH_L, HCP4_uC2_1;
+	HV_HL_Temp_PCB: 8, 254, HVH_L, HCP4_uC2_1;
+	HV_HL_Temp_Sensor_1: 8, 254, HVH_L, HCP4_uC2_1;
+	HV_HL_TimeOut_Fehler: 1, 0, HVH_L, HCP4_uC2_1;
+	HV_HL_Ubatt_NV: 8, 254, HVH_L, HCP4_uC2_1;
+	HV_HL_Vorhalt_Stufe: 2, 0, HVH_L, HCP4_uC2_1;
+	ISOALLReqB0: 8, 0, HCP4_uC2_1, HVH_L, KJS1, KJS2, KLE_1, KLE_2, MVH_L, WP_1a;
+	ISOALLReqB1: 8, 0, HCP4_uC2_1, HVH_L, KJS1, KJS2, KLE_1, KLE_2, MVH_L, WP_1a;
+	ISOALLReqB2: 8, 0, HCP4_uC2_1, HVH_L, KJS1, KJS2, KLE_1, KLE_2, MVH_L, WP_1a;
+	ISOALLReqB3: 8, 0, HCP4_uC2_1, HVH_L, KJS1, KJS2, KLE_1, KLE_2, MVH_L, WP_1a;
+	ISOALLReqB4: 8, 0, HCP4_uC2_1, HVH_L, KJS1, KJS2, KLE_1, KLE_2, MVH_L, WP_1a;
+	ISOALLReqB5: 8, 0, HCP4_uC2_1, HVH_L, KJS1, KJS2, KLE_1, KLE_2, MVH_L, WP_1a;
+	ISOALLReqB6: 8, 0, HCP4_uC2_1, HVH_L, KJS1, KJS2, KLE_1, KLE_2, MVH_L, WP_1a;
+	ISOALLReqB7: 8, 0, HCP4_uC2_1, HVH_L, KJS1, KJS2, KLE_1, KLE_2, MVH_L, WP_1a;
+	KJS1_ResponseError: 1, 0, KJS1, HCP4_uC2_1;
+	KJS1s_01_BZ: 4, 0, KJS1, HCP4_uC2_1;
+	KJS1s_01_CRC: 8, 0, KJS1, HCP4_uC2_1;
+	KJS2_ResponseError: 1, 0, KJS2, HCP4_uC2_1;
+	KJS2s_01_BZ: 4, 0, KJS2, HCP4_uC2_1;
+	KJS2s_01_CRC: 8, 0, KJS2, HCP4_uC2_1;
+	KJS_SA1_AktDefekt_TF: 1, 0, KJS1, HCP4_uC2_1;
+	KJS_SA1_AktDefekt_TNCTOC: 1, 1, KJS1, HCP4_uC2_1;
+	KJS_SA1_Bewegungsstatus: 2, 3, KJS1, HCP4_uC2_1;
+	KJS_SA1_Blockade1_TF: 1, 0, KJS1, HCP4_uC2_1;
+	KJS_SA1_Blockade1_TNCTOC: 1, 1, KJS1, HCP4_uC2_1;
+	KJS_SA1_Blockade2_TF: 1, 0, KJS1, HCP4_uC2_1;
+	KJS_SA1_Blockade2_TNCTOC: 1, 1, KJS1, HCP4_uC2_1;
+	KJS_SA1_Blockade_Pos: 12, 4094, KJS1, HCP4_uC2_1;
+	KJS_SA1_DrehtFrei1_TF: 1, 0, KJS1, HCP4_uC2_1;
+	KJS_SA1_DrehtFrei1_TNCTOC: 1, 1, KJS1, HCP4_uC2_1;
+	KJS_SA1_DrehtFrei2_TF: 1, 0, KJS1, HCP4_uC2_1;
+	KJS_SA1_DrehtFrei2_TNCTOC: 1, 1, KJS1, HCP4_uC2_1;
+	KJS_SA1_E2EFehler_TF: 1, 0, KJS1, HCP4_uC2_1;
+	KJS_SA1_E2EFehler_TNCTOC: 1, 1, KJS1, HCP4_uC2_1;
+	KJS_SA1_Fehler_Codierpin_TF: 1, 0, KJS1, HCP4_uC2_1;
+	KJS_SA1_Fehler_Codierpin_TNCTOC: 1, 1, KJS1, HCP4_uC2_1;
+	KJS_SA1_Fehler_InitRef_TF: 1, 0, KJS1, HCP4_uC2_1;
+	KJS_SA1_Fehler_InitRef_TNCTOC: 1, 1, KJS1, HCP4_uC2_1;
+	KJS_SA1_Fehler_Parameter_TF: 1, 0, KJS1, HCP4_uC2_1;
+	KJS_SA1_Fehler_Parameter_TNCTOC: 1, 1, KJS1, HCP4_uC2_1;
+	KJS_SA1_Initialisiert: 1, 0, KJS1, HCP4_uC2_1;
+	KJS_SA1_InkrFehler_TF: 1, 0, KJS1, HCP4_uC2_1;
+	KJS_SA1_InkrFehler_TNCTOC: 1, 1, KJS1, HCP4_uC2_1;
+	KJS_SA1_InkrSense_TF: 1, 0, KJS1, HCP4_uC2_1;
+	KJS_SA1_InkrSense_TNCTOC: 1, 1, KJS1, HCP4_uC2_1;
+	KJS_SA1_Ist_Drehrichtung: 2, 3, KJS1, HCP4_uC2_1;
+	KJS_SA1_Ist_Pos: 12, 4094, KJS1, HCP4_uC2_1;
+	KJS_SA1_PlausiFehlg_TF: 1, 0, KJS1, HCP4_uC2_1;
+	KJS_SA1_PlausiFehlg_TNCTOC: 1, 1, KJS1, HCP4_uC2_1;
+	KJS_SA1_Pos_erreicht: 1, 0, KJS1, HCP4_uC2_1;
+	KJS_SA1_Ref_Weg: 12, 4094, KJS1, HCP4_uC2_1;
+	KJS_SA1_Referenziert: 1, 0, KJS1, HCP4_uC2_1;
+	KJS_SA1_SenseDefekt_TF: 1, 0, KJS1, HCP4_uC2_1;
+	KJS_SA1_SenseDefekt_TNCTOC: 1, 1, KJS1, HCP4_uC2_1;
+	KJS_SA1_TempAbsch_TF: 1, 0, KJS1, HCP4_uC2_1;
+	KJS_SA1_TempAbsch_TNCTOC: 1, 1, KJS1, HCP4_uC2_1;
+	KJS_SA1_TempWarning_TF: 1, 0, KJS1, HCP4_uC2_1;
+	KJS_SA1_TempWarning_TNCTOC: 1, 1, KJS1, HCP4_uC2_1;
+	KJS_SA1_UHoch_TF: 1, 0, KJS1, HCP4_uC2_1;
+	KJS_SA1_UHoch_TNCTOC: 1, 1, KJS1, HCP4_uC2_1;
+	KJS_SA1_UNieder_TF: 1, 0, KJS1, HCP4_uC2_1;
+	KJS_SA1_UNieder_TNCTOC: 1, 1, KJS1, HCP4_uC2_1;
+	KJS_SA1_UUeber_TF: 1, 0, KJS1, HCP4_uC2_1;
+	KJS_SA1_UUeber_TNCTOC: 1, 1, KJS1, HCP4_uC2_1;
+	KJS_SA1_UUnter_TF: 1, 0, KJS1, HCP4_uC2_1;
+	KJS_SA1_UUnter_TNCTOC: 1, 1, KJS1, HCP4_uC2_1;
+	KJS_SA2_AktDefekt_TF: 1, 0, KJS2, HCP4_uC2_1;
+	KJS_SA2_AktDefekt_TNCTOC: 1, 1, KJS2, HCP4_uC2_1;
+	KJS_SA2_Bewegungsstatus: 2, 3, KJS2, HCP4_uC2_1;
+	KJS_SA2_Blockade1_TF: 1, 0, KJS2, HCP4_uC2_1;
+	KJS_SA2_Blockade1_TNCTOC: 1, 1, KJS2, HCP4_uC2_1;
+	KJS_SA2_Blockade2_TF: 1, 0, KJS2, HCP4_uC2_1;
+	KJS_SA2_Blockade2_TNCTOC: 1, 1, KJS2, HCP4_uC2_1;
+	KJS_SA2_Blockade_Pos: 12, 4094, KJS2, HCP4_uC2_1;
+	KJS_SA2_DrehtFrei1_TF: 1, 0, KJS2, HCP4_uC2_1;
+	KJS_SA2_DrehtFrei1_TNCTOC: 1, 1, KJS2, HCP4_uC2_1;
+	KJS_SA2_DrehtFrei2_TF: 1, 0, KJS2, HCP4_uC2_1;
+	KJS_SA2_DrehtFrei2_TNCTOC: 1, 1, KJS2, HCP4_uC2_1;
+	KJS_SA2_E2EFehler_TF: 1, 0, KJS2, HCP4_uC2_1;
+	KJS_SA2_E2EFehler_TNCTOC: 1, 1, KJS2, HCP4_uC2_1;
+	KJS_SA2_Fehler_Codierpin_TF: 1, 0, KJS2, HCP4_uC2_1;
+	KJS_SA2_Fehler_Codierpin_TNCTOC: 1, 1, KJS2, HCP4_uC2_1;
+	KJS_SA2_Fehler_InitRef_TF: 1, 0, KJS2, HCP4_uC2_1;
+	KJS_SA2_Fehler_InitRef_TNCTOC: 1, 1, KJS2, HCP4_uC2_1;
+	KJS_SA2_Fehler_Parameter_TF: 1, 0, KJS2, HCP4_uC2_1;
+	KJS_SA2_Fehler_Parameter_TNCTOC: 1, 1, KJS2, HCP4_uC2_1;
+	KJS_SA2_Initialisiert: 1, 0, KJS2, HCP4_uC2_1;
+	KJS_SA2_InkrFehler_TF: 1, 0, KJS2, HCP4_uC2_1;
+	KJS_SA2_InkrFehler_TNCTOC: 1, 1, KJS2, HCP4_uC2_1;
+	KJS_SA2_InkrSense_TF: 1, 0, KJS2, HCP4_uC2_1;
+	KJS_SA2_InkrSense_TNCTOC: 1, 1, KJS2, HCP4_uC2_1;
+	KJS_SA2_Ist_Drehrichtung: 2, 3, KJS2, HCP4_uC2_1;
+	KJS_SA2_Ist_Pos: 12, 4094, KJS2, HCP4_uC2_1;
+	KJS_SA2_PlausiFehlg_TF: 1, 0, KJS2, HCP4_uC2_1;
+	KJS_SA2_PlausiFehlg_TNCTOC: 1, 1, KJS2, HCP4_uC2_1;
+	KJS_SA2_Pos_erreicht: 1, 0, KJS2, HCP4_uC2_1;
+	KJS_SA2_Ref_Weg: 12, 4094, KJS2, HCP4_uC2_1;
+	KJS_SA2_Referenziert: 1, 0, KJS2, HCP4_uC2_1;
+	KJS_SA2_SenseDefekt_TF: 1, 0, KJS2, HCP4_uC2_1;
+	KJS_SA2_SenseDefekt_TNCTOC: 1, 1, KJS2, HCP4_uC2_1;
+	KJS_SA2_TempAbsch_TF: 1, 0, KJS2, HCP4_uC2_1;
+	KJS_SA2_TempAbsch_TNCTOC: 1, 1, KJS2, HCP4_uC2_1;
+	KJS_SA2_TempWarning_TF: 1, 0, KJS2, HCP4_uC2_1;
+	KJS_SA2_TempWarning_TNCTOC: 1, 1, KJS2, HCP4_uC2_1;
+	KJS_SA2_UHoch_TF: 1, 0, KJS2, HCP4_uC2_1;
+	KJS_SA2_UHoch_TNCTOC: 1, 1, KJS2, HCP4_uC2_1;
+	KJS_SA2_UNieder_TF: 1, 0, KJS2, HCP4_uC2_1;
+	KJS_SA2_UNieder_TNCTOC: 1, 1, KJS2, HCP4_uC2_1;
+	KJS_SA2_UUeber_TF: 1, 0, KJS2, HCP4_uC2_1;
+	KJS_SA2_UUeber_TNCTOC: 1, 1, KJS2, HCP4_uC2_1;
+	KJS_SA2_UUnter_TF: 1, 0, KJS2, HCP4_uC2_1;
+	KJS_SA2_UUnter_TNCTOC: 1, 1, KJS2, HCP4_uC2_1;
+	KL_HV_HL_ein: 1, 0, HCP4_uC2_1, HVH_L;
+	KL_HV_HL_HK1_PWM: 3, 0, HCP4_uC2_1, HVH_L;
+	KL_HV_HL_HK1_soll: 8, 254, HCP4_uC2_1, HVH_L;
+	KL_HV_HL_HK2_PWM: 3, 0, HCP4_uC2_1, HVH_L;
+	KL_HV_HL_HK2_soll: 8, 254, HCP4_uC2_1, HVH_L;
+	KL_HV_HL_HK3_PWM: 3, 0, HCP4_uC2_1, HVH_L;
+	KL_HV_HL_HK3_soll: 8, 254, HCP4_uC2_1, HVH_L;
+	KL_HV_HL_HK4_PWM: 3, 0, HCP4_uC2_1, HVH_L;
+	KL_HV_HL_HK4_soll: 8, 254, HCP4_uC2_1, HVH_L;
+	KLE1e_Adresse: 8, 0, HCP4_uC2_1, KLE_1;
+	KLE1e_downRamp: 2, 2, HCP4_uC2_1, KLE_1;
+	KLE1e_Kl15_Status: 2, 2, HCP4_uC2_1, KLE_1;
+	KLE1e_n_Notlauf_soll: 2, 0, HCP4_uC2_1, KLE_1;
+	KLE1e_n_soll: 8, 254, HCP4_uC2_1, KLE_1;
+	KLE1e_Not_reStart: 1, 0, HCP4_uC2_1, KLE_1;
+	KLE1e_U_Not_Stop: 4, 7, HCP4_uC2_1, KLE_1;
+	KLE1e_upRamp: 2, 1, HCP4_uC2_1, KLE_1;
+	KLE1s_Adresse: 8, 0, KLE_1, HCP4_uC2_1;
+	KLE1s_Adressinhalt: 16, 0, KLE_1, HCP4_uC2_1;
+	KLE1s_Diag_Block: 1, 0, KLE_1, HCP4_uC2_1;
+	KLE1s_Diag_Block_TNCTOC: 1, 1, KLE_1, HCP4_uC2_1;
+	KLE1s_Diag_int: 1, 0, KLE_1, HCP4_uC2_1;
+	KLE1s_Diag_int_TNCTOC: 1, 1, KLE_1, HCP4_uC2_1;
+	KLE1s_Diag_Temp: 1, 0, KLE_1, HCP4_uC2_1;
+	KLE1s_Diag_Temp_TNCTOC: 1, 1, KLE_1, HCP4_uC2_1;
+	KLE1s_Diag_Uebersp: 1, 0, KLE_1, HCP4_uC2_1;
+	KLE1s_Diag_Uebersp_TNCTOC: 1, 1, KLE_1, HCP4_uC2_1;
+	KLE1s_Diag_Untersp: 1, 0, KLE_1, HCP4_uC2_1;
+	KLE1s_Diag_Untersp_TNCTOC: 1, 1, KLE_1, HCP4_uC2_1;
+	KLE1s_ErrMemState: 2, 0, KLE_1, HCP4_uC2_1;
+	KLE1s_I_Last_ist: 10, 1022, KLE_1, HCP4_uC2_1;
+	KLE1s_n_ist: 8, 254, KLE_1, HCP4_uC2_1;
+	KLE1s_ResponseError: 1, 0, KLE_1, HCP4_uC2_1;
+	KLE1s_ResponseError_TNCTOC: 1, 1, KLE_1, HCP4_uC2_1;
+	KLE1s_Status_Derating: 2, 0, KLE_1, HCP4_uC2_1;
+	KLE1s_Status_Grenzwert: 3, 0, KLE_1, HCP4_uC2_1;
+	KLE1s_Status_SW: 4, 14, KLE_1, HCP4_uC2_1;
+	KLE1s_T_ist: 9, 510, KLE_1, HCP4_uC2_1;
+	KLE1s_U_Last: 10, 1022, KLE_1, HCP4_uC2_1;
+	KLE1s_U_logik: 7, 126, KLE_1, HCP4_uC2_1;
+	KLE2e_Adresse: 8, 0, HCP4_uC2_1, KLE_2;
+	KLE2e_downRamp: 2, 2, HCP4_uC2_1, KLE_2;
+	KLE2e_Kl15_Status: 2, 2, HCP4_uC2_1, KLE_2;
+	KLE2e_n_Notlauf_soll: 2, 0, HCP4_uC2_1, KLE_2;
+	KLE2e_n_soll: 8, 254, HCP4_uC2_1, KLE_2;
+	KLE2e_Not_reStart: 1, 0, HCP4_uC2_1, KLE_2;
+	KLE2e_U_Not_Stop: 4, 7, HCP4_uC2_1, KLE_2;
+	KLE2e_upRamp: 2, 1, HCP4_uC2_1, KLE_2;
+	KLE2s_Adresse: 8, 0, KLE_2, HCP4_uC2_1;
+	KLE2s_Adressinhalt: 16, 0, KLE_2, HCP4_uC2_1;
+	KLE2s_Diag_Block: 1, 0, KLE_2, HCP4_uC2_1;
+	KLE2s_Diag_Block_TNCTOC: 1, 1, KLE_2, HCP4_uC2_1;
+	KLE2s_Diag_int: 1, 0, KLE_2, HCP4_uC2_1;
+	KLE2s_Diag_int_TNCTOC: 1, 1, KLE_2, HCP4_uC2_1;
+	KLE2s_Diag_Temp: 1, 0, KLE_2, HCP4_uC2_1;
+	KLE2s_Diag_Temp_TNCTOC: 1, 1, KLE_2, HCP4_uC2_1;
+	KLE2s_Diag_Uebersp: 1, 0, KLE_2, HCP4_uC2_1;
+	KLE2s_Diag_Uebersp_TNCTOC: 1, 1, KLE_2, HCP4_uC2_1;
+	KLE2s_Diag_Untersp: 1, 0, KLE_2, HCP4_uC2_1;
+	KLE2s_Diag_Untersp_TNCTOC: 1, 1, KLE_2, HCP4_uC2_1;
+	KLE2s_ErrMemState: 2, 0, KLE_2, HCP4_uC2_1;
+	KLE2s_I_Last_ist: 10, 1022, KLE_2, HCP4_uC2_1;
+	KLE2s_n_ist: 8, 254, KLE_2, HCP4_uC2_1;
+	KLE2s_ResponseError: 1, 0, KLE_2, HCP4_uC2_1;
+	KLE2s_ResponseError_TNCTOC: 1, 1, KLE_2, HCP4_uC2_1;
+	KLE2s_Status_Derating: 2, 0, KLE_2, HCP4_uC2_1;
+	KLE2s_Status_Grenzwert: 3, 0, KLE_2, HCP4_uC2_1;
+	KLE2s_Status_SW: 4, 14, KLE_2, HCP4_uC2_1;
+	KLE2s_T_ist: 9, 510, KLE_2, HCP4_uC2_1;
+	KLE2s_U_Last: 10, 1022, KLE_2, HCP4_uC2_1;
+	KLE2s_U_logik: 7, 126, KLE_2, HCP4_uC2_1;
+	MVH_L_Adressinhalt: 16, 0, MVH_L, HCP4_uC2_1;
+	MVH_L_Err_Heizkreis_1: 3, 0, MVH_L, HCP4_uC2_1;
+	MVH_L_Err_Heizkreis_1_TNCTOC: 1, 1, MVH_L, HCP4_uC2_1;
+	MVH_L_Err_Heizkreis_2: 3, 0, MVH_L, HCP4_uC2_1;
+	MVH_L_Err_Heizkreis_2_TNCTOC: 1, 1, MVH_L, HCP4_uC2_1;
+	MVH_L_Err_Heizkreis_3: 3, 0, MVH_L, HCP4_uC2_1;
+	MVH_L_Err_Heizkreis_3_TNCTOC: 1, 1, MVH_L, HCP4_uC2_1;
+	MVH_L_Err_Heizkreis_4: 3, 0, MVH_L, HCP4_uC2_1;
+	MVH_L_Err_Heizkreis_4_TNCTOC: 1, 1, MVH_L, HCP4_uC2_1;
+	MVH_L_Err_Intern: 1, 0, MVH_L, HCP4_uC2_1;
+	MVH_L_Err_Intern_TNCTOC: 1, 1, MVH_L, HCP4_uC2_1;
+	MVH_L_Err_Leckagestrom: 1, 0, MVH_L, HCP4_uC2_1;
+	MVH_L_Err_Leckagestrom_TNCTOC: 1, 1, MVH_L, HCP4_uC2_1;
+	MVH_L_Err_Ueberstromabsch: 1, 0, MVH_L, HCP4_uC2_1;
+	MVH_L_Err_Ueberstromabsch_TNCTOC: 1, 1, MVH_L, HCP4_uC2_1;
+	MVH_L_ErrMem_State: 2, 0, MVH_L, HCP4_uC2_1;
+	MVH_L_Fehlerstatus: 3, 7, MVH_L, HCP4_uC2_1;
+	MVH_L_Fehlerstatus_TNCTOC: 1, 1, MVH_L, HCP4_uC2_1;
+	MVH_L_HK1_I_ist: 7, 126, MVH_L, HCP4_uC2_1;
+	MVH_L_HK2_I_ist: 7, 126, MVH_L, HCP4_uC2_1;
+	MVH_L_HK3_I_ist: 7, 126, MVH_L, HCP4_uC2_1;
+	MVH_L_HK4_I_ist: 7, 126, MVH_L, HCP4_uC2_1;
+	MVH_L_Istmodus: 1, 0, MVH_L, HCP4_uC2_1;
+	MVH_L_Max_Anst: 1, 0, MVH_L, HCP4_uC2_1;
+	MVH_L_MV_I: 9, 510, MVH_L, HCP4_uC2_1;
+	MVH_L_MV_I_TNCTOC: 1, 1, MVH_L, HCP4_uC2_1;
+	MVH_L_MV_Status: 2, 3, MVH_L, HCP4_uC2_1;
+	MVH_L_MV_U: 8, 254, MVH_L, HCP4_uC2_1;
+	MVH_L_MV_U_TNCTOC: 1, 1, MVH_L, HCP4_uC2_1;
+	MVH_L_NV_Status: 2, 3, MVH_L, HCP4_uC2_1;
+	MVH_L_NV_Status_TNCTOC: 1, 1, MVH_L, HCP4_uC2_1;
+	MVH_L_Temp_PCB: 8, 254, MVH_L, HCP4_uC2_1;
+	MVH_L_Temp_PCB_Abschaltung: 1, 0, MVH_L, HCP4_uC2_1;
+	MVH_L_Temp_PCB_TNCTOC: 1, 1, MVH_L, HCP4_uC2_1;
+	MVH_L_TimeOut: 1, 0, MVH_L, HCP4_uC2_1;
+	NV_PTC_EOL_Jahr: 8, 254, PTC1, HCP4_uC2_1;
+	NV_PTC_EOL_Seriennummer: 32, {0,0,0,0}, PTC1, HCP4_uC2_1;
+	NV_PTC_EOL_Woche: 8, 254, PTC1, HCP4_uC2_1;
+	NV_PTC_EOL_Wochentag: 8, 255, PTC1, HCP4_uC2_1;
+	NV_PTC_HW: 4, 0, PTC1, HCP4_uC2_1;
+	NV_PTC_I_ist: 8, 254, PTC1, HCP4_uC2_1;
+	NV_PTC_P_ist: 8, 0, PTC1, HCP4_uC2_1;
+	NV_PTC_Status: 1, 0, PTC1, HCP4_uC2_1;
+	NV_PTC_Status_PTC: 2, 3, PTC1, HCP4_uC2_1;
+	NV_PTC_Status_UBatt: 2, 3, PTC1, HCP4_uC2_1;
+	NV_PTC_SW: 4, 0, PTC1, HCP4_uC2_1;
+	NV_PTC_Temp_PCB: 8, 0, PTC1, HCP4_uC2_1;
+	NV_PTC_TimeOut_Fehler: 1, 0, PTC1, HCP4_uC2_1;
+	NV_PTC_UBatt: 8, 0, PTC1, HCP4_uC2_1;
+	PTC2_ResponseError: 1, 0, HVH_L, HCP4_uC2_1;
+	PTC_3_ResponseError: 1, 0, MVH_L, HCP4_uC2_1;
+	PTC_ResponseError: 1, 0, PTC1, HCP4_uC2_1;
+	PumpKM_1_ErrMem_State: 2, 2, WP_1a, HCP4_uC2_1;
+	PumpKM_1_ResponseError: 1, 0, WP_1a, HCP4_uC2_1;
+	TME_HV_HL_maxStrom: 5, 31, HCP4_uC2_1, HVH_L;
+	TME_KJS1_Anf_Initialisierung: 1, 0, HCP4_uC2_1, KJS1;
+	TME_KJS1_Anf_Referenzierung: 1, 0, HCP4_uC2_1, KJS1;
+	TME_KJS1_Drehmoment: 2, 3, HCP4_uC2_1, KJS1;
+	TME_KJS1_Endlagenschalter: 2, 3, HCP4_uC2_1, KJS1;
+	TME_KJS1_Freigabe_Verst: 1, 0, HCP4_uC2_1, KJS1;
+	TME_KJS1_keine_Freigabe_Revers: 1, 1, HCP4_uC2_1, KJS1;
+	TME_KJS1_PWM_Freq: 8, 0, HCP4_uC2_1, KJS1;
+	TME_KJS1_Soll_Drehrichtung: 2, 3, HCP4_uC2_1, KJS1;
+	TME_KJS1_Soll_Pos: 12, 4094, HCP4_uC2_1, KJS1;
+	TME_KJS1_Verfahrgeschw: 2, 1, HCP4_uC2_1, KJS1;
+	TME_KJS2_Anf_Initialisierung: 1, 0, HCP4_uC2_1, KJS2;
+	TME_KJS2_Anf_Referenzierung: 1, 0, HCP4_uC2_1, KJS2;
+	TME_KJS2_Drehmoment: 2, 3, HCP4_uC2_1, KJS2;
+	TME_KJS2_Endlagenschalter: 2, 3, HCP4_uC2_1, KJS2;
+	TME_KJS2_Freigabe_Verst: 1, 0, HCP4_uC2_1, KJS2;
+	TME_KJS2_keine_Freigabe_Revers: 1, 1, HCP4_uC2_1, KJS2;
+	TME_KJS2_PWM_Freq: 8, 0, HCP4_uC2_1, KJS2;
+	TME_KJS2_Soll_Drehrichtung: 2, 3, HCP4_uC2_1, KJS2;
+	TME_KJS2_Soll_Pos: 12, 4094, HCP4_uC2_1, KJS2;
+	TME_KJS2_Verfahrgeschw: 2, 1, HCP4_uC2_1, KJS2;
+	TME_MVH_L_Adresse: 10, 0, HCP4_uC2_1, MVH_L;
+	TME_MVH_L_Ein: 1, 0, HCP4_uC2_1, MVH_L;
+	TME_MVH_L_KL_15_Status: 1, 0, HCP4_uC2_1, MVH_L;
+	TME_MVH_L_Rampe: 6, 62, HCP4_uC2_1, MVH_L;
+	TME_MVH_L_Soll: 8, 254, HCP4_uC2_1, MVH_L;
+	TME_NV_PTC_ein: 1, 0, HCP4_uC2_1, PTC1;
+	TME_NV_PTC_Rampe: 3, 0, HCP4_uC2_1, PTC1;
+	TME_NV_PTC_soll: 8, 254, HCP4_uC2_1, PTC1;
+	TME_Temp_nach_Verdampfer_Front: 10, 1022, HCP4_uC2_1, HVH_L;
+	WP1a_DC_Strom: 8, 254, WP_1a, HCP4_uC2_1;
+	WP1a_Derating_aktiv: 1, 0, WP_1a, HCP4_uC2_1;
+	WP1a_Derating_aktiv_Status: 1, 1, WP_1a, HCP4_uC2_1;
+	WP1a_E1_Unterspannung: 1, 0, WP_1a, HCP4_uC2_1;
+	WP1a_E1_Unterspannung_Status: 1, 1, WP_1a, HCP4_uC2_1;
+	WP1a_E2_Ueberspannung: 1, 0, WP_1a, HCP4_uC2_1;
+	WP1a_E2_Ueberspannung_Status: 1, 1, WP_1a, HCP4_uC2_1;
+	WP1a_F1_Trockenlauf: 1, 0, WP_1a, HCP4_uC2_1;
+	WP1a_F1_Trockenlauf_Status: 1, 1, WP_1a, HCP4_uC2_1;
+	WP1a_F2_Rotor_blockiert: 1, 0, WP_1a, HCP4_uC2_1;
+	WP1a_F2_Rotor_blockiert_Status: 1, 1, WP_1a, HCP4_uC2_1;
+	WP1a_F3_Ueberstrom: 1, 0, WP_1a, HCP4_uC2_1;
+	WP1a_F3_Ueberstrom_Status: 1, 1, WP_1a, HCP4_uC2_1;
+	WP1a_F4_neg_Drehrichtung: 1, 0, WP_1a, HCP4_uC2_1;
+	WP1a_F4_neg_Drehrichtung_Status: 1, 1, WP_1a, HCP4_uC2_1;
+	WP1a_F5_Knockout: 1, 0, WP_1a, HCP4_uC2_1;
+	WP1a_F5_Knockout_Status: 1, 1, WP_1a, HCP4_uC2_1;
+	WP1a_F6_Watchdog: 1, 0, WP_1a, HCP4_uC2_1;
+	WP1a_F6_Watchdog_Status: 1, 1, WP_1a, HCP4_uC2_1;
+	WP1a_F7_Uebertemperatur: 1, 0, WP_1a, HCP4_uC2_1;
+	WP1a_F7_Uebertemperatur_Status: 1, 1, WP_1a, HCP4_uC2_1;
+	WP1a_H1_Endstufe_def_Status: 1, 1, WP_1a, HCP4_uC2_1;
+	WP1a_H1_Endstufe_defekt: 1, 0, WP_1a, HCP4_uC2_1;
+	WP1a_H2_Controller_def_Status: 1, 1, WP_1a, HCP4_uC2_1;
+	WP1a_H2_Controller_defekt: 1, 0, WP_1a, HCP4_uC2_1;
+	WP1a_H3_TempSensor_def: 1, 0, WP_1a, HCP4_uC2_1;
+	WP1a_H3_TempSensor_def_Status: 1, 1, WP_1a, HCP4_uC2_1;
+	WP1a_H4_RotorlageSens_def_Status: 1, 1, WP_1a, HCP4_uC2_1;
+	WP1a_H4_RotorlageSensor_def: 1, 0, WP_1a, HCP4_uC2_1;
+	WP1a_Istdrehzahl: 13, 8190, WP_1a, HCP4_uC2_1;
+	WP1a_Knockout_Counter: 7, 0, WP_1a, HCP4_uC2_1;
+	WP1a_Phasenstrom: 8, 254, WP_1a, HCP4_uC2_1;
+	WP1a_Software_inkomp_Status: 1, 1, WP_1a, HCP4_uC2_1;
+	WP1a_Software_inkompatibel: 1, 0, WP_1a, HCP4_uC2_1;
+	WP1a_Solldrehzahl: 13, 8190, HCP4_uC2_1, WP_1a;
+	WP1a_Spannung_Ubat: 8, 254, WP_1a, HCP4_uC2_1;
+	WP1a_Supplier_Code: 3, 0, WP_1a, HCP4_uC2_1;
+	WP1a_Temperatur_PCB: 8, 254, WP_1a, HCP4_uC2_1;
+	WP1ae_01_BZ: 4, 0, HCP4_uC2_1, WP_1a;
+	WP1as_01_BZ: 4, 0, WP_1a, HCP4_uC2_1;
+	WP1as_02_BZ: 4, 0, WP_1a, HCP4_uC2_1;
+}
+Diagnostic_signals {
+		MasterReqB0:8,0;
+		MasterReqB1:8,0;
+		MasterReqB2:8,0;
+		MasterReqB3:8,0;
+		MasterReqB4:8,0;
+		MasterReqB5:8,0;
+		MasterReqB6:8,0;
+		MasterReqB7:8,0;
+		SlaveRespB0:8,0;
+		SlaveRespB1:8,0;
+		SlaveRespB2:8,0;
+		SlaveRespB3:8,0;
+		SlaveRespB4:8,0;
+		SlaveRespB5:8,0;
+		SlaveRespB6:8,0;
+		SlaveRespB7:8,0;
+}
+Frames {
+	HVH_Le_01: 33, HCP4_uC2_1, 8 {
+		KL_HV_HL_HK1_PWM, 4;
+		KL_HV_HL_HK2_PWM, 7;
+		KL_HV_HL_HK3_PWM, 10;
+		KL_HV_HL_HK4_PWM, 13;
+		KL_HV_HL_HK4_soll, 16;
+		KL_HV_HL_HK1_soll, 24;
+		KL_HV_HL_HK2_soll, 32;
+		KL_HV_HL_HK3_soll, 40;
+		TME_Temp_nach_Verdampfer_Front, 48;
+		TME_HV_HL_maxStrom, 58;
+		KL_HV_HL_ein, 63;
+}
+	HVH_Ls_01: 34, HVH_L, 8 {
+		HV_HL_Temp_PCB, 0;
+		HV_HL_Err_Temp_HK4_1_TNCTOC, 8;
+		HV_HL_Err_Temp_HK4_2_TNCTOC, 9;
+		HV_HL_HV_Voltage_TNCTOC, 10;
+		HV_HL_Status_UBatt, 11;
+		HV_HL_Err_Temp_HK1_1_TNCTOC, 13;
+		HV_HL_Err_Temp_HK2_1_TNCTOC, 14;
+		HV_HL_Err_Temp_HK2_2_TNCTOC, 15;
+		HV_HL_HV_UBattNV_TNCTOC, 16;
+		HV_HL_Err_Temp_PCB_TNCTOC, 17;
+		HV_HL_Istmodus, 18;
+		HV_HL_Fehlerstatus, 19;
+		HV_HL_HK1_maxAnst, 22;
+		HV_HL_HK2_maxAnst, 23;
+		HV_HL_HK3_maxAnst, 24;
+		HV_HL_HK4_maxAnst, 25;
+		HV_HL_Err_Leckagestrom_TNCTOC, 26;
+		HV_HL_TimeOut_Fehler, 27;
+		HV_HL_HV_ERR, 28;
+		HV_HL_Err_Leckagestrom, 30;
+		HV_HL_Err_Ueberstromabschaltung, 31;
+		HV_HL_Err_Temperaturschutz, 32;
+		PTC2_ResponseError, 33;
+		HV_HL_Err_intern, 34;
+		HV_HL_Err_Intern_TNCTOC, 35;
+		HV_HL_Err_Heizkreis_1_TNCTOC, 36;
+		HV_HL_Err_Heizkreis_2_TNCTOC, 37;
+		HV_HL_Err_Heizkreis_3_TNCTOC, 38;
+		HV_HL_Err_Heizkreis_4_TNCTOC, 39;
+		HV_HL_Err_Ueberstromabs_TNCTOC, 40;
+		HV_HL_Err_TempSchutz_TNCTOC, 41;
+		HV_HL_ResponseError_TNCTOC, 42;
+		HV_HL_ParameterChange, 43;
+		HV_HL_ErrMem_State, 44;
+		HV_HL_Err_Temp_Sens1_TNCTOC, 46;
+		HV_HL_Err_Temp_HK1_2_TNCTOC, 47;
+		HV_HL_Err_Temp_HK3_1_TNCTOC, 48;
+		HV_HL_Err_Temp_HK3_2_TNCTOC, 49;
+		HV_HL_Vorhalt_Stufe, 50;
+		HV_HL_Mode_HK1, 52;
+		HV_HL_Mode_HK2, 55;
+		HV_HL_Mode_HK3, 58;
+		HV_HL_Mode_HK4, 61;
+}
+	HVH_Ls_02: 35, HVH_L, 8 {
+		HV_HL_Ubatt_NV, 0;
+		HV_HL_Temp_Sensor_1, 8;
+		HV_HL_HV_Voltage, 16;
+		HV_HL_HV_I_ist, 24;
+		HV_HL_HK1_HV_I_ist, 32;
+		HV_HL_HK2_HV_I_ist, 40;
+		HV_HL_HK3_HV_I_ist, 48;
+		HV_HL_HK4_HV_I_ist, 56;
+}
+	HVH_Ls_03: 36, HVH_L, 8 {
+		HV_HL_Temp_HK4_1, 0;
+		HV_HL_Temp_HK4_2, 8;
+		HV_HL_Temp_HK1_1, 16;
+		HV_HL_Temp_HK1_2, 24;
+		HV_HL_Temp_HK2_1, 32;
+		HV_HL_Temp_HK2_2, 40;
+		HV_HL_Temp_HK3_1, 48;
+		HV_HL_Temp_HK3_2, 56;
+}
+	ISO_Funktionaler_Req_All: 44, HCP4_uC2_1, 8 {
+		ISOALLReqB0, 0;
+		ISOALLReqB1, 8;
+		ISOALLReqB2, 16;
+		ISOALLReqB3, 24;
+		ISOALLReqB4, 32;
+		ISOALLReqB5, 40;
+		ISOALLReqB6, 48;
+		ISOALLReqB7, 56;
+}
+	KJS1e_01: 19, HCP4_uC2_1, 8 {
+		TME_KJS1_Endlagenschalter, 32;
+		TME_KJS1_keine_Freigabe_Revers, 34;
+		TME_KJS1_Anf_Referenzierung, 35;
+		TME_KJS1_Anf_Initialisierung, 36;
+		TME_KJS1_Drehmoment, 37;
+		TME_KJS1_Freigabe_Verst, 39;
+		TME_KJS1_PWM_Freq, 40;
+		TME_KJS1_Soll_Drehrichtung, 48;
+		TME_KJS1_Soll_Pos, 50;
+		TME_KJS1_Verfahrgeschw, 62;
+}
+	KJS1s_01: 20, KJS1, 8 {
+		KJS1s_01_CRC, 0;
+		KJS1s_01_BZ, 8;
+		KJS_SA1_Ref_Weg, 12;
+		KJS_SA1_Blockade_Pos, 24;
+		KJS_SA1_Ist_Drehrichtung, 36;
+		KJS_SA1_Bewegungsstatus, 38;
+		KJS1_ResponseError, 48;
+		KJS_SA1_Referenziert, 49;
+		KJS_SA1_Pos_erreicht, 50;
+		KJS_SA1_Initialisiert, 51;
+		KJS_SA1_Ist_Pos, 52;
+}
+	KJS1s_02: 21, KJS1, 8 {
+		KJS_SA1_Fehler_Codierpin_TF, 26;
+		KJS_SA1_Fehler_Codierpin_TNCTOC, 27;
+		KJS_SA1_Fehler_Parameter_TF, 28;
+		KJS_SA1_Fehler_Parameter_TNCTOC, 29;
+		KJS_SA1_Blockade1_TF, 30;
+		KJS_SA1_Blockade1_TNCTOC, 31;
+		KJS_SA1_Blockade2_TF, 32;
+		KJS_SA1_Blockade2_TNCTOC, 33;
+		KJS_SA1_DrehtFrei1_TF, 34;
+		KJS_SA1_DrehtFrei1_TNCTOC, 35;
+		KJS_SA1_DrehtFrei2_TF, 36;
+		KJS_SA1_DrehtFrei2_TNCTOC, 37;
+		KJS_SA1_Fehler_InitRef_TF, 38;
+		KJS_SA1_Fehler_InitRef_TNCTOC, 39;
+		KJS_SA1_TempWarning_TF, 40;
+		KJS_SA1_TempWarning_TNCTOC, 41;
+		KJS_SA1_TempAbsch_TF, 42;
+		KJS_SA1_TempAbsch_TNCTOC, 43;
+		KJS_SA1_UUeber_TF, 44;
+		KJS_SA1_UUeber_TNCTOC, 45;
+		KJS_SA1_UHoch_TF, 46;
+		KJS_SA1_UHoch_TNCTOC, 47;
+		KJS_SA1_UUnter_TF, 48;
+		KJS_SA1_UUnter_TNCTOC, 49;
+		KJS_SA1_UNieder_TF, 50;
+		KJS_SA1_UNieder_TNCTOC, 51;
+		KJS_SA1_AktDefekt_TF, 52;
+		KJS_SA1_AktDefekt_TNCTOC, 53;
+		KJS_SA1_SenseDefekt_TF, 54;
+		KJS_SA1_SenseDefekt_TNCTOC, 55;
+		KJS_SA1_InkrSense_TF, 56;
+		KJS_SA1_InkrSense_TNCTOC, 57;
+		KJS_SA1_InkrFehler_TF, 58;
+		KJS_SA1_InkrFehler_TNCTOC, 59;
+		KJS_SA1_PlausiFehlg_TF, 60;
+		KJS_SA1_PlausiFehlg_TNCTOC, 61;
+		KJS_SA1_E2EFehler_TF, 62;
+		KJS_SA1_E2EFehler_TNCTOC, 63;
+}
+	KJS2e_01: 29, HCP4_uC2_1, 8 {
+		TME_KJS2_Endlagenschalter, 32;
+		TME_KJS2_keine_Freigabe_Revers, 34;
+		TME_KJS2_Anf_Referenzierung, 35;
+		TME_KJS2_Anf_Initialisierung, 36;
+		TME_KJS2_Drehmoment, 37;
+		TME_KJS2_Freigabe_Verst, 39;
+		TME_KJS2_PWM_Freq, 40;
+		TME_KJS2_Soll_Drehrichtung, 48;
+		TME_KJS2_Soll_Pos, 50;
+		TME_KJS2_Verfahrgeschw, 62;
+}
+	KJS2s_01: 22, KJS2, 8 {
+		KJS2s_01_CRC, 0;
+		KJS2s_01_BZ, 8;
+		KJS_SA2_Ref_Weg, 12;
+		KJS_SA2_Blockade_Pos, 24;
+		KJS_SA2_Ist_Drehrichtung, 36;
+		KJS_SA2_Bewegungsstatus, 38;
+		KJS2_ResponseError, 48;
+		KJS_SA2_Referenziert, 49;
+		KJS_SA2_Pos_erreicht, 50;
+		KJS_SA2_Initialisiert, 51;
+		KJS_SA2_Ist_Pos, 52;
+}
+	KJS2s_02: 31, KJS2, 8 {
+		KJS_SA2_Fehler_Codierpin_TF, 26;
+		KJS_SA2_Fehler_Codierpin_TNCTOC, 27;
+		KJS_SA2_Fehler_Parameter_TF, 28;
+		KJS_SA2_Fehler_Parameter_TNCTOC, 29;
+		KJS_SA2_Blockade1_TF, 30;
+		KJS_SA2_Blockade1_TNCTOC, 31;
+		KJS_SA2_Blockade2_TF, 32;
+		KJS_SA2_Blockade2_TNCTOC, 33;
+		KJS_SA2_DrehtFrei1_TF, 34;
+		KJS_SA2_DrehtFrei1_TNCTOC, 35;
+		KJS_SA2_DrehtFrei2_TF, 36;
+		KJS_SA2_DrehtFrei2_TNCTOC, 37;
+		KJS_SA2_Fehler_InitRef_TF, 38;
+		KJS_SA2_Fehler_InitRef_TNCTOC, 39;
+		KJS_SA2_TempWarning_TF, 40;
+		KJS_SA2_TempWarning_TNCTOC, 41;
+		KJS_SA2_TempAbsch_TF, 42;
+		KJS_SA2_TempAbsch_TNCTOC, 43;
+		KJS_SA2_UUeber_TF, 44;
+		KJS_SA2_UUeber_TNCTOC, 45;
+		KJS_SA2_UHoch_TF, 46;
+		KJS_SA2_UHoch_TNCTOC, 47;
+		KJS_SA2_UUnter_TF, 48;
+		KJS_SA2_UUnter_TNCTOC, 49;
+		KJS_SA2_UNieder_TF, 50;
+		KJS_SA2_UNieder_TNCTOC, 51;
+		KJS_SA2_AktDefekt_TF, 52;
+		KJS_SA2_AktDefekt_TNCTOC, 53;
+		KJS_SA2_SenseDefekt_TF, 54;
+		KJS_SA2_SenseDefekt_TNCTOC, 55;
+		KJS_SA2_InkrSense_TF, 56;
+		KJS_SA2_InkrSense_TNCTOC, 57;
+		KJS_SA2_InkrFehler_TF, 58;
+		KJS_SA2_InkrFehler_TNCTOC, 59;
+		KJS_SA2_PlausiFehlg_TF, 60;
+		KJS_SA2_PlausiFehlg_TNCTOC, 61;
+		KJS_SA2_E2EFehler_TF, 62;
+		KJS_SA2_E2EFehler_TNCTOC, 63;
+}
+	KLE1e_01_E3: 57, HCP4_uC2_1, 8 {
+		KLE1e_n_Notlauf_soll, 0;
+		KLE1e_n_soll, 8;
+		KLE1e_downRamp, 16;
+		KLE1e_Kl15_Status, 18;
+		KLE1e_upRamp, 20;
+		KLE1e_U_Not_Stop, 24;
+		KLE1e_Not_reStart, 28;
+		KLE1e_Adresse, 56;
+}
+	KLE1s_01_E3: 55, KLE_1, 8 {
+		KLE1s_n_ist, 0;
+		KLE1s_U_Last, 8;
+		KLE1s_T_ist, 18;
+		KLE1s_I_Last_ist, 27;
+		KLE1s_Status_SW, 37;
+		KLE1s_Status_Derating, 41;
+		KLE1s_Status_Grenzwert, 43;
+		KLE1s_U_logik, 46;
+}
+	KLE1s_02_E3: 53, KLE_1, 8 {
+		KLE1s_Diag_Block, 0;
+		KLE1s_Diag_Block_TNCTOC, 1;
+		KLE1s_Diag_Temp, 2;
+		KLE1s_Diag_Temp_TNCTOC, 3;
+		KLE1s_Diag_Untersp, 4;
+		KLE1s_Diag_Untersp_TNCTOC, 5;
+		KLE1s_Diag_Uebersp, 6;
+		KLE1s_Diag_Uebersp_TNCTOC, 7;
+		KLE1s_Diag_int, 8;
+		KLE1s_Diag_int_TNCTOC, 9;
+		KLE1s_ResponseError, 10;
+		KLE1s_ResponseError_TNCTOC, 11;
+		KLE1s_ErrMemState, 12;
+		KLE1s_Adressinhalt, 16;
+		KLE1s_Adresse, 32;
+}
+	KLE2e_01_E3: 58, HCP4_uC2_1, 8 {
+		KLE2e_n_Notlauf_soll, 0;
+		KLE2e_n_soll, 8;
+		KLE2e_downRamp, 16;
+		KLE2e_Kl15_Status, 18;
+		KLE2e_upRamp, 20;
+		KLE2e_U_Not_Stop, 24;
+		KLE2e_Not_reStart, 28;
+		KLE2e_Adresse, 56;
+}
+	KLE2s_01_E3: 56, KLE_2, 8 {
+		KLE2s_n_ist, 0;
+		KLE2s_U_Last, 8;
+		KLE2s_T_ist, 18;
+		KLE2s_I_Last_ist, 27;
+		KLE2s_Status_SW, 37;
+		KLE2s_Status_Derating, 41;
+		KLE2s_Status_Grenzwert, 43;
+		KLE2s_U_logik, 46;
+}
+	KLE2s_02_E3: 59, KLE_2, 8 {
+		KLE2s_Diag_Block, 0;
+		KLE2s_Diag_Block_TNCTOC, 1;
+		KLE2s_Diag_Temp, 2;
+		KLE2s_Diag_Temp_TNCTOC, 3;
+		KLE2s_Diag_Untersp, 4;
+		KLE2s_Diag_Untersp_TNCTOC, 5;
+		KLE2s_Diag_Uebersp, 6;
+		KLE2s_Diag_Uebersp_TNCTOC, 7;
+		KLE2s_Diag_int, 8;
+		KLE2s_Diag_int_TNCTOC, 9;
+		KLE2s_ResponseError, 10;
+		KLE2s_ResponseError_TNCTOC, 11;
+		KLE2s_ErrMemState, 12;
+		KLE2s_Adressinhalt, 16;
+		KLE2s_Adresse, 32;
+}
+	MV_He_01: 1, HCP4_uC2_1, 8 {
+		TME_MVH_L_Adresse, 0;
+		TME_MVH_L_Rampe, 10;
+		TME_MVH_L_Soll, 16;
+		TME_MVH_L_KL_15_Status, 24;
+		TME_MVH_L_Ein, 25;
+}
+	MV_Hs_01: 5, MVH_L, 8 {
+		MVH_L_MV_I_TNCTOC, 3;
+		MVH_L_MV_U_TNCTOC, 4;
+		MVH_L_NV_Status_TNCTOC, 5;
+		MVH_L_MV_Status, 6;
+		MVH_L_Fehlerstatus, 8;
+		MVH_L_Fehlerstatus_TNCTOC, 11;
+		MVH_L_NV_Status, 12;
+		MVH_L_ErrMem_State, 14;
+		MVH_L_Err_Heizkreis_1, 16;
+		MVH_L_Err_Heizkreis_1_TNCTOC, 19;
+		MVH_L_Err_Heizkreis_2, 20;
+		MVH_L_Err_Heizkreis_2_TNCTOC, 23;
+		MVH_L_Err_Heizkreis_3, 24;
+		MVH_L_Err_Heizkreis_3_TNCTOC, 27;
+		MVH_L_Err_Heizkreis_4, 28;
+		MVH_L_Err_Heizkreis_4_TNCTOC, 31;
+		MVH_L_Err_Intern, 32;
+		MVH_L_Err_Intern_TNCTOC, 33;
+		MVH_L_Istmodus, 34;
+		PTC_3_ResponseError, 35;
+		MVH_L_Err_Ueberstromabsch, 36;
+		MVH_L_Err_Ueberstromabsch_TNCTOC, 37;
+		MVH_L_TimeOut, 38;
+		MVH_L_MV_I, 39;
+		MVH_L_MV_U, 48;
+		MVH_L_Temp_PCB, 56;
+}
+	MV_Hs_02: 6, MVH_L, 8 {
+		MVH_L_Temp_PCB_Abschaltung, 14;
+		MVH_L_Temp_PCB_TNCTOC, 15;
+		MVH_L_HK1_I_ist, 16;
+		MVH_L_Err_Leckagestrom, 23;
+		MVH_L_HK2_I_ist, 24;
+		MVH_L_Max_Anst, 31;
+		MVH_L_HK3_I_ist, 32;
+		MVH_L_Err_Leckagestrom_TNCTOC, 39;
+		MVH_L_HK4_I_ist, 40;
+		MVH_L_Adressinhalt, 48;
+}
+	PTCe_01: 28, HCP4_uC2_1, 4 {
+		TME_NV_PTC_soll, 0;
+		TME_NV_PTC_ein, 8;
+		TME_NV_PTC_Rampe, 9;
+}
+	PTCs_01: 48, PTC1, 8 {
+		NV_PTC_I_ist, 0;
+		NV_PTC_P_ist, 8;
+		NV_PTC_Status, 16;
+		NV_PTC_Status_PTC, 17;
+		NV_PTC_Status_UBatt, 19;
+		PTC_ResponseError, 21;
+		NV_PTC_TimeOut_Fehler, 22;
+		NV_PTC_HW, 24;
+		NV_PTC_SW, 28;
+		NV_PTC_UBatt, 32;
+		NV_PTC_Temp_PCB, 40;
+}
+	PTCs_02: 49, PTC1, 8 {
+		NV_PTC_EOL_Seriennummer, 0;
+		NV_PTC_EOL_Wochentag, 32;
+		NV_PTC_EOL_Woche, 40;
+		NV_PTC_EOL_Jahr, 48;
+}
+	WP1ae_01: 54, HCP4_uC2_1, 8 {
+		WP1ae_01_BZ, 8;
+		WP1a_Solldrehzahl, 16;
+}
+	WP1as_01: 2, WP_1a, 8 {
+		WP1as_01_BZ, 8;
+		WP1a_Istdrehzahl, 16;
+		WP1a_Knockout_Counter, 29;
+		WP1a_Phasenstrom, 40;
+		WP1a_DC_Strom, 48;
+		PumpKM_1_ErrMem_State, 61;
+		PumpKM_1_ResponseError, 63;
+}
+	WP1as_02: 3, WP_1a, 8 {
+		WP1as_02_BZ, 8;
+		WP1a_E1_Unterspannung, 12;
+		WP1a_E1_Unterspannung_Status, 13;
+		WP1a_E2_Ueberspannung, 14;
+		WP1a_E2_Ueberspannung_Status, 15;
+		WP1a_H1_Endstufe_def_Status, 16;
+		WP1a_H1_Endstufe_defekt, 17;
+		WP1a_H2_Controller_def_Status, 18;
+		WP1a_H2_Controller_defekt, 19;
+		WP1a_H3_TempSensor_def, 20;
+		WP1a_H3_TempSensor_def_Status, 21;
+		WP1a_H4_RotorlageSens_def_Status, 22;
+		WP1a_H4_RotorlageSensor_def, 23;
+		WP1a_F1_Trockenlauf, 24;
+		WP1a_F1_Trockenlauf_Status, 25;
+		WP1a_F2_Rotor_blockiert, 26;
+		WP1a_F2_Rotor_blockiert_Status, 27;
+		WP1a_F3_Ueberstrom, 28;
+		WP1a_F3_Ueberstrom_Status, 29;
+		WP1a_F4_neg_Drehrichtung, 30;
+		WP1a_F4_neg_Drehrichtung_Status, 31;
+		WP1a_F5_Knockout, 32;
+		WP1a_F5_Knockout_Status, 33;
+		WP1a_F6_Watchdog, 34;
+		WP1a_F6_Watchdog_Status, 35;
+		WP1a_F7_Uebertemperatur, 36;
+		WP1a_F7_Uebertemperatur_Status, 37;
+		WP1a_Derating_aktiv, 38;
+		WP1a_Derating_aktiv_Status, 39;
+		WP1a_Software_inkompatibel, 40;
+		WP1a_Spannung_Ubat, 41;
+		WP1a_Temperatur_PCB, 49;
+		WP1a_Software_inkomp_Status, 57;
+		WP1a_Supplier_Code, 58;
+}
+}
+Diagnostic_frames {
+	MasterReq: 60 {
+		MasterReqB0, 0;
+		MasterReqB1, 8;
+		MasterReqB2, 16;
+		MasterReqB3, 24;
+		MasterReqB4, 32;
+		MasterReqB5, 40;
+		MasterReqB6, 48;
+		MasterReqB7, 56;
+	}
+	SlaveResp: 61	{
+		SlaveRespB0, 0;
+		SlaveRespB1, 8;
+		SlaveRespB2, 16;
+		SlaveRespB3, 24;
+		SlaveRespB4, 32;
+		SlaveRespB5, 40;
+		SlaveRespB6, 48;
+		SlaveRespB7, 56;
+	}
+}
+Node_attributes {
+	HVH_L {
+		LIN_protocol = 2.0;
+		configured_NAD=0x63;
+		product_id=0x0000, 0x0000, 0x00;
+		response_error =PTC2_ResponseError;
+		P2_min = 10 ms;
+		ST_min = 10 ms;
+		configurable_frames {
+			HVH_Le_01 = 0x4021;
+			HVH_Ls_01 = 0x4022;
+			HVH_Ls_02 = 0x4023;
+			HVH_Ls_03 = 0x4024;
+			ISO_Funktionaler_Req_All = 0x402C;
+		}
+	}
+	KJS1 {
+		LIN_protocol = 2.0;
+		configured_NAD=0x0D;
+		product_id=0x0000, 0x0000, 0x00;
+		response_error =KJS1_ResponseError;
+		P2_min = 10 ms;
+		ST_min = 10 ms;
+		configurable_frames {
+			ISO_Funktionaler_Req_All = 0x402C;
+			KJS1e_01 = 0x4013;
+			KJS1s_01 = 0x4014;
+			KJS1s_02 = 0x4015;
+		}
+	}
+	KJS2 {
+		LIN_protocol = 2.0;
+		configured_NAD=0x0E;
+		product_id=0x0000, 0x0000, 0x00;
+		response_error =KJS2_ResponseError;
+		P2_min = 10 ms;
+		ST_min = 10 ms;
+		configurable_frames {
+			ISO_Funktionaler_Req_All = 0x402C;
+			KJS2e_01 = 0x401D;
+			KJS2s_01 = 0x4016;
+			KJS2s_02 = 0x401F;
+		}
+	}
+	KLE_1 {
+		LIN_protocol = 2.0;
+		configured_NAD=0x78;
+		product_id=0x0000, 0x0000, 0x00;
+		response_error =KLE1s_ResponseError;
+		P2_min = 10 ms;
+		ST_min = 10 ms;
+		configurable_frames {
+			ISO_Funktionaler_Req_All = 0x782C;
+			KLE1e_01_E3 = 0x4039;
+			KLE1s_01_E3 = 0x4037;
+			KLE1s_02_E3 = 0x4035;
+		}
+	}
+	KLE_2 {
+		LIN_protocol = 2.0;
+		configured_NAD=0x79;
+		product_id=0x0000, 0x0000, 0x00;
+		response_error =KLE2s_ResponseError;
+		P2_min = 10 ms;
+		ST_min = 10 ms;
+		configurable_frames {
+			ISO_Funktionaler_Req_All = 0x792C;
+			KLE2e_01_E3 = 0x403A;
+			KLE2s_01_E3 = 0x4038;
+			KLE2s_02_E3 = 0x403B;
+		}
+	}
+	MVH_L {
+		LIN_protocol = 2.0;
+		configured_NAD=0x7B;
+		product_id=0x0000, 0x0000, 0x00;
+		response_error =PTC_3_ResponseError;
+		P2_min = 10 ms;
+		ST_min = 10 ms;
+		configurable_frames {
+			ISO_Funktionaler_Req_All = 0x402C;
+			MV_He_01 = 0x4001;
+			MV_Hs_01 = 0x4002;
+			MV_Hs_02 = 0x4003;
+		}
+	}
+	PTC1 {
+		LIN_protocol = 2.0;
+		configured_NAD=0x5F;
+		product_id=0x0000, 0x0000, 0x00;
+		response_error =PTC_ResponseError;
+		P2_min = 10 ms;
+		ST_min = 10 ms;
+		configurable_frames {
+			PTCe_01 = 0x401C;
+			PTCs_01 = 0x4030;
+			PTCs_02 = 0x4031;
+		}
+	}
+	WP_1a {
+		LIN_protocol = 2.0;
+		configured_NAD=0x6C;
+		product_id=0x0000, 0x0000, 0x00;
+		response_error =PumpKM_1_ResponseError;
+		P2_min = 10 ms;
+		ST_min = 10 ms;
+		configurable_frames {
+			ISO_Funktionaler_Req_All = 0x402C;
+			WP1ae_01 = 0x4036;
+			WP1as_01 = 0x4002;
+			WP1as_02 = 0x4003;
+		}
+	}
+}
+Schedule_tables {
+	ST_HVH_L {
+		KLE1e_01_E3 delay 10 ms;
+		KLE1s_01_E3 delay 10 ms;
+		KLE2e_01_E3 delay 10 ms;
+		KLE2s_01_E3 delay 10 ms;
+		WP1ae_01 delay 10 ms;
+		KJS1e_01 delay 10 ms;
+		HVH_Le_01 delay 10 ms;
+		KLE1s_02_E3 delay 10 ms;
+		KLE2s_02_E3 delay 10 ms;
+		KJS1s_01 delay 10 ms;
+		KJS1s_02 delay 10 ms;
+		WP1as_01 delay 10 ms;
+		KLE1e_01_E3 delay 10 ms;
+		KLE1s_01_E3 delay 10 ms;
+		KLE2e_01_E3 delay 10 ms;
+		KLE2s_01_E3 delay 10 ms;
+		WP1ae_01 delay 10 ms;
+		KJS2e_01 delay 10 ms;
+		HVH_Ls_01 delay 10 ms;
+		HVH_Ls_02 delay 10 ms;
+		HVH_Ls_03 delay 10 ms;
+		KJS2s_01 delay 10 ms;
+		KJS2s_02 delay 10 ms;
+		WP1as_02 delay 10 ms;
+	}
+	ST_KickDown {
+		HVH_Le_01 delay 10 ms;
+		MV_He_01 delay 10 ms;
+	}
+	ST_MVH_L {
+		KLE1e_01_E3 delay 10 ms;
+		KLE1s_01_E3 delay 10 ms;
+		KLE2e_01_E3 delay 10 ms;
+		KLE2s_01_E3 delay 10 ms;
+		WP1ae_01 delay 10 ms;
+		KJS1e_01 delay 10 ms;
+		MV_He_01 delay 10 ms;
+		KLE1s_02_E3 delay 10 ms;
+		KLE2s_02_E3 delay 10 ms;
+		KJS1s_01 delay 10 ms;
+		KJS1s_02 delay 10 ms;
+		WP1as_01 delay 10 ms;
+		KLE1e_01_E3 delay 10 ms;
+		KLE1s_01_E3 delay 10 ms;
+		KLE2e_01_E3 delay 10 ms;
+		KLE2s_01_E3 delay 10 ms;
+		WP1ae_01 delay 10 ms;
+		KJS2e_01 delay 10 ms;
+		MV_Hs_01 delay 10 ms;
+		MV_Hs_02 delay 10 ms;
+		KJS2s_01 delay 10 ms;
+		KJS2s_02 delay 10 ms;
+		WP1as_02 delay 10 ms;
+	}
+	ST_NV_PTC {
+		KLE1e_01_E3 delay 10 ms;
+		KLE1s_01_E3 delay 10 ms;
+		KLE2e_01_E3 delay 10 ms;
+		KLE2s_01_E3 delay 10 ms;
+		WP1ae_01 delay 10 ms;
+		KJS1e_01 delay 10 ms;
+		PTCe_01 delay 10 ms;
+		KLE1s_02_E3 delay 10 ms;
+		KLE2s_02_E3 delay 10 ms;
+		KJS1s_01 delay 10 ms;
+		KJS1s_02 delay 10 ms;
+		WP1as_01 delay 10 ms;
+		KLE1e_01_E3 delay 10 ms;
+		KLE1s_01_E3 delay 10 ms;
+		KLE2e_01_E3 delay 10 ms;
+		KLE2s_01_E3 delay 10 ms;
+		WP1ae_01 delay 10 ms;
+		KJS2e_01 delay 10 ms;
+		PTCs_01 delay 10 ms;
+		PTCs_02 delay 10 ms;
+		KJS2s_01 delay 10 ms;
+		KJS2s_02 delay 10 ms;
+		WP1as_02 delay 10 ms;
+	}
+	DiagFunktionalerRequest {
+		ISO_Funktionaler_Req_All delay 10 ms;
+	}
+	FlashRequest {
+		MasterReq delay 10 ms;
+	}
+	FlashResponse {
+		SlaveResp delay 10 ms;
+	}
+	DiagRequest {
+		MasterReq delay 10 ms;
+	}
+	DiagResponse {
+		SlaveResp delay 10 ms;
+	}
+}
+Signal_encoding_types {
+	HV_HL_Err_Heizkreis_1_TNCTOC_encoding {
+		logical_value, 0, "testcompletedthisoperationcycle";
+		logical_value, 1, "testnotcompleted";
+	}
+	HV_HL_Err_Heizkreis_2_TNCTOC_encoding {
+		logical_value, 0, "testcompletedthisoperationcycle";
+		logical_value, 1, "testnotcompleted";
+	}
+	HV_HL_Err_Heizkreis_3_TNCTOC_encoding {
+		logical_value, 0, "testcompletedthisoperationcycle";
+		logical_value, 1, "testnotcompleted";
+	}
+	HV_HL_Err_Heizkreis_4_TNCTOC_encoding {
+		logical_value, 0, "testcompletedthisoperationcycle";
+		logical_value, 1, "testnotcompleted";
+	}
+	HV_HL_Err_intern_encoding {
+		logical_value, 0, "normal";
+		logical_value, 1, "Fehler";
+	}
+	HV_HL_Err_Intern_TNCTOC_encoding {
+		logical_value, 0, "testcompletedthisoperationcycle";
+		logical_value, 1, "testnotcompleted";
+	}
+	HV_HL_Err_Leckagestrom_encoding {
+		logical_value, 0, "normal";
+		logical_value, 1, "Fehler";
+	}
+	HV_HL_Err_Leckagestrom_TNCTOC_encoding {
+		logical_value, 0, "testcompletedthisoperationcycle";
+		logical_value, 1, "testnotcompleted";
+	}
+	HV_HL_Err_Temp_HK1_1_TNCTOC_encoding {
+		logical_value, 0, "testcompletedthisoperationcycle";
+		logical_value, 1, "testnotcompleted";
+	}
+	HV_HL_Err_Temp_HK1_2_TNCTOC_encoding {
+		logical_value, 0, "testcompletedthisoperationcycle";
+		logical_value, 1, "testnotcompleted";
+	}
+	HV_HL_Err_Temp_HK2_1_TNCTOC_encoding {
+		logical_value, 0, "testcompletedthisoperationcycle";
+		logical_value, 1, "testnotcompleted";
+	}
+	HV_HL_Err_Temp_HK2_2_TNCTOC_encoding {
+		logical_value, 0, "testcompletedthisoperationcycle";
+		logical_value, 1, "testnotcompleted";
+	}
+	HV_HL_Err_Temp_HK3_1_TNCTOC_encoding {
+		logical_value, 0, "testcompletedthisoperationcycle";
+		logical_value, 1, "testnotcompleted";
+	}
+	HV_HL_Err_Temp_HK3_2_TNCTOC_encoding {
+		logical_value, 0, "testcompletedthisoperationcycle";
+		logical_value, 1, "testnotcompleted";
+	}
+	HV_HL_Err_Temp_HK4_1_TNCTOC_encoding {
+		logical_value, 0, "testcompletedthisoperationcycle";
+		logical_value, 1, "testnotcompleted";
+	}
+	HV_HL_Err_Temp_HK4_2_TNCTOC_encoding {
+		logical_value, 0, "testcompletedthisoperationcycle";
+		logical_value, 1, "testnotcompleted";
+	}
+	HV_HL_Err_Temp_PCB_TNCTOC_encoding {
+		logical_value, 0, "testcompletedthisoperationcycle";
+		logical_value, 1, "testnotcompleted";
+	}
+	HV_HL_Err_Temp_Sens1_TNCTOC_encoding {
+		logical_value, 0, "testcompletedthisoperationcycle";
+		logical_value, 1, "testnotcompleted";
+	}
+	HV_HL_Err_Temperaturschutz_encoding {
+		logical_value, 0, "inaktiv";
+		logical_value, 1, "aktiv";
+	}
+	HV_HL_Err_TempSchutz_TNCTOC_encoding {
+		logical_value, 0, "testcompletedthisoperationcycle";
+		logical_value, 1, "testnotcompleted";
+	}
+	HV_HL_Err_Ueberstromabs_TNCTOC_encoding {
+		logical_value, 0, "testcompletedthisoperationcycle";
+		logical_value, 1, "testnotcompleted";
+	}
+	HV_HL_Err_Ueberstromabschaltung_encoding {
+		logical_value, 0, "inaktiv";
+		logical_value, 1, "aktiv";
+	}
+	HV_HL_ErrMem_State_encoding {
+		logical_value, 0, "Init";
+		logical_value, 1, "Normalbetrieb";
+		logical_value, 2, "WertNachEmpfangMode04Request";
+		logical_value, 3, "WertNachInitialisierung";
+	}
+	HV_HL_Fehlerstatus_encoding {
+		logical_value, 0, "Komponente_IO";
+		logical_value, 1, "Keine_HV_Spannung";
+		logical_value, 3, "Eingeschr_KompFkt";
+		logical_value, 6, "Keine_Komponentenfunktion";
+		logical_value, 7, "Init";
+	}
+	HV_HL_HK1_HV_I_ist_encoding {
+		logical_value, 254, "Init";
+		logical_value, 255, "Fehler";
+		physical_value, 0, 253, 0.25, 0, "Unit_Amper";
+	}
+	HV_HL_HK1_maxAnst_encoding {
+		logical_value, 0, "keine";
+		logical_value, 1, "max";
+	}
+	HV_HL_HK2_HV_I_ist_encoding {
+		logical_value, 254, "Init";
+		logical_value, 255, "Fehler";
+		physical_value, 0, 253, 0.25, 0, "Unit_Amper";
+	}
+	HV_HL_HK2_maxAnst_encoding {
+		logical_value, 0, "keine";
+		logical_value, 1, "max";
+	}
+	HV_HL_HK3_HV_I_ist_encoding {
+		logical_value, 254, "Init";
+		logical_value, 255, "Fehler";
+		physical_value, 0, 253, 0.25, 0, "Unit_Amper";
+	}
+	HV_HL_HK3_maxAnst_encoding {
+		logical_value, 0, "keine";
+		logical_value, 1, "max";
+	}
+	HV_HL_HK4_HV_I_ist_encoding {
+		logical_value, 254, "Init";
+		logical_value, 255, "Fehler";
+		physical_value, 0, 253, 0.25, 0, "Unit_Amper";
+	}
+	HV_HL_HK4_maxAnst_encoding {
+		logical_value, 0, "keine";
+		logical_value, 1, "max";
+	}
+	HV_HL_HV_ERR_encoding {
+		logical_value, 0, "No_Error";
+		logical_value, 1, "High_Voltage_too_low";
+		logical_value, 2, "High_Voltage_too_high";
+		logical_value, 3, "Init";
+	}
+	HV_HL_HV_I_ist_encoding {
+		logical_value, 254, "Init";
+		logical_value, 255, "Fehler";
+		physical_value, 0, 253, 0.25, 0, "Unit_Amper";
+	}
+	HV_HL_HV_UBattNV_TNCTOC_encoding {
+		logical_value, 0, "testcompletedthisoperationcycle";
+		logical_value, 1, "testnotcompleted";
+	}
+	HV_HL_HV_Voltage_encoding {
+		logical_value, 254, "Init";
+		logical_value, 255, "Fehler";
+		physical_value, 0, 253, 4, 0, "Unit_Volt";
+	}
+	HV_HL_HV_Voltage_TNCTOC_encoding {
+		logical_value, 0, "testcompletedthisoperationcycle";
+		logical_value, 1, "testnotcompleted";
+	}
+	HV_HL_Istmodus_encoding {
+		logical_value, 0, "Standby";
+		logical_value, 1, "Regelung_aktiv";
+	}
+	HV_HL_Mode_HK1_encoding {
+		logical_value, 0, "Normal";
+		logical_value, 1, "Degraded by temperature";
+		logical_value, 2, "Switch off by temperature";
+		logical_value, 3, "Fehler";
+	}
+	HV_HL_Mode_HK2_encoding {
+		logical_value, 0, "Normal";
+		logical_value, 1, "Degraded by temperature";
+		logical_value, 2, "Switch off by temperature";
+		logical_value, 3, "Fehler";
+	}
+	HV_HL_Mode_HK3_encoding {
+		logical_value, 0, "Normal";
+		logical_value, 1, "Degraded by temperature";
+		logical_value, 2, "Switch off by temperature";
+		logical_value, 3, "Fehler";
+	}
+	HV_HL_Mode_HK4_encoding {
+		logical_value, 0, "Normal";
+		logical_value, 1, "Degraded by temperature";
+		logical_value, 2, "Switch off by temperature";
+		logical_value, 3, "Fehler";
+	}
+	HV_HL_ParameterChange_encoding {
+		logical_value, 0, "noParameterChange";
+		logical_value, 1, "ParameterChange";
+	}
+	HV_HL_ResponseError_TNCTOC_encoding {
+		logical_value, 0, "testcompletedthisoperationcycle";
+		logical_value, 1, "testnotcompleted";
+	}
+	HV_HL_Status_UBatt_encoding {
+		logical_value, 0, "Batterie_OK";
+		logical_value, 1, "Unterspannung";
+		logical_value, 2, "Ueberspannung";
+		logical_value, 3, "Init";
+	}
+	HV_HL_Temp_HK1_1_encoding {
+		logical_value, 254, "Init";
+		logical_value, 255, "Fehler";
+		physical_value, 0, 253, 1, -50, "Unit_DegreCelsi";
+	}
+	HV_HL_Temp_HK1_2_encoding {
+		logical_value, 254, "Init";
+		logical_value, 255, "Fehler";
+		physical_value, 0, 253, 1, -50, "Unit_DegreCelsi";
+	}
+	HV_HL_Temp_HK2_1_encoding {
+		logical_value, 254, "Init";
+		logical_value, 255, "Fehler";
+		physical_value, 0, 253, 1, -50, "Unit_DegreCelsi";
+	}
+	HV_HL_Temp_HK2_2_encoding {
+		logical_value, 254, "Init";
+		logical_value, 255, "Fehler";
+		physical_value, 0, 253, 1, -50, "Unit_DegreCelsi";
+	}
+	HV_HL_Temp_HK3_1_encoding {
+		logical_value, 254, "Init";
+		logical_value, 255, "Fehler";
+		physical_value, 0, 253, 1, -50, "Unit_DegreCelsi";
+	}
+	HV_HL_Temp_HK3_2_encoding {
+		logical_value, 254, "Init";
+		logical_value, 255, "Fehler";
+		physical_value, 0, 253, 1, -50, "Unit_DegreCelsi";
+	}
+	HV_HL_Temp_HK4_1_encoding {
+		logical_value, 254, "Init";
+		logical_value, 255, "Fehler";
+		physical_value, 0, 253, 1, -50, "Unit_DegreCelsi";
+	}
+	HV_HL_Temp_HK4_2_encoding {
+		logical_value, 254, "Init";
+		logical_value, 255, "Fehler";
+		physical_value, 0, 253, 1, -50, "Unit_DegreCelsi";
+	}
+	HV_HL_Temp_PCB_encoding {
+		logical_value, 254, "Init";
+		logical_value, 255, "Fehler";
+		physical_value, 0, 200, 1, -50, "Unit_DegreCelsi";
+	}
+	HV_HL_Temp_Sensor_1_encoding {
+		logical_value, 254, "Init";
+		logical_value, 255, "Fehler";
+		physical_value, 0, 253, 1, -50, "Unit_DegreCelsi";
+	}
+	HV_HL_TimeOut_Fehler_encoding {
+		logical_value, 0, "no_timeout";
+		logical_value, 1, "timeout_detected";
+	}
+	HV_HL_Ubatt_NV_encoding {
+		logical_value, 254, "Init";
+		logical_value, 255, "Fehler";
+		physical_value, 0, 253, 0.1, 0, "Unit_Volt";
+	}
+	HV_HL_Vorhalt_Stufe_encoding {
+		logical_value, 0, "kein Vorhalt";
+		logical_value, 1, "Vorhalt 1";
+		logical_value, 2, "Vorhalt 2";
+		logical_value, 3, "Vorhalt 3";
+	}
+	KJS1_ResponseError_encoding {
+		logical_value, 0, "normal";
+		logical_value, 1, "Fehler";
+	}
+	KJS2_ResponseError_encoding {
+		logical_value, 0, "normal";
+		logical_value, 1, "Fehler";
+	}
+	KJS_SA1_AktDefekt_TF_encoding {
+		logical_value, 0, "Init_nicht_aktiv";
+		logical_value, 1, "Aktuator_defekt";
+	}
+	KJS_SA1_AktDefekt_TNCTOC_encoding {
+		logical_value, 0, "DTC_test_completed_this_operation_cycle";
+		logical_value, 1, "DTC_test_not_completed_this_operation_cycle";
+	}
+	KJS_SA1_Bewegungsstatus_encoding {
+		logical_value, 0, "keine_Bewegung";
+		logical_value, 1, "Bewegung_Richtung_Geschlossen";
+		logical_value, 2, "Bewegnung_Richtung_Geoeffnet";
+		logical_value, 3, "Init";
+	}
+	KJS_SA1_Blockade1_TF_encoding {
+		logical_value, 0, "Init_nicht_aktiv";
+		logical_value, 1, "Mechanik_blockiert_in_Richtung_Endanschlag_Geschlossen";
+	}
+	KJS_SA1_Blockade1_TNCTOC_encoding {
+		logical_value, 0, "DTC_test_completed_this_operation_cycle";
+		logical_value, 1, "DTC_test_not_completed_this_operation_cycle";
+	}
+	KJS_SA1_Blockade2_TF_encoding {
+		logical_value, 0, "Init_nicht_aktiv";
+		logical_value, 1, "Mechanik_blockiert_in_Richtung_Endanschlag_Geoeffnet";
+	}
+	KJS_SA1_Blockade2_TNCTOC_encoding {
+		logical_value, 0, "DTC_test_completed_this_operation_cycle";
+		logical_value, 1, "DTC_test_not_completed_this_operation_cycle";
+	}
+	KJS_SA1_Blockade_Pos_encoding {
+		logical_value, 4091, "KJS_SA_im_Endanschlag_Geschlossen";
+		logical_value, 4092, "KJS_SA_im_Endanschlag_Geoeffnet";
+		logical_value, 4093, "Reserviert";
+		logical_value, 4094, "Init_keine_Blockade";
+		logical_value, 4095, "Fehler";
+		physical_value, 0, 4000, 0.025, 0, "Unit_PerCent";
+	}
+	KJS_SA1_DrehtFrei1_TF_encoding {
+		logical_value, 0, "Init_nicht_aktiv";
+		logical_value, 1, "Mechanik_dreht_frei_Endanschlag_Geschlossen";
+	}
+	KJS_SA1_DrehtFrei1_TNCTOC_encoding {
+		logical_value, 0, "DTC_test_completed_this_operation_cycle";
+		logical_value, 1, "DTC_test_not_completed_this_operation_cycle";
+	}
+	KJS_SA1_DrehtFrei2_TF_encoding {
+		logical_value, 0, "Init_nicht_aktiv";
+		logical_value, 1, "Mechanik_dreht_frei_Endanschlag_Geoeffnet";
+	}
+	KJS_SA1_DrehtFrei2_TNCTOC_encoding {
+		logical_value, 0, "DTC_test_completed_this_operation_cycle";
+		logical_value, 1, "DTC_test_not_completed_this_operation_cycle";
+	}
+	KJS_SA1_E2EFehler_TF_encoding {
+		logical_value, 0, "Init_nicht_aktiv";
+		logical_value, 1, "E2E_Fehler_Master_aktiv";
+	}
+	KJS_SA1_E2EFehler_TNCTOC_encoding {
+		logical_value, 0, "DTC_test_completed_this_operation_cycle";
+		logical_value, 1, "DTC_test_not_completed_this_operation_cycle";
+	}
+	KJS_SA1_Fehler_Codierpin_TF_encoding {
+		logical_value, 0, "Init_nicht_aktiv";
+		logical_value, 1, "Fehler";
+	}
+	KJS_SA1_Fehler_Codierpin_TNCTOC_encoding {
+		logical_value, 0, "DTC_test_completed_this_operation_cycle";
+		logical_value, 1, "DTC_test_not_completed_this_operation_cycle";
+	}
+	KJS_SA1_Fehler_InitRef_TF_encoding {
+		logical_value, 0, "Init_nicht_aktiv";
+		logical_value, 1, "Fehler_waehrend_Referenzierung_Initialisierung";
+	}
+	KJS_SA1_Fehler_InitRef_TNCTOC_encoding {
+		logical_value, 0, "DTC_test_completed_this_operation_cycle";
+		logical_value, 1, "DTC_test_not_completed_this_operation_cycle";
+	}
+	KJS_SA1_Fehler_Parameter_TF_encoding {
+		logical_value, 0, "Init_nicht_aktiv";
+		logical_value, 1, "Fehler";
+	}
+	KJS_SA1_Fehler_Parameter_TNCTOC_encoding {
+		logical_value, 0, "DTC_test_completed_this_operation_cycle";
+		logical_value, 1, "DTC_test_not_completed_this_operation_cycle";
+	}
+	KJS_SA1_Initialisiert_encoding {
+		logical_value, 0, "nicht_initialisiert";
+		logical_value, 1, "initialisiert";
+	}
+	KJS_SA1_InkrFehler_TF_encoding {
+		logical_value, 0, "Init_nicht_aktiv";
+		logical_value, 1, "Inkremente_Fehler";
+	}
+	KJS_SA1_InkrFehler_TNCTOC_encoding {
+		logical_value, 0, "DTC_test_completed_this_operation_cycle";
+		logical_value, 1, "DTC_test_not_completed_this_operation_cycle";
+	}
+	KJS_SA1_InkrSense_TF_encoding {
+		logical_value, 0, "Init_nicht_aktiv";
+		logical_value, 1, "Inkrementalsensor_defekt";
+	}
+	KJS_SA1_InkrSense_TNCTOC_encoding {
+		logical_value, 0, "DTC_test_completed_this_operation_cycle";
+		logical_value, 1, "DTC_test_not_completed_this_operation_cycle";
+	}
+	KJS_SA1_Ist_Drehrichtung_encoding {
+		logical_value, 0, "Rechtslauf_CW";
+		logical_value, 1, "Linkslauf_CCW";
+		logical_value, 2, "reserviert";
+		logical_value, 3, "Init";
+	}
+	KJS_SA1_Ist_Pos_encoding {
+		logical_value, 4091, "Anfahren_Endanschlag_Geschlossen";
+		logical_value, 4092, "Anfahren_Endanschlag_Geoeffnet";
+		logical_value, 4093, "Reserviert";
+		logical_value, 4094, "Init";
+		logical_value, 4095, "Fehler";
+		physical_value, 0, 4000, 0.025, 0, "Unit_PerCent";
+	}
+	KJS_SA1_PlausiFehlg_TF_encoding {
+		logical_value, 0, "Init_nicht_aktiv";
+		logical_value, 1, "Mechanik_Plausi_fehlgeschlagen";
+	}
+	KJS_SA1_PlausiFehlg_TNCTOC_encoding {
+		logical_value, 0, "DTC_test_completed_this_operation_cycle";
+		logical_value, 1, "DTC_test_not_completed_this_operation_cycle";
+	}
+	KJS_SA1_Pos_erreicht_encoding {
+		logical_value, 0, "Position_nicht_erreicht_Verstellung_aktiv";
+		logical_value, 1, "Position_erreicht";
+	}
+	KJS_SA1_Ref_Weg_encoding {
+		logical_value, 4094, "Init_kein_valider_referenzierter_Weg";
+		logical_value, 4095, "Fehler";
+		physical_value, 0, 4093, 1, 0, "Unit_DegreOfArc";
+	}
+	KJS_SA1_Referenziert_encoding {
+		logical_value, 0, "nicht_referenziert";
+		logical_value, 1, "referenziert";
+	}
+	KJS_SA1_SenseDefekt_TF_encoding {
+		logical_value, 0, "Init_nicht_aktiv";
+		logical_value, 1, "Sensor_defekt";
+	}
+	KJS_SA1_SenseDefekt_TNCTOC_encoding {
+		logical_value, 0, "DTC_test_completed_this_operation_cycle";
+		logical_value, 1, "DTC_test_not_completed_this_operation_cycle";
+	}
+	KJS_SA1_TempAbsch_TF_encoding {
+		logical_value, 0, "Init_nicht_aktiv";
+		logical_value, 1, "Thermoschutz_Abschaltung";
+	}
+	KJS_SA1_TempAbsch_TNCTOC_encoding {
+		logical_value, 0, "DTC_test_completed_this_operation_cycle";
+		logical_value, 1, "DTC_test_not_completed_this_operation_cycle";
+	}
+	KJS_SA1_TempWarning_TF_encoding {
+		logical_value, 0, "Init_nicht_aktiv";
+		logical_value, 1, "Thermoschutz_Warnung";
+	}
+	KJS_SA1_TempWarning_TNCTOC_encoding {
+		logical_value, 0, "DTC_test_completed_this_operation_cycle";
+		logical_value, 1, "DTC_test_not_completed_this_operation_cycle";
+	}
+	KJS_SA1_UHoch_TF_encoding {
+		logical_value, 0, "Init_nicht_aktiv";
+		logical_value, 1, "Hochspannung";
+	}
+	KJS_SA1_UHoch_TNCTOC_encoding {
+		logical_value, 0, "DTC_test_completed_this_operation_cycle";
+		logical_value, 1, "DTC_test_not_completed_this_operation_cycle";
+	}
+	KJS_SA1_UNieder_TF_encoding {
+		logical_value, 0, "Init_nicht_aktiv";
+		logical_value, 1, "Niederspannung";
+	}
+	KJS_SA1_UNieder_TNCTOC_encoding {
+		logical_value, 0, "DTC_test_completed_this_operation_cycle";
+		logical_value, 1, "DTC_test_not_completed_this_operation_cycle";
+	}
+	KJS_SA1_UUeber_TF_encoding {
+		logical_value, 0, "Init_nicht_aktiv";
+		logical_value, 1, "Ueberspannung";
+	}
+	KJS_SA1_UUeber_TNCTOC_encoding {
+		logical_value, 0, "DTC_test_completed_this_operation_cycle";
+		logical_value, 1, "DTC_test_not_completed_this_operation_cycle";
+	}
+	KJS_SA1_UUnter_TF_encoding {
+		logical_value, 0, "Init_nicht_aktiv";
+		logical_value, 1, "Unterspannung";
+	}
+	KJS_SA1_UUnter_TNCTOC_encoding {
+		logical_value, 0, "DTC_test_completed_this_operation_cycle";
+		logical_value, 1, "DTC_test_not_completed_this_operation_cycle";
+	}
+	KJS_SA2_AktDefekt_TF_encoding {
+		logical_value, 0, "Init_nicht_aktiv";
+		logical_value, 1, "Aktuator_defekt";
+	}
+	KJS_SA2_AktDefekt_TNCTOC_encoding {
+		logical_value, 0, "DTC_test_completed_this_operation_cycle";
+		logical_value, 1, "DTC_test_not_completed_this_operation_cycle";
+	}
+	KJS_SA2_Bewegungsstatus_encoding {
+		logical_value, 0, "keine_Bewegung";
+		logical_value, 1, "Bewegung_Richtung_Geschlossen";
+		logical_value, 2, "Bewegnung_Richtung_Geoeffnet";
+		logical_value, 3, "Init";
+	}
+	KJS_SA2_Blockade1_TF_encoding {
+		logical_value, 0, "Init_nicht_aktiv";
+		logical_value, 1, "Mechanik_blockiert_in_Richtung_Endanschlag_Geschlossen";
+	}
+	KJS_SA2_Blockade1_TNCTOC_encoding {
+		logical_value, 0, "DTC_test_completed_this_operation_cycle";
+		logical_value, 1, "DTC_test_not_completed_this_operation_cycle";
+	}
+	KJS_SA2_Blockade2_TF_encoding {
+		logical_value, 0, "Init_nicht_aktiv";
+		logical_value, 1, "Mechanik_blockiert_in_Richtung_Endanschlag_Geoeffnet";
+	}
+	KJS_SA2_Blockade2_TNCTOC_encoding {
+		logical_value, 0, "DTC_test_completed_this_operation_cycle";
+		logical_value, 1, "DTC_test_not_completed_this_operation_cycle";
+	}
+	KJS_SA2_Blockade_Pos_encoding {
+		logical_value, 4091, "KJS_SA_im_Endanschlag_Geschlossen";
+		logical_value, 4092, "KJS_SA_im_Endanschlag_Geoeffnet";
+		logical_value, 4093, "Reserviert";
+		logical_value, 4094, "Init_keine_Blockade";
+		logical_value, 4095, "Fehler";
+		physical_value, 0, 4000, 0.025, 0, "Unit_PerCent";
+	}
+	KJS_SA2_DrehtFrei1_TF_encoding {
+		logical_value, 0, "Init_nicht_aktiv";
+		logical_value, 1, "Mechanik_dreht_frei_Endanschlag_Geschlossen";
+	}
+	KJS_SA2_DrehtFrei1_TNCTOC_encoding {
+		logical_value, 0, "DTC_test_completed_this_operation_cycle";
+		logical_value, 1, "DTC_test_not_completed_this_operation_cycle";
+	}
+	KJS_SA2_DrehtFrei2_TF_encoding {
+		logical_value, 0, "Init_nicht_aktiv";
+		logical_value, 1, "Mechanik_dreht_frei_Endanschlag_Geoeffnet";
+	}
+	KJS_SA2_DrehtFrei2_TNCTOC_encoding {
+		logical_value, 0, "DTC_test_completed_this_operation_cycle";
+		logical_value, 1, "DTC_test_not_completed_this_operation_cycle";
+	}
+	KJS_SA2_E2EFehler_TF_encoding {
+		logical_value, 0, "Init_nicht_aktiv";
+		logical_value, 1, "E2E_Fehler_Master_aktiv";
+	}
+	KJS_SA2_E2EFehler_TNCTOC_encoding {
+		logical_value, 0, "DTC_test_completed_this_operation_cycle";
+		logical_value, 1, "DTC_test_not_completed_this_operation_cycle";
+	}
+	KJS_SA2_Fehler_Codierpin_TF_encoding {
+		logical_value, 0, "Init_nicht_aktiv";
+		logical_value, 1, "Fehler_Codierpin unplausibel_aktiv";
+	}
+	KJS_SA2_Fehler_Codierpin_TNCTOC_encoding {
+		logical_value, 0, "DTC_test_completed_this_operation_cycle";
+		logical_value, 1, "DTC_test_not_completed_this_operation_cycle";
+	}
+	KJS_SA2_Fehler_InitRef_TF_encoding {
+		logical_value, 0, "Init_nicht_aktiv";
+		logical_value, 1, "Fehler_waehrend_Referenzierung_Initialisierung";
+	}
+	KJS_SA2_Fehler_InitRef_TNCTOC_encoding {
+		logical_value, 0, "DTC_test_completed_this_operation_cycle";
+		logical_value, 1, "DTC_test_not_completed_this_operation_cycle";
+	}
+	KJS_SA2_Fehler_Parameter_TF_encoding {
+		logical_value, 0, "Init_nicht_aktiv";
+		logical_value, 1, "Fehler_Parametrierung_aktiv";
+	}
+	KJS_SA2_Fehler_Parameter_TNCTOC_encoding {
+		logical_value, 0, "DTC_test_completed_this_operation_cycle";
+		logical_value, 1, "DTC_test_not_completed_this_operation_cycle";
+	}
+	KJS_SA2_Initialisiert_encoding {
+		logical_value, 0, "nicht_initialisiert";
+		logical_value, 1, "initialisiert";
+	}
+	KJS_SA2_InkrFehler_TF_encoding {
+		logical_value, 0, "Init_nicht_aktiv";
+		logical_value, 1, "Inkremente_Fehler";
+	}
+	KJS_SA2_InkrFehler_TNCTOC_encoding {
+		logical_value, 0, "DTC_test_completed_this_operation_cycle";
+		logical_value, 1, "DTC_test_not_completed_this_operation_cycle";
+	}
+	KJS_SA2_InkrSense_TF_encoding {
+		logical_value, 0, "Init_nicht_aktiv";
+		logical_value, 1, "Inkrementalsensor_defekt";
+	}
+	KJS_SA2_InkrSense_TNCTOC_encoding {
+		logical_value, 0, "DTC_test_completed_this_operation_cycle";
+		logical_value, 1, "DTC_test_not_completed_this_operation_cycle";
+	}
+	KJS_SA2_Ist_Drehrichtung_encoding {
+		logical_value, 0, "Rechtslauf_CW";
+		logical_value, 1, "Linkslauf_CCW";
+		logical_value, 2, "reserviert";
+		logical_value, 3, "Init";
+	}
+	KJS_SA2_Ist_Pos_encoding {
+		logical_value, 4091, "Anfahren_Endanschlag_Geschlossen";
+		logical_value, 4092, "Anfahren_Endanschlag_Geoeffnet";
+		logical_value, 4093, "Reserviert";
+		logical_value, 4094, "Init";
+		logical_value, 4095, "Fehler";
+		physical_value, 0, 4000, 0.025, 0, "Unit_PerCent";
+	}
+	KJS_SA2_PlausiFehlg_TF_encoding {
+		logical_value, 0, "Init_nicht_aktiv";
+		logical_value, 1, "Mechanik_Plausi_fehlgeschlagen";
+	}
+	KJS_SA2_PlausiFehlg_TNCTOC_encoding {
+		logical_value, 0, "DTC_test_completed_this_operation_cycle";
+		logical_value, 1, "DTC_test_not_completed_this_operation_cycle";
+	}
+	KJS_SA2_Pos_erreicht_encoding {
+		logical_value, 0, "Position_nicht_erreicht_Verstellung_aktiv";
+		logical_value, 1, "Position_erreicht";
+	}
+	KJS_SA2_Ref_Weg_encoding {
+		logical_value, 4094, "Init_kein_valider_referenzierter_Weg";
+		logical_value, 4095, "Fehler";
+		physical_value, 0, 4093, 1, 0, "Unit_DegreOfArc";
+	}
+	KJS_SA2_Referenziert_encoding {
+		logical_value, 0, "nicht_referenziert";
+		logical_value, 1, "referenziert";
+	}
+	KJS_SA2_SenseDefekt_TF_encoding {
+		logical_value, 0, "Init_nicht_aktiv";
+		logical_value, 1, "Sensor_defekt";
+	}
+	KJS_SA2_SenseDefekt_TNCTOC_encoding {
+		logical_value, 0, "DTC_test_completed_this_operation_cycle";
+		logical_value, 1, "DTC_test_not_completed_this_operation_cycle";
+	}
+	KJS_SA2_TempAbsch_TF_encoding {
+		logical_value, 0, "Init_nicht_aktiv";
+		logical_value, 1, "Thermoschutz_Abschaltung";
+	}
+	KJS_SA2_TempAbsch_TNCTOC_encoding {
+		logical_value, 0, "DTC_test_completed_this_operation_cycle";
+		logical_value, 1, "DTC_test_not_completed_this_operation_cycle";
+	}
+	KJS_SA2_TempWarning_TF_encoding {
+		logical_value, 0, "Init_nicht_aktiv";
+		logical_value, 1, "Thermoschutz_Warnung";
+	}
+	KJS_SA2_TempWarning_TNCTOC_encoding {
+		logical_value, 0, "DTC_test_completed_this_operation_cycle";
+		logical_value, 1, "DTC_test_not_completed_this_operation_cycle";
+	}
+	KJS_SA2_UHoch_TF_encoding {
+		logical_value, 0, "Init_nicht_aktiv";
+		logical_value, 1, "Hochspannung";
+	}
+	KJS_SA2_UHoch_TNCTOC_encoding {
+		logical_value, 0, "DTC_test_completed_this_operation_cycle";
+		logical_value, 1, "DTC_test_not_completed_this_operation_cycle";
+	}
+	KJS_SA2_UNieder_TF_encoding {
+		logical_value, 0, "Init_nicht_aktiv";
+		logical_value, 1, "Niederspannung";
+	}
+	KJS_SA2_UNieder_TNCTOC_encoding {
+		logical_value, 0, "DTC_test_completed_this_operation_cycle";
+		logical_value, 1, "DTC_test_not_completed_this_operation_cycle";
+	}
+	KJS_SA2_UUeber_TF_encoding {
+		logical_value, 0, "Init_nicht_aktiv";
+		logical_value, 1, "Ueberspannung";
+	}
+	KJS_SA2_UUeber_TNCTOC_encoding {
+		logical_value, 0, "DTC_test_completed_this_operation_cycle";
+		logical_value, 1, "DTC_test_not_completed_this_operation_cycle";
+	}
+	KJS_SA2_UUnter_TF_encoding {
+		logical_value, 0, "Init_nicht_aktiv";
+		logical_value, 1, "Unterspannung";
+	}
+	KJS_SA2_UUnter_TNCTOC_encoding {
+		logical_value, 0, "DTC_test_completed_this_operation_cycle";
+		logical_value, 1, "DTC_test_not_completed_this_operation_cycle";
+	}
+	KL_HV_HL_ein_encoding {
+		logical_value, 0, "Aus";
+		logical_value, 1, "Ein";
+	}
+	KL_HV_HL_HK1_PWM_encoding {
+		logical_value, 0, "0";
+		logical_value, 1, "25";
+		logical_value, 2, "50";
+		logical_value, 3, "75";
+		logical_value, 4, "100";
+	}
+	KL_HV_HL_HK1_soll_encoding {
+		logical_value, 254, "Init";
+		logical_value, 255, "Fehler";
+		physical_value, 0, 200, 0.5, 0, "Unit_PerCent";
+	}
+	KL_HV_HL_HK2_PWM_encoding {
+		logical_value, 0, "0";
+		logical_value, 1, "25";
+		logical_value, 2, "50";
+		logical_value, 3, "75";
+		logical_value, 4, "100";
+	}
+	KL_HV_HL_HK2_soll_encoding {
+		logical_value, 254, "Init";
+		logical_value, 255, "Fehler";
+		physical_value, 0, 200, 0.5, 0, "Unit_PerCent";
+	}
+	KL_HV_HL_HK3_PWM_encoding {
+		logical_value, 0, "0";
+		logical_value, 1, "25";
+		logical_value, 2, "50";
+		logical_value, 3, "75";
+		logical_value, 4, "100";
+	}
+	KL_HV_HL_HK3_soll_encoding {
+		logical_value, 254, "Init";
+		logical_value, 255, "Fehler";
+		physical_value, 0, 200, 0.5, 0, "Unit_PerCent";
+	}
+	KL_HV_HL_HK4_PWM_encoding {
+		logical_value, 0, "0";
+		logical_value, 1, "25";
+		logical_value, 2, "50";
+		logical_value, 3, "75";
+		logical_value, 4, "100";
+	}
+	KL_HV_HL_HK4_soll_encoding {
+		logical_value, 254, "Init";
+		logical_value, 255, "Fehler";
+		physical_value, 0, 200, 0.5, 0, "Unit_PerCent";
+	}
+	KLE1e_Adresse_encoding {
+		physical_value, 0, 255, 1, 0, "";
+	}
+	KLE1e_downRamp_encoding {
+		logical_value, 0, "Kennlinie 1";
+		logical_value, 1, "Kennlinie 2";
+		logical_value, 2, "Kennlinie 3";
+		logical_value, 3, "Kennlinie 4";
+	}
+	KLE1e_Kl15_Status_encoding {
+		logical_value, 0, "Kl_15_Aus";
+		logical_value, 1, "Kl_15_Ein";
+		logical_value, 2, "Init";
+		logical_value, 3, "N_A";
+	}
+	KLE1e_n_Notlauf_soll_encoding {
+		logical_value, 0, "kein_Notlauf";
+		logical_value, 1, "mittlere_Nenndrehzahl";
+		logical_value, 2, "Nenndrehzahl";
+		logical_value, 3, "Nennleistung";
+	}
+	KLE1e_n_soll_encoding {
+		logical_value, 254, "Init";
+		logical_value, 255, "Fehler";
+		physical_value, 0, 253, 0.5, 0, "Unit_PerCent";
+	}
+	KLE1e_Not_reStart_encoding {
+		logical_value, 0, "Notlauf_deaktivieren_bei_unterschreiten_der_Spannungsschwelle_TME_U_Not_Stop_Sleepmode_Wiederaufstart_nicht_erlaubt";
+		logical_value, 1, "Notlauf_aktiv_bei_ueberschreiten_der_Spannungshysterese_Wiederaufstart_erlaubt";
+	}
+	KLE1e_U_Not_Stop_encoding {
+		logical_value, 15, "Fehler";
+		physical_value, 0, 14, 0.2142857142, 10, "Unit_Volt";
+	}
+	KLE1e_upRamp_encoding {
+		logical_value, 0, "Kennlinie 1";
+		logical_value, 1, "Kennlinie 2";
+		logical_value, 2, "Kennlinie 3";
+		logical_value, 3, "Kennlinie 4";
+	}
+	KLE1s_Adresse_encoding {
+		physical_value, 0, 255, 1, 0, "";
+	}
+	KLE1s_Adressinhalt_encoding {
+		physical_value, 0, 65535, 1, 0, "";
+	}
+	KLE1s_Diag_Block_encoding {
+		logical_value, 0, "KLE_nicht_blockiert";
+		logical_value, 1, "KLE_blockiert";
+	}
+	KLE1s_Diag_Block_TNCTOC_encoding {
+		logical_value, 0, "TCTOC";
+		logical_value, 1, "TNCTOC";
+	}
+	KLE1s_Diag_int_encoding {
+		logical_value, 0, "kein_interner_Fehler";
+		logical_value, 1, "interner_Fehler_Abschaltung";
+	}
+	KLE1s_Diag_int_TNCTOC_encoding {
+		logical_value, 0, "TCTOC";
+		logical_value, 1, "TNCTOC";
+	}
+	KLE1s_Diag_Temp_encoding {
+		logical_value, 0, "keine_Uebertemperatur";
+		logical_value, 1, "Uebertemperatur_Abschaltung";
+	}
+	KLE1s_Diag_Temp_TNCTOC_encoding {
+		logical_value, 0, "TCTOC";
+		logical_value, 1, "TNCTOC";
+	}
+	KLE1s_Diag_Uebersp_encoding {
+		logical_value, 0, "keine_Ueberspannung";
+		logical_value, 1, "Ueberspannung_Abschaltung";
+	}
+	KLE1s_Diag_Uebersp_TNCTOC_encoding {
+		logical_value, 0, "TCTOC";
+		logical_value, 1, "TNCTOC";
+	}
+	KLE1s_Diag_Untersp_encoding {
+		logical_value, 0, "keine_Unterspannung";
+		logical_value, 1, "Unterspannung_Abschaltung";
+	}
+	KLE1s_Diag_Untersp_TNCTOC_encoding {
+		logical_value, 0, "TCTOC";
+		logical_value, 1, "TNCTOC";
+	}
+	KLE1s_ErrMemState_encoding {
+		logical_value, 0, "Init_Default";
+		logical_value, 1, "ErrMem_Active_State";
+		logical_value, 2, "ErrMem_InitProgress";
+		logical_value, 3, "ErrMem_Init_done";
+	}
+	KLE1s_I_Last_ist_encoding {
+		logical_value, 1022, "Init";
+		logical_value, 1023, "Fehler";
+		physical_value, 0, 1021, 0.2, -50, "Unit_Amper";
+	}
+	KLE1s_n_ist_encoding {
+		logical_value, 254, "Init";
+		logical_value, 255, "Fehler";
+		physical_value, 0, 253, 20, 0, "Unit_MinutInver";
+	}
+	KLE1s_ResponseError_encoding {
+		logical_value, 0, "normal";
+		logical_value, 1, "Fehler";
+	}
+	KLE1s_ResponseError_TNCTOC_encoding {
+		logical_value, 0, "TCTOC";
+		logical_value, 1, "TNCTOC";
+	}
+	KLE1s_Status_Derating_encoding {
+		logical_value, 0, "kein_Derating";
+		logical_value, 1, "derating_Spannung";
+		logical_value, 2, "derating_Temperatur";
+		logical_value, 3, "derating_Spannung_und_Temperatur";
+	}
+	KLE1s_Status_Grenzwert_encoding {
+		logical_value, 0, "kein_GW";
+		logical_value, 1, "P/I_Begrenzung_aktiv";
+		logical_value, 2, "Unterspannung";
+		logical_value, 3, "Ueberspannung";
+		logical_value, 4, "Drehzahlbegrenzung_aktiv";
+	}
+	KLE1s_Status_SW_encoding {
+		logical_value, 0, "Sollwertvorgabe_ist_Null";
+		logical_value, 1, "Anlaufversuch";
+		logical_value, 2, "n_soll_wird_angefahren";
+		logical_value, 3, "n_soll_erreicht";
+		logical_value, 4, "n_soll_nicht_erreicht";
+		logical_value, 5, "Ueberblasen";
+		logical_value, 6, "max_Ansteuerung";
+		logical_value, 7, "FM_aktiv";
+		logical_value, 14, "Init";
+		logical_value, 15, "Fehler";
+	}
+	KLE1s_T_ist_encoding {
+		logical_value, 510, "Init";
+		logical_value, 511, "Fehler";
+		physical_value, 0, 509, 1, -60, "Unit_DegreCelsi";
+	}
+	KLE1s_U_Last_encoding {
+		logical_value, 1022, "Init";
+		logical_value, 1023, "Fehler";
+		physical_value, 0, 1021, 0.1, 0, "Unit_Volt";
+	}
+	KLE1s_U_logik_encoding {
+		logical_value, 126, "Init";
+		logical_value, 127, "Fehler";
+		physical_value, 0, 125, 0.2, 5, "Unit_Volt";
+	}
+	KLE2e_Adresse_encoding {
+		physical_value, 0, 255, 1, 0, "";
+	}
+	KLE2e_downRamp_encoding {
+		logical_value, 0, "Kennlinie 1";
+		logical_value, 1, "Kennlinie 2";
+		logical_value, 2, "Kennlinie 3";
+		logical_value, 3, "Kennlinie 4";
+	}
+	KLE2e_Kl15_Status_encoding {
+		logical_value, 0, "Kl_15_Aus";
+		logical_value, 1, "Kl_15_Ein";
+		logical_value, 2, "Init";
+		logical_value, 3, "N_A";
+	}
+	KLE2e_n_Notlauf_soll_encoding {
+		logical_value, 0, "kein_Notlauf";
+		logical_value, 1, "mittlere_Nenndrehzahl";
+		logical_value, 2, "Nenndrehzahl";
+		logical_value, 3, "Nennleistung";
+	}
+	KLE2e_n_soll_encoding {
+		logical_value, 254, "Init";
+		logical_value, 255, "Fehler";
+		physical_value, 0, 253, 0.5, 0, "Unit_PerCent";
+	}
+	KLE2e_Not_reStart_encoding {
+		logical_value, 0, "Notlauf_deaktivieren_bei_unterschreiten_der_Spannungsschwelle_TME_U_Not_Stop_Sleepmode_Wiederaufstart_nicht_erlaubt";
+		logical_value, 1, "Notlauf_aktiv_bei_ueberschreiten_der_Spannungshysterese_Wiederaufstart_erlaubt";
+	}
+	KLE2e_U_Not_Stop_encoding {
+		logical_value, 15, "Fehler";
+		physical_value, 0, 14, 0.2142857142, 10, "Unit_Volt";
+	}
+	KLE2e_upRamp_encoding {
+		logical_value, 0, "Kennlinie 1";
+		logical_value, 1, "Kennlinie 2";
+		logical_value, 2, "Kennlinie 3";
+		logical_value, 3, "Kennlinie 4";
+	}
+	KLE2s_Adresse_encoding {
+		physical_value, 0, 255, 1, 0, "";
+	}
+	KLE2s_Adressinhalt_encoding {
+		physical_value, 0, 65535, 1, 0, "";
+	}
+	KLE2s_Diag_Block_encoding {
+		logical_value, 0, "KLE_nicht_blockiert";
+		logical_value, 1, "KLE_blockiert";
+	}
+	KLE2s_Diag_Block_TNCTOC_encoding {
+		logical_value, 0, "TCTOC";
+		logical_value, 1, "TNCTOC";
+	}
+	KLE2s_Diag_int_encoding {
+		logical_value, 0, "kein_interner_Fehler";
+		logical_value, 1, "interner_Fehler_Abschaltung";
+	}
+	KLE2s_Diag_int_TNCTOC_encoding {
+		logical_value, 0, "TCTOC";
+		logical_value, 1, "TNCTOC";
+	}
+	KLE2s_Diag_Temp_encoding {
+		logical_value, 0, "keine_Uebertemperatur";
+		logical_value, 1, "Uebertemperatur_Abschaltung";
+	}
+	KLE2s_Diag_Temp_TNCTOC_encoding {
+		logical_value, 0, "TCTOC";
+		logical_value, 1, "TNCTOC";
+	}
+	KLE2s_Diag_Uebersp_encoding {
+		logical_value, 0, "keine_Ueberspannung";
+		logical_value, 1, "Ueberspannung_Abschaltung";
+	}
+	KLE2s_Diag_Uebersp_TNCTOC_encoding {
+		logical_value, 0, "TCTOC";
+		logical_value, 1, "TNCTOC";
+	}
+	KLE2s_Diag_Untersp_encoding {
+		logical_value, 0, "keine_Unterspannung";
+		logical_value, 1, "Unterspannung_Abschaltung";
+	}
+	KLE2s_Diag_Untersp_TNCTOC_encoding {
+		logical_value, 0, "TCTOC";
+		logical_value, 1, "TNCTOC";
+	}
+	KLE2s_ErrMemState_encoding {
+		logical_value, 0, "Init_Default";
+		logical_value, 1, "ErrMem_Active_State";
+		logical_value, 2, "ErrMem_InitProgress";
+		logical_value, 3, "ErrMem_Init_done";
+	}
+	KLE2s_I_Last_ist_encoding {
+		logical_value, 1022, "Init";
+		logical_value, 1023, "Fehler";
+		physical_value, 0, 1021, 0.2, -50, "Unit_Amper";
+	}
+	KLE2s_n_ist_encoding {
+		logical_value, 254, "Init";
+		logical_value, 255, "Fehler";
+		physical_value, 0, 253, 20, 0, "Unit_MinutInver";
+	}
+	KLE2s_ResponseError_encoding {
+		logical_value, 0, "normal";
+		logical_value, 1, "Fehler";
+	}
+	KLE2s_ResponseError_TNCTOC_encoding {
+		logical_value, 0, "TCTOC";
+		logical_value, 1, "TNCTOC";
+	}
+	KLE2s_Status_Derating_encoding {
+		logical_value, 0, "kein_Derating";
+		logical_value, 1, "derating_Spannung";
+		logical_value, 2, "derating_Temperatur";
+		logical_value, 3, "derating_Spannung_und_Temperatur";
+	}
+	KLE2s_Status_Grenzwert_encoding {
+		logical_value, 0, "kein_GW";
+		logical_value, 1, "P/I_Begrenzung_aktiv";
+		logical_value, 2, "Unterspannung";
+		logical_value, 3, "Ueberspannung";
+		logical_value, 4, "Drehzahlbegrenzung_aktiv";
+	}
+	KLE2s_Status_SW_encoding {
+		logical_value, 0, "Sollwertvorgabe_ist_Null";
+		logical_value, 1, "Anlaufversuch";
+		logical_value, 2, "n_soll_wird_angefahren";
+		logical_value, 3, "n_soll_erreicht";
+		logical_value, 4, "n_soll_nicht_erreicht";
+		logical_value, 5, "Ueberblasen";
+		logical_value, 6, "max_Ansteuerung";
+		logical_value, 7, "FM_aktiv";
+		logical_value, 14, "Init";
+		logical_value, 15, "Fehler";
+	}
+	KLE2s_T_ist_encoding {
+		logical_value, 510, "Init";
+		logical_value, 511, "Fehler";
+		physical_value, 0, 509, 1, -60, "Unit_DegreCelsi";
+	}
+	KLE2s_U_Last_encoding {
+		logical_value, 1022, "Init";
+		logical_value, 1023, "Fehler";
+		physical_value, 0, 1021, 0.1, 0, "Unit_Volt";
+	}
+	KLE2s_U_logik_encoding {
+		logical_value, 126, "Init";
+		logical_value, 127, "Fehler";
+		physical_value, 0, 125, 0.2, 5, "Unit_Volt";
+	}
+	MVH_L_Adressinhalt_encoding {
+		physical_value, 0, 65535, 1, 0, "";
+	}
+	MVH_L_Err_Heizkreis_1_encoding {
+		logical_value, 0, "kein_Fehler";
+		logical_value, 1, "Ueberstrom";
+		logical_value, 2, "Uebertemperatur";
+		logical_value, 3, "Kurzschluss";
+		logical_value, 4, "Unterbrechung";
+		logical_value, 5, "nicht_definiert";
+		logical_value, 6, "nicht_definiert";
+		logical_value, 7, "defekt";
+	}
+	MVH_L_Err_Intern_encoding {
+		logical_value, 0, "nicht_vorhanden";
+		logical_value, 1, "vorhanden";
+	}
+	MVH_L_Err_Leckagestrom_encoding {
+		logical_value, 0, "normal";
+		logical_value, 1, "Leckagestrom_erkannt";
+	}
+	MVH_L_Err_Ueberstromabsch_encoding {
+		logical_value, 0, "keine_Abschaltung";
+		logical_value, 1, "Abschaltung";
+	}
+	MVH_L_ErrMem_State_encoding {
+		logical_value, 0, "Init_Default";
+		logical_value, 1, "ErrMem_Active_State";
+		logical_value, 2, "ErrMem_InitProgress";
+		logical_value, 3, "ErrMem_Init_done";
+	}
+	MVH_L_Fehlerstatus_encoding {
+		logical_value, 0, "PTC_OK";
+		logical_value, 1, "Leistungsreduzierung_aktiv";
+		logical_value, 2, "Eingeschraenkte_Funktion";
+		logical_value, 3, "Keine_Funktion";
+		logical_value, 4, "not_defined";
+		logical_value, 5, "not_defined";
+		logical_value, 6, "Komponente_defekt";
+		logical_value, 7, "Init";
+	}
+	MVH_L_HK1_I_ist_encoding {
+		logical_value, 126, "Init";
+		logical_value, 127, "Fehler";
+		physical_value, 0, 125, 0.5, 0, "Unit_Amper";
+	}
+	MVH_L_HK2_I_ist_encoding {
+		logical_value, 126, "Init";
+		logical_value, 127, "Fehler";
+		physical_value, 0, 125, 0.5, 0, "Unit_Amper";
+	}
+	MVH_L_HK3_I_ist_encoding {
+		logical_value, 126, "Init";
+		logical_value, 127, "Fehler";
+		physical_value, 0, 125, 0.5, 0, "Unit_Amper";
+	}
+	MVH_L_HK4_I_ist_encoding {
+		logical_value, 126, "Init";
+		logical_value, 127, "Fehler";
+		physical_value, 0, 125, 0.5, 0, "Unit_Amper";
+	}
+	MVH_L_Istmodus_encoding {
+		logical_value, 0, "Standby";
+		logical_value, 1, "Regelung_Aktiv";
+	}
+	MVH_L_Max_Anst_encoding {
+		logical_value, 0, "nicht_erreicht";
+		logical_value, 1, "erreicht";
+	}
+	MVH_L_MV_I_encoding {
+		logical_value, 510, "Init";
+		logical_value, 511, "Fehler";
+		physical_value, 0, 509, 0.25, 0, "Unit_Amper";
+	}
+	MVH_L_MV_I_TNCTOC_encoding {
+		logical_value, 0, "TCTOC";
+		logical_value, 1, "TNCTOC";
+	}
+	MVH_L_MV_Status_encoding {
+		logical_value, 0, "No_Error";
+		logical_value, 1, "MV_Voltage_too_low";
+		logical_value, 2, "MV_Voltage_too_high";
+		logical_value, 3, "Init";
+	}
+	MVH_L_MV_U_encoding {
+		logical_value, 254, "Init";
+		logical_value, 255, "Fehler";
+		physical_value, 0, 253, 0.3, 0, "Unit_Volt";
+	}
+	MVH_L_NV_Status_encoding {
+		logical_value, 0, "No_Error";
+		logical_value, 1, "NV_Voltage_too_low";
+		logical_value, 2, "NV_Voltage_too_high";
+		logical_value, 3, "Init";
+	}
+	MVH_L_Temp_PCB_encoding {
+		logical_value, 253, "nicht_verbaut";
+		logical_value, 254, "Init";
+		logical_value, 255, "Fehler";
+		physical_value, 0, 252, 1, -50, "Unit_DegreCelsi";
+	}
+	MVH_L_Temp_PCB_Abschaltung_encoding {
+		logical_value, 0, "inaktiv";
+		logical_value, 1, "aktiv";
+	}
+	MVH_L_TimeOut_encoding {
+		logical_value, 0, "kein_timeout";
+		logical_value, 1, "timeout";
+	}
+	NV_PTC_EOL_Jahr_encoding {
+		logical_value, 254, "Init";
+		logical_value, 255, "Fehler";
+		physical_value, 0, 253, 1, 2000, "";
+	}
+	NV_PTC_EOL_Seriennummer_encoding {
+		physical_value, 0, 255, 1, 0, "Unit_None";
+	}
+	NV_PTC_EOL_Woche_encoding {
+		logical_value, 254, "Init";
+		logical_value, 255, "Fehler";
+		physical_value, 1, 52, 1, 0, "";
+	}
+	NV_PTC_EOL_Wochentag_encoding {
+		logical_value, 1, "Montag";
+		logical_value, 2, "Dienstag";
+		logical_value, 3, "Mittwoch";
+		logical_value, 4, "Donnerstag";
+		logical_value, 5, "Freitag";
+		logical_value, 6, "Samstag";
+		logical_value, 7, "Sonntag";
+		logical_value, 255, "Init";
+	}
+	NV_PTC_HW_encoding {
+		physical_value, 0, 15, 1, 0, "Unit_None";
+	}
+	NV_PTC_I_ist_encoding {
+		logical_value, 254, "Init";
+		logical_value, 255, "Fehler";
+		physical_value, 0, 253, 1, 0, "Unit_Amper";
+	}
+	NV_PTC_P_ist_encoding {
+		logical_value, 254, "Init";
+		logical_value, 255, "Fehler";
+		physical_value, 0, 253, 10, 0, "Unit_Watt";
+	}
+	NV_PTC_Status_encoding {
+		logical_value, 0, "Aus";
+		logical_value, 1, "Ein";
+	}
+	NV_PTC_Status_PTC_encoding {
+		logical_value, 0, "PTC_OK";
+		logical_value, 1, "PTC_defekt";
+		logical_value, 2, "PTC_Control_Modul_overheated__PTC_shut_down";
+		logical_value, 3, "Init";
+	}
+	NV_PTC_Status_UBatt_encoding {
+		logical_value, 0, "Batterie_OK";
+		logical_value, 1, "Unterspannung";
+		logical_value, 2, "Ueberspannung";
+		logical_value, 3, "Init";
+	}
+	NV_PTC_SW_encoding {
+		physical_value, 0, 15, 1, 0, "Unit_None";
+	}
+	NV_PTC_Temp_PCB_encoding {
+		logical_value, 254, "Init";
+		logical_value, 255, "Fehler";
+		physical_value, 0, 200, 1, -50, "Unit_DegreCelsi";
+	}
+	NV_PTC_TimeOut_Fehler_encoding {
+		logical_value, 0, "no_timeout";
+		logical_value, 1, "timeout_detected";
+	}
+	NV_PTC_UBatt_encoding {
+		logical_value, 254, "Init";
+		logical_value, 255, "Fehler";
+		physical_value, 0, 253, 0.1, 0, "Unit_Volt";
+	}
+	PTC2_ResponseError_encoding {
+		logical_value, 0, "normal";
+		logical_value, 1, "Fehler";
+	}
+	PTC_3_ResponseError_encoding {
+		logical_value, 0, "normal";
+		logical_value, 1, "Fehler";
+	}
+	PTC_ResponseError_encoding {
+		logical_value, 0, "normal";
+		logical_value, 1, "Fehler";
+	}
+	PumpKM_1_ErrMem_State_encoding {
+		logical_value, 1, "ErrMem_Active";
+		logical_value, 2, "ErrMem_Init_Progress";
+		logical_value, 3, "ErrMem_Init_Done";
+	}
+	PumpKM_1_ResponseError_encoding {
+		logical_value, 0, "normal";
+		logical_value, 1, "Fehler";
+	}
+	TME_HV_HL_maxStrom_encoding {
+		logical_value, 0, "keine_Begrenzung";
+		logical_value, 31, "Init";
+		physical_value, 1, 30, 1, 6, "Unit_Amper";
+	}
+	TME_KJS1_Anf_Initialisierung_encoding {
+		logical_value, 0, "Initialisierung nicht zulaessig / Init";
+		logical_value, 1, "Initialisierung darf durchgefuehrt werden";
+	}
+	TME_KJS1_Anf_Referenzierung_encoding {
+		logical_value, 0, "nicht_angefordert";
+		logical_value, 1, "angefordert";
+	}
+	TME_KJS1_Drehmoment_encoding {
+		logical_value, 0, "niedrig";
+		logical_value, 1, "hoch";
+		logical_value, 2, "Reserviert";
+		logical_value, 3, "Init";
+	}
+	TME_KJS1_Endlagenschalter_encoding {
+		logical_value, 0, "kein_Schalter_erkannt";
+		logical_value, 1, "Schalter_Endanschlag_Geschlossen";
+		logical_value, 2, "Schalter_Endanschlag_Geoeffnet";
+		logical_value, 3, "Init";
+	}
+	TME_KJS1_Freigabe_Verst_encoding {
+		logical_value, 0, "Keine Freigabe / Init";
+		logical_value, 1, "Freigabe";
+	}
+	TME_KJS1_keine_Freigabe_Revers_encoding {
+		logical_value, 0, "Freigabe_Aktuator_Reversieren";
+		logical_value, 1, "keine_Freigabe_Aktuator_Reversieren";
+	}
+	TME_KJS1_PWM_Freq_encoding {
+		physical_value, 0, 255, 1, -128, "";
+	}
+	TME_KJS1_Soll_Drehrichtung_encoding {
+		logical_value, 0, "Rechtslauf_CW";
+		logical_value, 1, "Linkslauf_CCW";
+		logical_value, 2, "reserviert";
+		logical_value, 3, "Init";
+	}
+	TME_KJS1_Soll_Pos_encoding {
+		logical_value, 4091, "Anfahren_Endanschlag_Geschlossen";
+		logical_value, 4092, "Anfahren_Endanschlag_Geoeffnet";
+		logical_value, 4093, "Reserviert";
+		logical_value, 4094, "Init";
+		logical_value, 4095, "Fehler";
+		physical_value, 0, 4000, 0.025, 0, "Unit_PerCent";
+	}
+	TME_KJS1_Verfahrgeschw_encoding {
+		logical_value, 0, "langsam";
+		logical_value, 1, "normal";
+		logical_value, 2, "schnell";
+		logical_value, 3, "reserviert";
+	}
+	TME_KJS2_Anf_Initialisierung_encoding {
+		logical_value, 0, "Initialisierung nicht zulaessig / Init";
+		logical_value, 1, "Initialisierung darf durchgefuehrt werden";
+	}
+	TME_KJS2_Anf_Referenzierung_encoding {
+		logical_value, 0, "nicht_angefordert";
+		logical_value, 1, "angefordert";
+	}
+	TME_KJS2_Drehmoment_encoding {
+		logical_value, 0, "niedrig";
+		logical_value, 1, "hoch";
+		logical_value, 2, "Reserviert";
+		logical_value, 3, "Init";
+	}
+	TME_KJS2_Endlagenschalter_encoding {
+		logical_value, 0, "kein_Schalter_erkannt";
+		logical_value, 1, "Schalter_Endanschlag_Geschlossen";
+		logical_value, 2, "Schalter_Endanschlag_Geoeffnet";
+		logical_value, 3, "Init";
+	}
+	TME_KJS2_Freigabe_Verst_encoding {
+		logical_value, 0, "Keine Freigabe / Init";
+		logical_value, 1, "Freigabe";
+	}
+	TME_KJS2_keine_Freigabe_Revers_encoding {
+		logical_value, 0, "Freigabe_Aktuator_Reversieren";
+		logical_value, 1, "keine_Freigabe_Aktuator_Reversieren";
+	}
+	TME_KJS2_PWM_Freq_encoding {
+		physical_value, 0, 255, 1, -128, "";
+	}
+	TME_KJS2_Soll_Drehrichtung_encoding {
+		logical_value, 0, "Rechtslauf_CW";
+		logical_value, 1, "Linkslauf_CCW";
+		logical_value, 2, "reserviert";
+		logical_value, 3, "Init";
+	}
+	TME_KJS2_Soll_Pos_encoding {
+		logical_value, 4091, "Anfahren_Endanschlag_Geschlossen";
+		logical_value, 4092, "Anfahren_Endanschlag_Geoeffnet";
+		logical_value, 4093, "Reserviert";
+		logical_value, 4094, "Init";
+		logical_value, 4095, "Fehler";
+		physical_value, 0, 4000, 0.025, 0, "Unit_PerCent";
+	}
+	TME_KJS2_Verfahrgeschw_encoding {
+		logical_value, 0, "langsam";
+		logical_value, 1, "normal";
+		logical_value, 2, "schnell";
+		logical_value, 3, "reserviert";
+	}
+	TME_MVH_L_Adresse_encoding {
+		physical_value, 0, 1023, 1, 0, "";
+	}
+	TME_MVH_L_Ein_encoding {
+		logical_value, 0, "Aus";
+		logical_value, 1, "Ein";
+	}
+	TME_MVH_L_KL_15_Status_encoding {
+		logical_value, 0, "Aus";
+		logical_value, 1, "Ein";
+	}
+	TME_MVH_L_Rampe_encoding {
+		logical_value, 61, "nicht_verwendet";
+		logical_value, 62, "Init";
+		logical_value, 63, "Fehler";
+		physical_value, 0, 60, 50, 0, "Unit_WattPerSecon";
+	}
+	TME_MVH_L_Soll_encoding {
+		logical_value, 254, "Init";
+		logical_value, 255, "Fehler";
+		physical_value, 0, 200, 0.5, 0, "Unit_PerCent";
+	}
+	TME_NV_PTC_ein_encoding {
+		logical_value, 0, "Aus";
+		logical_value, 1, "Ein";
+	}
+	TME_NV_PTC_Rampe_encoding {
+		physical_value, 0, 7, 50, 0, "Unit_WattPerSecon";
+	}
+	TME_NV_PTC_soll_encoding {
+		logical_value, 254, "Init";
+		logical_value, 255, "Fehler";
+		physical_value, 0, 253, 10, 0, "Unit_Watt";
+	}
+	TME_Temp_nach_Verdampfer_Front_encoding {
+		logical_value, 1022, "Init";
+		logical_value, 1023, "Fehler";
+		physical_value, 0, 900, 0.1, -20, "Unit_DegreCelsi";
+	}
+	WP1a_DC_Strom_encoding {
+		logical_value, 253, "Reserviert";
+		logical_value, 254, "Init";
+		logical_value, 255, "Fehler";
+		physical_value, 0, 252, 0.2, 0, "";
+	}
+	WP1a_Derating_aktiv_encoding {
+		logical_value, 0, "passiv";
+		logical_value, 1, "aktive";
+	}
+	WP1a_Derating_aktiv_Status_encoding {
+		logical_value, 0, "TestCompletedThisOperationCycle";
+		logical_value, 1, "TestNotCompletedThisOperationCycle";
+	}
+	WP1a_E1_Unterspannung_encoding {
+		logical_value, 0, "passiv";
+		logical_value, 1, "aktive";
+	}
+	WP1a_E1_Unterspannung_Status_encoding {
+		logical_value, 0, "TestCompletedThisOperationCycle";
+		logical_value, 1, "TestNotCompletedThisOperationCycle";
+	}
+	WP1a_E2_Ueberspannung_encoding {
+		logical_value, 0, "passiv";
+		logical_value, 1, "aktive";
+	}
+	WP1a_E2_Ueberspannung_Status_encoding {
+		logical_value, 0, "TestCompletedThisOperationCycle";
+		logical_value, 1, "TestNotCompletedThisOperationCycle";
+	}
+	WP1a_F1_Trockenlauf_encoding {
+		logical_value, 0, "passiv";
+		logical_value, 1, "aktive";
+	}
+	WP1a_F1_Trockenlauf_Status_encoding {
+		logical_value, 0, "TestCompletedThisOperationCycle";
+		logical_value, 1, "TestNotCompletedThisOperationCycle";
+	}
+	WP1a_F2_Rotor_blockiert_encoding {
+		logical_value, 0, "passiv";
+		logical_value, 1, "aktive";
+	}
+	WP1a_F2_Rotor_blockiert_Status_encoding {
+		logical_value, 0, "TestCompletedThisOperationCycle";
+		logical_value, 1, "TestNotCompletedThisOperationCycle";
+	}
+	WP1a_F3_Ueberstrom_encoding {
+		logical_value, 0, "passiv";
+		logical_value, 1, "aktive";
+	}
+	WP1a_F3_Ueberstrom_Status_encoding {
+		logical_value, 0, "TestCompletedThisOperationCycle";
+		logical_value, 1, "TestNotCompletedThisOperationCycle";
+	}
+	WP1a_F4_neg_Drehrichtung_encoding {
+		logical_value, 0, "passiv";
+		logical_value, 1, "aktive";
+	}
+	WP1a_F4_neg_Drehrichtung_Status_encoding {
+		logical_value, 0, "TestCompletedThisOperationCycle";
+		logical_value, 1, "TestNotCompletedThisOperationCycle";
+	}
+	WP1a_F5_Knockout_encoding {
+		logical_value, 0, "passiv";
+		logical_value, 1, "aktive";
+	}
+	WP1a_F5_Knockout_Status_encoding {
+		logical_value, 0, "TestCompletedThisOperationCycle";
+		logical_value, 1, "TestNotCompletedThisOperationCycle";
+	}
+	WP1a_F6_Watchdog_encoding {
+		logical_value, 0, "passiv";
+		logical_value, 1, "aktive";
+	}
+	WP1a_F6_Watchdog_Status_encoding {
+		logical_value, 0, "TestCompletedThisOperationCycle";
+		logical_value, 1, "TestNotCompletedThisOperationCycle";
+	}
+	WP1a_F7_Uebertemperatur_encoding {
+		logical_value, 0, "passiv";
+		logical_value, 1, "aktive";
+	}
+	WP1a_F7_Uebertemperatur_Status_encoding {
+		logical_value, 0, "TestCompletedThisOperationCycle";
+		logical_value, 1, "TestNotCompletedThisOperationCycle";
+	}
+	WP1a_H1_Endstufe_def_Status_encoding {
+		logical_value, 0, "TestCompletedThisOperationCycle";
+		logical_value, 1, "TestNotCompletedThisOperationCycle";
+	}
+	WP1a_H1_Endstufe_defekt_encoding {
+		logical_value, 0, "passiv";
+		logical_value, 1, "aktive";
+	}
+	WP1a_H2_Controller_def_Status_encoding {
+		logical_value, 0, "TestCompletedThisOperationCycle";
+		logical_value, 1, "TestNotCompletedThisOperationCycle";
+	}
+	WP1a_H2_Controller_defekt_encoding {
+		logical_value, 0, "passiv";
+		logical_value, 1, "aktive";
+	}
+	WP1a_H3_TempSensor_def_encoding {
+		logical_value, 0, "passiv";
+		logical_value, 1, "aktive";
+	}
+	WP1a_H3_TempSensor_def_Status_encoding {
+		logical_value, 0, "TestCompletedThisOperationCycle";
+		logical_value, 1, "TestNotCompletedThisOperationCycle";
+	}
+	WP1a_H4_RotorlageSens_def_Status_encoding {
+		logical_value, 0, "TestCompletedThisOperationCycle";
+		logical_value, 1, "TestNotCompletedThisOperationCycle";
+	}
+	WP1a_H4_RotorlageSensor_def_encoding {
+		logical_value, 0, "passiv";
+		logical_value, 1, "aktive";
+	}
+	WP1a_Istdrehzahl_encoding {
+		logical_value, 8189, "Reserviert";
+		logical_value, 8190, "Init";
+		logical_value, 8191, "Fehler";
+		physical_value, 0, 8188, 1, -100, "";
+	}
+	WP1a_Knockout_Counter_encoding {
+		physical_value, 0, 127, 1, 0, "";
+	}
+	WP1a_Phasenstrom_encoding {
+		logical_value, 253, "Reserviert";
+		logical_value, 254, "Init";
+		logical_value, 255, "Fehler";
+		physical_value, 0, 252, 0.5, -40, "";
+	}
+	WP1a_Software_inkomp_Status_encoding {
+		logical_value, 0, "TestCompletedThisOperationCycle";
+		logical_value, 1, "TestNotCompletedThisOperationCycle";
+	}
+	WP1a_Software_inkompatibel_encoding {
+		logical_value, 0, "passiv";
+		logical_value, 1, "aktive";
+	}
+	WP1a_Solldrehzahl_encoding {
+		logical_value, 8189, "Reserviert";
+		logical_value, 8190, "Init";
+		logical_value, 8191, "Fehler";
+		physical_value, 0, 8188, 1, -100, "";
+	}
+	WP1a_Spannung_Ubat_encoding {
+		logical_value, 253, "Reserviert";
+		logical_value, 254, "Init";
+		logical_value, 255, "Fehler";
+		physical_value, 0, 252, 0.1, 0, "Unit_Volt";
+	}
+	WP1a_Supplier_Code_encoding {
+		physical_value, 0, 7, 1, 0, "Unit_None";
+	}
+	WP1a_Temperatur_PCB_encoding {
+		logical_value, 253, "Reserviert";
+		logical_value, 254, "Init";
+		logical_value, 255, "Fehler";
+		physical_value, 0, 252, 1, -40, "Unit_DegreCelsi";
+	}
+	WP1ae_01_BZ_encoding {
+		physical_value, 0, 15, 1, 0, "";
+	}
+	WP1as_01_BZ_encoding {
+		physical_value, 0, 15, 1, 0, "";
+	}
+	WP1as_02_BZ_encoding {
+		physical_value, 0, 15, 1, 0, "";
+	}
+	SC_BZ {
+		physical_value, 0, 15, 1, 0, "";
+	}
+	SC_CRC {
+		physical_value, 0, 255, 1, 0, "";
+	}
+	SC_MV_HL_Err_Heizkreis {
+		logical_value, 0, "kein_Fehler";
+		logical_value, 1, "Ueberstrom";
+		logical_value, 2, "Uebertemperatur";
+		logical_value, 3, "Kurzschluss";
+		logical_value, 4, "Unterbrechung";
+		logical_value, 5, "nicht_definiert";
+		logical_value, 6, "nicht_definiert";
+		logical_value, 7, "defekt";
+	}
+	SC_MVH_TNCTOC_V1 {
+		logical_value, 0, "TCTOC";
+		logical_value, 1, "TNCTOC";
+	}
+}
+Signal_representation {
+	HV_HL_Err_Heizkreis_1_TNCTOC_encoding: HV_HL_Err_Heizkreis_1_TNCTOC;
+	HV_HL_Err_Heizkreis_2_TNCTOC_encoding: HV_HL_Err_Heizkreis_2_TNCTOC;
+	HV_HL_Err_Heizkreis_3_TNCTOC_encoding: HV_HL_Err_Heizkreis_3_TNCTOC;
+	HV_HL_Err_Heizkreis_4_TNCTOC_encoding: HV_HL_Err_Heizkreis_4_TNCTOC;
+	HV_HL_Err_intern_encoding: HV_HL_Err_intern;
+	HV_HL_Err_Intern_TNCTOC_encoding: HV_HL_Err_Intern_TNCTOC;
+	HV_HL_Err_Leckagestrom_encoding: HV_HL_Err_Leckagestrom;
+	HV_HL_Err_Leckagestrom_TNCTOC_encoding: HV_HL_Err_Leckagestrom_TNCTOC;
+	HV_HL_Err_Temp_HK1_1_TNCTOC_encoding: HV_HL_Err_Temp_HK1_1_TNCTOC;
+	HV_HL_Err_Temp_HK1_2_TNCTOC_encoding: HV_HL_Err_Temp_HK1_2_TNCTOC;
+	HV_HL_Err_Temp_HK2_1_TNCTOC_encoding: HV_HL_Err_Temp_HK2_1_TNCTOC;
+	HV_HL_Err_Temp_HK2_2_TNCTOC_encoding: HV_HL_Err_Temp_HK2_2_TNCTOC;
+	HV_HL_Err_Temp_HK3_1_TNCTOC_encoding: HV_HL_Err_Temp_HK3_1_TNCTOC;
+	HV_HL_Err_Temp_HK3_2_TNCTOC_encoding: HV_HL_Err_Temp_HK3_2_TNCTOC;
+	HV_HL_Err_Temp_HK4_1_TNCTOC_encoding: HV_HL_Err_Temp_HK4_1_TNCTOC;
+	HV_HL_Err_Temp_HK4_2_TNCTOC_encoding: HV_HL_Err_Temp_HK4_2_TNCTOC;
+	HV_HL_Err_Temp_PCB_TNCTOC_encoding: HV_HL_Err_Temp_PCB_TNCTOC;
+	HV_HL_Err_Temp_Sens1_TNCTOC_encoding: HV_HL_Err_Temp_Sens1_TNCTOC;
+	HV_HL_Err_Temperaturschutz_encoding: HV_HL_Err_Temperaturschutz;
+	HV_HL_Err_TempSchutz_TNCTOC_encoding: HV_HL_Err_TempSchutz_TNCTOC;
+	HV_HL_Err_Ueberstromabs_TNCTOC_encoding: HV_HL_Err_Ueberstromabs_TNCTOC;
+	HV_HL_Err_Ueberstromabschaltung_encoding: HV_HL_Err_Ueberstromabschaltung;
+	HV_HL_ErrMem_State_encoding: HV_HL_ErrMem_State;
+	HV_HL_Fehlerstatus_encoding: HV_HL_Fehlerstatus;
+	HV_HL_HK1_HV_I_ist_encoding: HV_HL_HK1_HV_I_ist;
+	HV_HL_HK1_maxAnst_encoding: HV_HL_HK1_maxAnst;
+	HV_HL_HK2_HV_I_ist_encoding: HV_HL_HK2_HV_I_ist;
+	HV_HL_HK2_maxAnst_encoding: HV_HL_HK2_maxAnst;
+	HV_HL_HK3_HV_I_ist_encoding: HV_HL_HK3_HV_I_ist;
+	HV_HL_HK3_maxAnst_encoding: HV_HL_HK3_maxAnst;
+	HV_HL_HK4_HV_I_ist_encoding: HV_HL_HK4_HV_I_ist;
+	HV_HL_HK4_maxAnst_encoding: HV_HL_HK4_maxAnst;
+	HV_HL_HV_ERR_encoding: HV_HL_HV_ERR;
+	HV_HL_HV_I_ist_encoding: HV_HL_HV_I_ist;
+	HV_HL_HV_UBattNV_TNCTOC_encoding: HV_HL_HV_UBattNV_TNCTOC;
+	HV_HL_HV_Voltage_encoding: HV_HL_HV_Voltage;
+	HV_HL_HV_Voltage_TNCTOC_encoding: HV_HL_HV_Voltage_TNCTOC;
+	HV_HL_Istmodus_encoding: HV_HL_Istmodus;
+	HV_HL_Mode_HK1_encoding: HV_HL_Mode_HK1;
+	HV_HL_Mode_HK2_encoding: HV_HL_Mode_HK2;
+	HV_HL_Mode_HK3_encoding: HV_HL_Mode_HK3;
+	HV_HL_Mode_HK4_encoding: HV_HL_Mode_HK4;
+	HV_HL_ParameterChange_encoding: HV_HL_ParameterChange;
+	HV_HL_ResponseError_TNCTOC_encoding: HV_HL_ResponseError_TNCTOC;
+	HV_HL_Status_UBatt_encoding: HV_HL_Status_UBatt;
+	HV_HL_Temp_HK1_1_encoding: HV_HL_Temp_HK1_1;
+	HV_HL_Temp_HK1_2_encoding: HV_HL_Temp_HK1_2;
+	HV_HL_Temp_HK2_1_encoding: HV_HL_Temp_HK2_1;
+	HV_HL_Temp_HK2_2_encoding: HV_HL_Temp_HK2_2;
+	HV_HL_Temp_HK3_1_encoding: HV_HL_Temp_HK3_1;
+	HV_HL_Temp_HK3_2_encoding: HV_HL_Temp_HK3_2;
+	HV_HL_Temp_HK4_1_encoding: HV_HL_Temp_HK4_1;
+	HV_HL_Temp_HK4_2_encoding: HV_HL_Temp_HK4_2;
+	HV_HL_Temp_PCB_encoding: HV_HL_Temp_PCB;
+	HV_HL_Temp_Sensor_1_encoding: HV_HL_Temp_Sensor_1;
+	HV_HL_TimeOut_Fehler_encoding: HV_HL_TimeOut_Fehler;
+	HV_HL_Ubatt_NV_encoding: HV_HL_Ubatt_NV;
+	HV_HL_Vorhalt_Stufe_encoding: HV_HL_Vorhalt_Stufe;
+	KJS1_ResponseError_encoding: KJS1_ResponseError;
+	KJS2_ResponseError_encoding: KJS2_ResponseError;
+	KJS_SA1_AktDefekt_TF_encoding: KJS_SA1_AktDefekt_TF;
+	KJS_SA1_AktDefekt_TNCTOC_encoding: KJS_SA1_AktDefekt_TNCTOC;
+	KJS_SA1_Bewegungsstatus_encoding: KJS_SA1_Bewegungsstatus;
+	KJS_SA1_Blockade1_TF_encoding: KJS_SA1_Blockade1_TF;
+	KJS_SA1_Blockade1_TNCTOC_encoding: KJS_SA1_Blockade1_TNCTOC;
+	KJS_SA1_Blockade2_TF_encoding: KJS_SA1_Blockade2_TF;
+	KJS_SA1_Blockade2_TNCTOC_encoding: KJS_SA1_Blockade2_TNCTOC;
+	KJS_SA1_Blockade_Pos_encoding: KJS_SA1_Blockade_Pos;
+	KJS_SA1_DrehtFrei1_TF_encoding: KJS_SA1_DrehtFrei1_TF;
+	KJS_SA1_DrehtFrei1_TNCTOC_encoding: KJS_SA1_DrehtFrei1_TNCTOC;
+	KJS_SA1_DrehtFrei2_TF_encoding: KJS_SA1_DrehtFrei2_TF;
+	KJS_SA1_DrehtFrei2_TNCTOC_encoding: KJS_SA1_DrehtFrei2_TNCTOC;
+	KJS_SA1_E2EFehler_TF_encoding: KJS_SA1_E2EFehler_TF;
+	KJS_SA1_E2EFehler_TNCTOC_encoding: KJS_SA1_E2EFehler_TNCTOC;
+	KJS_SA1_Fehler_Codierpin_TF_encoding: KJS_SA1_Fehler_Codierpin_TF;
+	KJS_SA1_Fehler_Codierpin_TNCTOC_encoding: KJS_SA1_Fehler_Codierpin_TNCTOC;
+	KJS_SA1_Fehler_InitRef_TF_encoding: KJS_SA1_Fehler_InitRef_TF;
+	KJS_SA1_Fehler_InitRef_TNCTOC_encoding: KJS_SA1_Fehler_InitRef_TNCTOC;
+	KJS_SA1_Fehler_Parameter_TF_encoding: KJS_SA1_Fehler_Parameter_TF;
+	KJS_SA1_Fehler_Parameter_TNCTOC_encoding: KJS_SA1_Fehler_Parameter_TNCTOC;
+	KJS_SA1_Initialisiert_encoding: KJS_SA1_Initialisiert;
+	KJS_SA1_InkrFehler_TF_encoding: KJS_SA1_InkrFehler_TF;
+	KJS_SA1_InkrFehler_TNCTOC_encoding: KJS_SA1_InkrFehler_TNCTOC;
+	KJS_SA1_InkrSense_TF_encoding: KJS_SA1_InkrSense_TF;
+	KJS_SA1_InkrSense_TNCTOC_encoding: KJS_SA1_InkrSense_TNCTOC;
+	KJS_SA1_Ist_Drehrichtung_encoding: KJS_SA1_Ist_Drehrichtung;
+	KJS_SA1_Ist_Pos_encoding: KJS_SA1_Ist_Pos;
+	KJS_SA1_PlausiFehlg_TF_encoding: KJS_SA1_PlausiFehlg_TF;
+	KJS_SA1_PlausiFehlg_TNCTOC_encoding: KJS_SA1_PlausiFehlg_TNCTOC;
+	KJS_SA1_Pos_erreicht_encoding: KJS_SA1_Pos_erreicht;
+	KJS_SA1_Ref_Weg_encoding: KJS_SA1_Ref_Weg;
+	KJS_SA1_Referenziert_encoding: KJS_SA1_Referenziert;
+	KJS_SA1_SenseDefekt_TF_encoding: KJS_SA1_SenseDefekt_TF;
+	KJS_SA1_SenseDefekt_TNCTOC_encoding: KJS_SA1_SenseDefekt_TNCTOC;
+	KJS_SA1_TempAbsch_TF_encoding: KJS_SA1_TempAbsch_TF;
+	KJS_SA1_TempAbsch_TNCTOC_encoding: KJS_SA1_TempAbsch_TNCTOC;
+	KJS_SA1_TempWarning_TF_encoding: KJS_SA1_TempWarning_TF;
+	KJS_SA1_TempWarning_TNCTOC_encoding: KJS_SA1_TempWarning_TNCTOC;
+	KJS_SA1_UHoch_TF_encoding: KJS_SA1_UHoch_TF;
+	KJS_SA1_UHoch_TNCTOC_encoding: KJS_SA1_UHoch_TNCTOC;
+	KJS_SA1_UNieder_TF_encoding: KJS_SA1_UNieder_TF;
+	KJS_SA1_UNieder_TNCTOC_encoding: KJS_SA1_UNieder_TNCTOC;
+	KJS_SA1_UUeber_TF_encoding: KJS_SA1_UUeber_TF;
+	KJS_SA1_UUeber_TNCTOC_encoding: KJS_SA1_UUeber_TNCTOC;
+	KJS_SA1_UUnter_TF_encoding: KJS_SA1_UUnter_TF;
+	KJS_SA1_UUnter_TNCTOC_encoding: KJS_SA1_UUnter_TNCTOC;
+	KJS_SA2_AktDefekt_TF_encoding: KJS_SA2_AktDefekt_TF;
+	KJS_SA2_AktDefekt_TNCTOC_encoding: KJS_SA2_AktDefekt_TNCTOC;
+	KJS_SA2_Bewegungsstatus_encoding: KJS_SA2_Bewegungsstatus;
+	KJS_SA2_Blockade1_TF_encoding: KJS_SA2_Blockade1_TF;
+	KJS_SA2_Blockade1_TNCTOC_encoding: KJS_SA2_Blockade1_TNCTOC;
+	KJS_SA2_Blockade2_TF_encoding: KJS_SA2_Blockade2_TF;
+	KJS_SA2_Blockade2_TNCTOC_encoding: KJS_SA2_Blockade2_TNCTOC;
+	KJS_SA2_Blockade_Pos_encoding: KJS_SA2_Blockade_Pos;
+	KJS_SA2_DrehtFrei1_TF_encoding: KJS_SA2_DrehtFrei1_TF;
+	KJS_SA2_DrehtFrei1_TNCTOC_encoding: KJS_SA2_DrehtFrei1_TNCTOC;
+	KJS_SA2_DrehtFrei2_TF_encoding: KJS_SA2_DrehtFrei2_TF;
+	KJS_SA2_DrehtFrei2_TNCTOC_encoding: KJS_SA2_DrehtFrei2_TNCTOC;
+	KJS_SA2_E2EFehler_TF_encoding: KJS_SA2_E2EFehler_TF;
+	KJS_SA2_E2EFehler_TNCTOC_encoding: KJS_SA2_E2EFehler_TNCTOC;
+	KJS_SA2_Fehler_Codierpin_TF_encoding: KJS_SA2_Fehler_Codierpin_TF;
+	KJS_SA2_Fehler_Codierpin_TNCTOC_encoding: KJS_SA2_Fehler_Codierpin_TNCTOC;
+	KJS_SA2_Fehler_InitRef_TF_encoding: KJS_SA2_Fehler_InitRef_TF;
+	KJS_SA2_Fehler_InitRef_TNCTOC_encoding: KJS_SA2_Fehler_InitRef_TNCTOC;
+	KJS_SA2_Fehler_Parameter_TF_encoding: KJS_SA2_Fehler_Parameter_TF;
+	KJS_SA2_Fehler_Parameter_TNCTOC_encoding: KJS_SA2_Fehler_Parameter_TNCTOC;
+	KJS_SA2_Initialisiert_encoding: KJS_SA2_Initialisiert;
+	KJS_SA2_InkrFehler_TF_encoding: KJS_SA2_InkrFehler_TF;
+	KJS_SA2_InkrFehler_TNCTOC_encoding: KJS_SA2_InkrFehler_TNCTOC;
+	KJS_SA2_InkrSense_TF_encoding: KJS_SA2_InkrSense_TF;
+	KJS_SA2_InkrSense_TNCTOC_encoding: KJS_SA2_InkrSense_TNCTOC;
+	KJS_SA2_Ist_Drehrichtung_encoding: KJS_SA2_Ist_Drehrichtung;
+	KJS_SA2_Ist_Pos_encoding: KJS_SA2_Ist_Pos;
+	KJS_SA2_PlausiFehlg_TF_encoding: KJS_SA2_PlausiFehlg_TF;
+	KJS_SA2_PlausiFehlg_TNCTOC_encoding: KJS_SA2_PlausiFehlg_TNCTOC;
+	KJS_SA2_Pos_erreicht_encoding: KJS_SA2_Pos_erreicht;
+	KJS_SA2_Ref_Weg_encoding: KJS_SA2_Ref_Weg;
+	KJS_SA2_Referenziert_encoding: KJS_SA2_Referenziert;
+	KJS_SA2_SenseDefekt_TF_encoding: KJS_SA2_SenseDefekt_TF;
+	KJS_SA2_SenseDefekt_TNCTOC_encoding: KJS_SA2_SenseDefekt_TNCTOC;
+	KJS_SA2_TempAbsch_TF_encoding: KJS_SA2_TempAbsch_TF;
+	KJS_SA2_TempAbsch_TNCTOC_encoding: KJS_SA2_TempAbsch_TNCTOC;
+	KJS_SA2_TempWarning_TF_encoding: KJS_SA2_TempWarning_TF;
+	KJS_SA2_TempWarning_TNCTOC_encoding: KJS_SA2_TempWarning_TNCTOC;
+	KJS_SA2_UHoch_TF_encoding: KJS_SA2_UHoch_TF;
+	KJS_SA2_UHoch_TNCTOC_encoding: KJS_SA2_UHoch_TNCTOC;
+	KJS_SA2_UNieder_TF_encoding: KJS_SA2_UNieder_TF;
+	KJS_SA2_UNieder_TNCTOC_encoding: KJS_SA2_UNieder_TNCTOC;
+	KJS_SA2_UUeber_TF_encoding: KJS_SA2_UUeber_TF;
+	KJS_SA2_UUeber_TNCTOC_encoding: KJS_SA2_UUeber_TNCTOC;
+	KJS_SA2_UUnter_TF_encoding: KJS_SA2_UUnter_TF;
+	KJS_SA2_UUnter_TNCTOC_encoding: KJS_SA2_UUnter_TNCTOC;
+	KL_HV_HL_ein_encoding: KL_HV_HL_ein;
+	KL_HV_HL_HK1_PWM_encoding: KL_HV_HL_HK1_PWM;
+	KL_HV_HL_HK1_soll_encoding: KL_HV_HL_HK1_soll;
+	KL_HV_HL_HK2_PWM_encoding: KL_HV_HL_HK2_PWM;
+	KL_HV_HL_HK2_soll_encoding: KL_HV_HL_HK2_soll;
+	KL_HV_HL_HK3_PWM_encoding: KL_HV_HL_HK3_PWM;
+	KL_HV_HL_HK3_soll_encoding: KL_HV_HL_HK3_soll;
+	KL_HV_HL_HK4_PWM_encoding: KL_HV_HL_HK4_PWM;
+	KL_HV_HL_HK4_soll_encoding: KL_HV_HL_HK4_soll;
+	KLE1e_Adresse_encoding: KLE1e_Adresse;
+	KLE1e_downRamp_encoding: KLE1e_downRamp;
+	KLE1e_Kl15_Status_encoding: KLE1e_Kl15_Status;
+	KLE1e_n_Notlauf_soll_encoding: KLE1e_n_Notlauf_soll;
+	KLE1e_n_soll_encoding: KLE1e_n_soll;
+	KLE1e_Not_reStart_encoding: KLE1e_Not_reStart;
+	KLE1e_U_Not_Stop_encoding: KLE1e_U_Not_Stop;
+	KLE1e_upRamp_encoding: KLE1e_upRamp;
+	KLE1s_Adresse_encoding: KLE1s_Adresse;
+	KLE1s_Adressinhalt_encoding: KLE1s_Adressinhalt;
+	KLE1s_Diag_Block_encoding: KLE1s_Diag_Block;
+	KLE1s_Diag_Block_TNCTOC_encoding: KLE1s_Diag_Block_TNCTOC;
+	KLE1s_Diag_int_encoding: KLE1s_Diag_int;
+	KLE1s_Diag_int_TNCTOC_encoding: KLE1s_Diag_int_TNCTOC;
+	KLE1s_Diag_Temp_encoding: KLE1s_Diag_Temp;
+	KLE1s_Diag_Temp_TNCTOC_encoding: KLE1s_Diag_Temp_TNCTOC;
+	KLE1s_Diag_Uebersp_encoding: KLE1s_Diag_Uebersp;
+	KLE1s_Diag_Uebersp_TNCTOC_encoding: KLE1s_Diag_Uebersp_TNCTOC;
+	KLE1s_Diag_Untersp_encoding: KLE1s_Diag_Untersp;
+	KLE1s_Diag_Untersp_TNCTOC_encoding: KLE1s_Diag_Untersp_TNCTOC;
+	KLE1s_ErrMemState_encoding: KLE1s_ErrMemState;
+	KLE1s_I_Last_ist_encoding: KLE1s_I_Last_ist;
+	KLE1s_n_ist_encoding: KLE1s_n_ist;
+	KLE1s_ResponseError_encoding: KLE1s_ResponseError;
+	KLE1s_ResponseError_TNCTOC_encoding: KLE1s_ResponseError_TNCTOC;
+	KLE1s_Status_Derating_encoding: KLE1s_Status_Derating;
+	KLE1s_Status_Grenzwert_encoding: KLE1s_Status_Grenzwert;
+	KLE1s_Status_SW_encoding: KLE1s_Status_SW;
+	KLE1s_T_ist_encoding: KLE1s_T_ist;
+	KLE1s_U_Last_encoding: KLE1s_U_Last;
+	KLE1s_U_logik_encoding: KLE1s_U_logik;
+	KLE2e_Adresse_encoding: KLE2e_Adresse;
+	KLE2e_downRamp_encoding: KLE2e_downRamp;
+	KLE2e_Kl15_Status_encoding: KLE2e_Kl15_Status;
+	KLE2e_n_Notlauf_soll_encoding: KLE2e_n_Notlauf_soll;
+	KLE2e_n_soll_encoding: KLE2e_n_soll;
+	KLE2e_Not_reStart_encoding: KLE2e_Not_reStart;
+	KLE2e_U_Not_Stop_encoding: KLE2e_U_Not_Stop;
+	KLE2e_upRamp_encoding: KLE2e_upRamp;
+	KLE2s_Adresse_encoding: KLE2s_Adresse;
+	KLE2s_Adressinhalt_encoding: KLE2s_Adressinhalt;
+	KLE2s_Diag_Block_encoding: KLE2s_Diag_Block;
+	KLE2s_Diag_Block_TNCTOC_encoding: KLE2s_Diag_Block_TNCTOC;
+	KLE2s_Diag_int_encoding: KLE2s_Diag_int;
+	KLE2s_Diag_int_TNCTOC_encoding: KLE2s_Diag_int_TNCTOC;
+	KLE2s_Diag_Temp_encoding: KLE2s_Diag_Temp;
+	KLE2s_Diag_Temp_TNCTOC_encoding: KLE2s_Diag_Temp_TNCTOC;
+	KLE2s_Diag_Uebersp_encoding: KLE2s_Diag_Uebersp;
+	KLE2s_Diag_Uebersp_TNCTOC_encoding: KLE2s_Diag_Uebersp_TNCTOC;
+	KLE2s_Diag_Untersp_encoding: KLE2s_Diag_Untersp;
+	KLE2s_Diag_Untersp_TNCTOC_encoding: KLE2s_Diag_Untersp_TNCTOC;
+	KLE2s_ErrMemState_encoding: KLE2s_ErrMemState;
+	KLE2s_I_Last_ist_encoding: KLE2s_I_Last_ist;
+	KLE2s_n_ist_encoding: KLE2s_n_ist;
+	KLE2s_ResponseError_encoding: KLE2s_ResponseError;
+	KLE2s_ResponseError_TNCTOC_encoding: KLE2s_ResponseError_TNCTOC;
+	KLE2s_Status_Derating_encoding: KLE2s_Status_Derating;
+	KLE2s_Status_Grenzwert_encoding: KLE2s_Status_Grenzwert;
+	KLE2s_Status_SW_encoding: KLE2s_Status_SW;
+	KLE2s_T_ist_encoding: KLE2s_T_ist;
+	KLE2s_U_Last_encoding: KLE2s_U_Last;
+	KLE2s_U_logik_encoding: KLE2s_U_logik;
+	MVH_L_Adressinhalt_encoding: MVH_L_Adressinhalt;
+	MVH_L_Err_Heizkreis_1_encoding: MVH_L_Err_Heizkreis_1;
+	MVH_L_Err_Intern_encoding: MVH_L_Err_Intern;
+	MVH_L_Err_Leckagestrom_encoding: MVH_L_Err_Leckagestrom;
+	MVH_L_Err_Ueberstromabsch_encoding: MVH_L_Err_Ueberstromabsch;
+	MVH_L_ErrMem_State_encoding: MVH_L_ErrMem_State;
+	MVH_L_Fehlerstatus_encoding: MVH_L_Fehlerstatus;
+	MVH_L_HK1_I_ist_encoding: MVH_L_HK1_I_ist;
+	MVH_L_HK2_I_ist_encoding: MVH_L_HK2_I_ist;
+	MVH_L_HK3_I_ist_encoding: MVH_L_HK3_I_ist;
+	MVH_L_HK4_I_ist_encoding: MVH_L_HK4_I_ist;
+	MVH_L_Istmodus_encoding: MVH_L_Istmodus;
+	MVH_L_Max_Anst_encoding: MVH_L_Max_Anst;
+	MVH_L_MV_I_encoding: MVH_L_MV_I;
+	MVH_L_MV_I_TNCTOC_encoding: MVH_L_MV_I_TNCTOC;
+	MVH_L_MV_Status_encoding: MVH_L_MV_Status;
+	MVH_L_MV_U_encoding: MVH_L_MV_U;
+	MVH_L_NV_Status_encoding: MVH_L_NV_Status;
+	MVH_L_Temp_PCB_encoding: MVH_L_Temp_PCB;
+	MVH_L_Temp_PCB_Abschaltung_encoding: MVH_L_Temp_PCB_Abschaltung;
+	MVH_L_TimeOut_encoding: MVH_L_TimeOut;
+	NV_PTC_EOL_Jahr_encoding: NV_PTC_EOL_Jahr;
+	NV_PTC_EOL_Seriennummer_encoding: NV_PTC_EOL_Seriennummer;
+	NV_PTC_EOL_Woche_encoding: NV_PTC_EOL_Woche;
+	NV_PTC_EOL_Wochentag_encoding: NV_PTC_EOL_Wochentag;
+	NV_PTC_HW_encoding: NV_PTC_HW;
+	NV_PTC_I_ist_encoding: NV_PTC_I_ist;
+	NV_PTC_P_ist_encoding: NV_PTC_P_ist;
+	NV_PTC_Status_encoding: NV_PTC_Status;
+	NV_PTC_Status_PTC_encoding: NV_PTC_Status_PTC;
+	NV_PTC_Status_UBatt_encoding: NV_PTC_Status_UBatt;
+	NV_PTC_SW_encoding: NV_PTC_SW;
+	NV_PTC_Temp_PCB_encoding: NV_PTC_Temp_PCB;
+	NV_PTC_TimeOut_Fehler_encoding: NV_PTC_TimeOut_Fehler;
+	NV_PTC_UBatt_encoding: NV_PTC_UBatt;
+	PTC2_ResponseError_encoding: PTC2_ResponseError;
+	PTC_3_ResponseError_encoding: PTC_3_ResponseError;
+	PTC_ResponseError_encoding: PTC_ResponseError;
+	PumpKM_1_ErrMem_State_encoding: PumpKM_1_ErrMem_State;
+	PumpKM_1_ResponseError_encoding: PumpKM_1_ResponseError;
+	TME_HV_HL_maxStrom_encoding: TME_HV_HL_maxStrom;
+	TME_KJS1_Anf_Initialisierung_encoding: TME_KJS1_Anf_Initialisierung;
+	TME_KJS1_Anf_Referenzierung_encoding: TME_KJS1_Anf_Referenzierung;
+	TME_KJS1_Drehmoment_encoding: TME_KJS1_Drehmoment;
+	TME_KJS1_Endlagenschalter_encoding: TME_KJS1_Endlagenschalter;
+	TME_KJS1_Freigabe_Verst_encoding: TME_KJS1_Freigabe_Verst;
+	TME_KJS1_keine_Freigabe_Revers_encoding: TME_KJS1_keine_Freigabe_Revers;
+	TME_KJS1_PWM_Freq_encoding: TME_KJS1_PWM_Freq;
+	TME_KJS1_Soll_Drehrichtung_encoding: TME_KJS1_Soll_Drehrichtung;
+	TME_KJS1_Soll_Pos_encoding: TME_KJS1_Soll_Pos;
+	TME_KJS1_Verfahrgeschw_encoding: TME_KJS1_Verfahrgeschw;
+	TME_KJS2_Anf_Initialisierung_encoding: TME_KJS2_Anf_Initialisierung;
+	TME_KJS2_Anf_Referenzierung_encoding: TME_KJS2_Anf_Referenzierung;
+	TME_KJS2_Drehmoment_encoding: TME_KJS2_Drehmoment;
+	TME_KJS2_Endlagenschalter_encoding: TME_KJS2_Endlagenschalter;
+	TME_KJS2_Freigabe_Verst_encoding: TME_KJS2_Freigabe_Verst;
+	TME_KJS2_keine_Freigabe_Revers_encoding: TME_KJS2_keine_Freigabe_Revers;
+	TME_KJS2_PWM_Freq_encoding: TME_KJS2_PWM_Freq;
+	TME_KJS2_Soll_Drehrichtung_encoding: TME_KJS2_Soll_Drehrichtung;
+	TME_KJS2_Soll_Pos_encoding: TME_KJS2_Soll_Pos;
+	TME_KJS2_Verfahrgeschw_encoding: TME_KJS2_Verfahrgeschw;
+	TME_MVH_L_Adresse_encoding: TME_MVH_L_Adresse;
+	TME_MVH_L_Ein_encoding: TME_MVH_L_Ein;
+	TME_MVH_L_KL_15_Status_encoding: TME_MVH_L_KL_15_Status;
+	TME_MVH_L_Rampe_encoding: TME_MVH_L_Rampe;
+	TME_MVH_L_Soll_encoding: TME_MVH_L_Soll;
+	TME_NV_PTC_ein_encoding: TME_NV_PTC_ein;
+	TME_NV_PTC_Rampe_encoding: TME_NV_PTC_Rampe;
+	TME_NV_PTC_soll_encoding: TME_NV_PTC_soll;
+	TME_Temp_nach_Verdampfer_Front_encoding: TME_Temp_nach_Verdampfer_Front;
+	WP1a_DC_Strom_encoding: WP1a_DC_Strom;
+	WP1a_Derating_aktiv_encoding: WP1a_Derating_aktiv;
+	WP1a_Derating_aktiv_Status_encoding: WP1a_Derating_aktiv_Status;
+	WP1a_E1_Unterspannung_encoding: WP1a_E1_Unterspannung;
+	WP1a_E1_Unterspannung_Status_encoding: WP1a_E1_Unterspannung_Status;
+	WP1a_E2_Ueberspannung_encoding: WP1a_E2_Ueberspannung;
+	WP1a_E2_Ueberspannung_Status_encoding: WP1a_E2_Ueberspannung_Status;
+	WP1a_F1_Trockenlauf_encoding: WP1a_F1_Trockenlauf;
+	WP1a_F1_Trockenlauf_Status_encoding: WP1a_F1_Trockenlauf_Status;
+	WP1a_F2_Rotor_blockiert_encoding: WP1a_F2_Rotor_blockiert;
+	WP1a_F2_Rotor_blockiert_Status_encoding: WP1a_F2_Rotor_blockiert_Status;
+	WP1a_F3_Ueberstrom_encoding: WP1a_F3_Ueberstrom;
+	WP1a_F3_Ueberstrom_Status_encoding: WP1a_F3_Ueberstrom_Status;
+	WP1a_F4_neg_Drehrichtung_encoding: WP1a_F4_neg_Drehrichtung;
+	WP1a_F4_neg_Drehrichtung_Status_encoding: WP1a_F4_neg_Drehrichtung_Status;
+	WP1a_F5_Knockout_encoding: WP1a_F5_Knockout;
+	WP1a_F5_Knockout_Status_encoding: WP1a_F5_Knockout_Status;
+	WP1a_F6_Watchdog_encoding: WP1a_F6_Watchdog;
+	WP1a_F6_Watchdog_Status_encoding: WP1a_F6_Watchdog_Status;
+	WP1a_F7_Uebertemperatur_encoding: WP1a_F7_Uebertemperatur;
+	WP1a_F7_Uebertemperatur_Status_encoding: WP1a_F7_Uebertemperatur_Status;
+	WP1a_H1_Endstufe_def_Status_encoding: WP1a_H1_Endstufe_def_Status;
+	WP1a_H1_Endstufe_defekt_encoding: WP1a_H1_Endstufe_defekt;
+	WP1a_H2_Controller_def_Status_encoding: WP1a_H2_Controller_def_Status;
+	WP1a_H2_Controller_defekt_encoding: WP1a_H2_Controller_defekt;
+	WP1a_H3_TempSensor_def_encoding: WP1a_H3_TempSensor_def;
+	WP1a_H3_TempSensor_def_Status_encoding: WP1a_H3_TempSensor_def_Status;
+	WP1a_H4_RotorlageSens_def_Status_encoding: WP1a_H4_RotorlageSens_def_Status;
+	WP1a_H4_RotorlageSensor_def_encoding: WP1a_H4_RotorlageSensor_def;
+	WP1a_Istdrehzahl_encoding: WP1a_Istdrehzahl;
+	WP1a_Knockout_Counter_encoding: WP1a_Knockout_Counter;
+	WP1a_Phasenstrom_encoding: WP1a_Phasenstrom;
+	WP1a_Software_inkomp_Status_encoding: WP1a_Software_inkomp_Status;
+	WP1a_Software_inkompatibel_encoding: WP1a_Software_inkompatibel;
+	WP1a_Solldrehzahl_encoding: WP1a_Solldrehzahl;
+	WP1a_Spannung_Ubat_encoding: WP1a_Spannung_Ubat;
+	WP1a_Supplier_Code_encoding: WP1a_Supplier_Code;
+	WP1a_Temperatur_PCB_encoding: WP1a_Temperatur_PCB;
+	WP1ae_01_BZ_encoding: WP1ae_01_BZ;
+	WP1as_01_BZ_encoding: WP1as_01_BZ;
+	WP1as_02_BZ_encoding: WP1as_02_BZ;
+	SC_BZ: KJS1s_01_BZ, KJS2s_01_BZ;
+	SC_CRC: KJS1s_01_CRC, KJS2s_01_CRC;
+	SC_MVH_TNCTOC_V1: MVH_L_Err_Heizkreis_1_TNCTOC, MVH_L_Err_Heizkreis_2_TNCTOC, MVH_L_Err_Heizkreis_3_TNCTOC, MVH_L_Err_Heizkreis_4_TNCTOC, MVH_L_Err_Intern_TNCTOC, MVH_L_Err_Leckagestrom_TNCTOC, MVH_L_Err_Ueberstromabsch_TNCTOC, MVH_L_Fehlerstatus_TNCTOC, MVH_L_MV_U_TNCTOC, MVH_L_NV_Status_TNCTOC, MVH_L_Temp_PCB_TNCTOC;
+	SC_MV_HL_Err_Heizkreis: MVH_L_Err_Heizkreis_2, MVH_L_Err_Heizkreis_3, MVH_L_Err_Heizkreis_4;
+}

@@ -1,0 +1,228 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                    	         BMW AG                                       */
+/*                        All rights reserved                                 */
+/*                                                                            */
+/* ************************************************************************** */
+/*                                                                            */
+/*  Description: LIN Description file                                         */
+/*  Konfiguration: PL7_KW27_14 [18]                                           */
+/*  Konfigurationsstand: F020-15-07-410 (Freeze KW27/14)                      */
+/*  Bus: M-LIN_2_V44                                                          */
+/*                                                                            */
+/* ************************************************************************** */
+
+LIN_description_file;
+LIN_protocol_version = "2.1";
+LIN_language_version = "2.1";
+LIN_speed =  19.2 kbps;
+Channel_name = "_M-LIN_2";
+Nodes {
+	Master: DME1, 10.0 ms, 0.1 ms;
+	Slaves: EWP23;
+}
+
+Signals {
+	AVL_VL_RPM_EWP23_LIN: 8, 255, EWP23, DME1;
+	COMM_ERR_EWP23_LIN: 1, 0, EWP23, DME1;
+	CTR_CLU_EWP23_LIN: 2, 3, DME1, EWP23;
+	ERR_ST_BLK_EWP23_LIN: 2, 3, EWP23, DME1;
+	ERR_ST_DRYR_EWP23_LIN: 2, 3, EWP23, DME1;
+	ERR_ST_ERR_EL_EWP23_LIN: 2, 3, EWP23, DME1;
+	ERR_ST_OCU_EWP23_LIN: 2, 3, EWP23, DME1;
+	ERR_ST_OTMP_EWP23_LIN: 2, 3, EWP23, DME1;
+	ERR_ST_U_EWP23_LIN: 2, 3, EWP23, DME1;
+	I_EWP23_LIN: 8, 255, EWP23, DME1;
+	ST_RPM_MONI_EWP23_LIN: 2, 3, EWP23, DME1;
+	ST_TARVL_RPM_EWP23_LIN: 8, 255, EWP23, DME1;
+	TARVL_RPM_EWP23_LIN: 8, 255, DME1, EWP23;
+	TEMP_EWP23_LIN: 8, 255, EWP23, DME1;
+	U_EWP23_LIN: 8, 255, EWP23, DME1;
+}
+
+Diagnostic_signals {
+	MasterReqB0:8, 0;
+	MasterReqB1:8, 0;
+	MasterReqB2:8, 0;
+	MasterReqB3:8, 0;
+	MasterReqB4:8, 0;
+	MasterReqB5:8, 0;
+	MasterReqB6:8, 0;
+	MasterReqB7:8, 0;
+	SlaveRespB0:8, 0;
+	SlaveRespB1:8, 0;
+	SlaveRespB2:8, 0;
+	SlaveRespB3:8, 0;
+	SlaveRespB4:8, 0;
+	SlaveRespB5:8, 0;
+	SlaveRespB6:8, 0;
+	SlaveRespB7:8, 0;
+}
+
+Frames {
+	CTR_EWP23_LIN: 57, DME1, 2{
+	 	 TARVL_RPM_EWP23_LIN, 0;
+	 	 CTR_CLU_EWP23_LIN, 8; 
+	}	
+	ST_EWP23_LIN: 56, EWP23, 8{
+	 	 ST_TARVL_RPM_EWP23_LIN, 0; 
+	 	 AVL_VL_RPM_EWP23_LIN, 8; 
+	 	 U_EWP23_LIN, 16; 
+	 	 TEMP_EWP23_LIN, 24; 
+	 	 I_EWP23_LIN, 32; 
+	 	 ST_RPM_MONI_EWP23_LIN, 42; 
+	 	 ERR_ST_OTMP_EWP23_LIN, 46; 
+	 	 ERR_ST_OCU_EWP23_LIN, 48; 
+	 	 ERR_ST_DRYR_EWP23_LIN, 50; 
+	 	 ERR_ST_U_EWP23_LIN, 52; 
+	 	 ERR_ST_BLK_EWP23_LIN, 54; 
+	 	 ERR_ST_ERR_EL_EWP23_LIN, 56; 
+	 	 COMM_ERR_EWP23_LIN, 63; 
+	}
+}
+
+Diagnostic_frames {
+	MasterReq : 60 {
+		 MasterReqB0,0; 
+		 MasterReqB1,8; 
+		 MasterReqB2,16; 
+		 MasterReqB3,24; 
+		 MasterReqB4,32; 
+		 MasterReqB5,40; 
+		 MasterReqB6,48; 
+		 MasterReqB7,56;  
+	}
+	SlaveResp : 61 {
+		 SlaveRespB0,0; 
+		 SlaveRespB1,8; 
+		 SlaveRespB2,16; 
+		 SlaveRespB3,24; 
+		 SlaveRespB4,32; 
+		 SlaveRespB5,40; 
+		 SlaveRespB6,48; 
+		 SlaveRespB7,56;  
+	}
+}
+
+Node_attributes{
+	EWP23 {
+		LIN_protocol = "2.1";
+		configured_NAD = 0x4B; // init: 0x4B;
+		product_id = 0x0068, 0x00, 0x00;
+		response_error = COMM_ERR_EWP23_LIN;
+		P2_min = 50.0 ms;
+		ST_min = 0.0 ms;
+		configurable_frames {
+		       ST_EWP23_LIN;
+		       CTR_EWP23_LIN;
+		}
+	}
+}
+
+Schedule_tables {
+	RUN_B_Simple {
+		ST_EWP23_LIN delay 10.0 ms;
+		CTR_EWP23_LIN delay 10.0 ms;
+	}
+	
+	RUN_B {
+		ST_EWP23_LIN delay 10.0 ms;
+		CTR_EWP23_LIN delay 10.0 ms;
+		ST_EWP23_LIN delay 10.0 ms;
+		CTR_EWP23_LIN delay 10.0 ms;
+	}
+//	INIT_ALL {
+//		AssignFrameIdRange { EWP23, 0, 120, 57, 0xFF, 0xFF} delay 10.0 ms;
+//	}
+}
+
+Signal_encoding_types {
+	AVL_VL_RPM_EWP20_LIN {
+		physical_value, 0, 254, 1, 0, "";
+		logical_value, 255, "Signal ungültig";
+	}
+	COMM_ERR_EWP20_LIN {
+		logical_value, 0, "kein Fehler";
+		logical_value, 1, "Fehler aktiv";
+	}
+	CTR_CLU_EWP23_LIN {
+		logical_value, 0, "Mechanischer Betrieb";
+		logical_value, 1, "Elektrischer Betrieb";
+		logical_value, 2, "Keine Aktion";
+		logical_value, 3, "Signal ungültig";
+	}
+	ERR_ST_BLK_EWP20_LIN {
+		logical_value, 0, "Keine Blockierung";
+		logical_value, 1, "Blockierung";
+		logical_value, 3, "Signal ungültig";
+	}
+	ERR_ST_DRYR_EWP20_LIN {
+		logical_value, 0, "kein Trockenlauf";
+		logical_value, 1, "Trockenlauf";
+		logical_value, 3, "Signal ungültig";
+	}
+	ERR_ST_ERR_EL_EWP20_LIN {
+		logical_value, 0, "Kein interner Fehler erkannt";
+		logical_value, 1, "Unplausible Temperatur-, Spannungs-, Strommessung erkannt";
+		logical_value, 3, "Signal ungültig";
+	}
+	ERR_ST_OCU_EWP20_LIN {
+		logical_value, 0, "kein Überstrom";
+		logical_value, 1, "Überstromabschaltung";
+		logical_value, 2, "Überstromabregelung";
+		logical_value, 3, "Signal ungültig";
+	}
+	ERR_ST_OTMP_EWP20_LIN {
+		logical_value, 0, "keine Übertemperatur";
+		logical_value, 1, "Übertemperatur";
+		logical_value, 2, "Abregeltemperatur";
+		logical_value, 3, "Signal ungültig";
+	}
+	ERR_ST_U_EWP20_LIN {
+		logical_value, 0, "Versorgungsspannung in Ordnung";
+		logical_value, 1, "Unter-/Überspannung";
+		logical_value, 3, "Signal ungültig";
+	}
+	I_EWP20_LIN {
+		physical_value, 0, 254, 0.2, 0, "A";
+		logical_value, 255, "Signal ungültig";
+	}
+	ST_RPM_MONI_EWP20_LIN {
+		logical_value, 0, "Drehzahlüberwachung";
+		logical_value, 1, "keine Drehzahlüberwachung";
+		logical_value, 3, "Signal ungültig";
+	}
+	ST_TARVL_RPM_EWP20_LIN {
+		physical_value, 0, 254, 1, 0, "";
+		logical_value, 255, "Signal ungültig";
+	}
+	TARVL_RPM_EWP20_LIN {
+		physical_value, 0, 254, 1, 0, "";
+		logical_value, 255, "Signal ungültig";
+	}
+	TEMP_EWP20_LIN {
+		physical_value, 0, 254, 1, -50, "°C";
+		logical_value, 255, "Signal ungültig";
+	}
+	U_EWP20_LIN {
+		physical_value, 0, 254, 0.1, 0, "V";
+		logical_value, 255, "Signal ungültig";
+	}
+}
+
+Signal_representation {
+	AVL_VL_RPM_EWP20_LIN: AVL_VL_RPM_EWP23_LIN;
+	COMM_ERR_EWP20_LIN: COMM_ERR_EWP23_LIN;
+	ERR_ST_BLK_EWP20_LIN: ERR_ST_BLK_EWP23_LIN;
+	ERR_ST_DRYR_EWP20_LIN: ERR_ST_DRYR_EWP23_LIN;
+	ERR_ST_ERR_EL_EWP20_LIN: ERR_ST_ERR_EL_EWP23_LIN;
+	ERR_ST_OCU_EWP20_LIN: ERR_ST_OCU_EWP23_LIN;
+	ERR_ST_OTMP_EWP20_LIN: ERR_ST_OTMP_EWP23_LIN;
+	ERR_ST_U_EWP20_LIN: ERR_ST_U_EWP23_LIN;
+	I_EWP20_LIN: I_EWP23_LIN;
+	ST_RPM_MONI_EWP20_LIN: ST_RPM_MONI_EWP23_LIN;
+	ST_TARVL_RPM_EWP20_LIN: ST_TARVL_RPM_EWP23_LIN;
+	TARVL_RPM_EWP20_LIN: TARVL_RPM_EWP23_LIN;
+	TEMP_EWP20_LIN: TEMP_EWP23_LIN;
+	U_EWP20_LIN: U_EWP23_LIN;
+}

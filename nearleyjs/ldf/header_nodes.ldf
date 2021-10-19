@@ -1,0 +1,8 @@
+LIN_description_file;
+LIN_protocol_version = "2.1";
+LIN_language_version = "2.2";
+LIN_speed = 19.2 kbps;
+Nodes {
+	Master:HCP4_uC2_1, 10 ms, 0.9 ms;
+	Slaves: HVH_L, KJS1, KJS2, KLE_1, KLE_2, MVH_L,PTC1, WP_1a;
+}

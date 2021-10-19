@@ -1,0 +1,692 @@
+{
+    "header": "lin_description_file",
+    "protocol_version": 2.1,
+    "language_version": 2.1,
+    "speed": 19200,
+    "nodes": {
+        "master": {
+            "name": "DME1",
+            "timebase": 0.01,
+            "jitter": 0.0001
+        },
+        "slaves": [
+            "EWP23"
+        ]
+    },
+    "signals": [
+        {
+            "name": "AVL_VL_RPM_EWP23_LIN",
+            "width": 8,
+            "init_value": 255,
+            "publisher": "EWP23",
+            "subscribers": [
+                "DME1"
+            ]
+        },
+        {
+            "name": "COMM_ERR_EWP23_LIN",
+            "width": 1,
+            "init_value": 0,
+            "publisher": "EWP23",
+            "subscribers": [
+                "DME1"
+            ]
+        },
+        {
+            "name": "CTR_CLU_EWP23_LIN",
+            "width": 2,
+            "init_value": 3,
+            "publisher": "DME1",
+            "subscribers": [
+                "EWP23"
+            ]
+        },
+        {
+            "name": "ERR_ST_BLK_EWP23_LIN",
+            "width": 2,
+            "init_value": 3,
+            "publisher": "EWP23",
+            "subscribers": [
+                "DME1"
+            ]
+        },
+        {
+            "name": "ERR_ST_DRYR_EWP23_LIN",
+            "width": 2,
+            "init_value": 3,
+            "publisher": "EWP23",
+            "subscribers": [
+                "DME1"
+            ]
+        },
+        {
+            "name": "ERR_ST_ERR_EL_EWP23_LIN",
+            "width": 2,
+            "init_value": 3,
+            "publisher": "EWP23",
+            "subscribers": [
+                "DME1"
+            ]
+        },
+        {
+            "name": "ERR_ST_OCU_EWP23_LIN",
+            "width": 2,
+            "init_value": 3,
+            "publisher": "EWP23",
+            "subscribers": [
+                "DME1"
+            ]
+        },
+        {
+            "name": "ERR_ST_OTMP_EWP23_LIN",
+            "width": 2,
+            "init_value": 3,
+            "publisher": "EWP23",
+            "subscribers": [
+                "DME1"
+            ]
+        },
+        {
+            "name": "ERR_ST_U_EWP23_LIN",
+            "width": 2,
+            "init_value": 3,
+            "publisher": "EWP23",
+            "subscribers": [
+                "DME1"
+            ]
+        },
+        {
+            "name": "I_EWP23_LIN",
+            "width": 8,
+            "init_value": 255,
+            "publisher": "EWP23",
+            "subscribers": [
+                "DME1"
+            ]
+        },
+        {
+            "name": "ST_RPM_MONI_EWP23_LIN",
+            "width": 2,
+            "init_value": 3,
+            "publisher": "EWP23",
+            "subscribers": [
+                "DME1"
+            ]
+        },
+        {
+            "name": "ST_TARVL_RPM_EWP23_LIN",
+            "width": 8,
+            "init_value": 255,
+            "publisher": "EWP23",
+            "subscribers": [
+                "DME1"
+            ]
+        },
+        {
+            "name": "TARVL_RPM_EWP23_LIN",
+            "width": 8,
+            "init_value": 255,
+            "publisher": "DME1",
+            "subscribers": [
+                "EWP23"
+            ]
+        },
+        {
+            "name": "TEMP_EWP23_LIN",
+            "width": 8,
+            "init_value": 255,
+            "publisher": "EWP23",
+            "subscribers": [
+                "DME1"
+            ]
+        },
+        {
+            "name": "U_EWP23_LIN",
+            "width": 8,
+            "init_value": 255,
+            "publisher": "EWP23",
+            "subscribers": [
+                "DME1"
+            ]
+        }
+    ],
+    "diagnostic_signals": [],
+    "frames": [
+        {
+            "name": "CTR_EWP23_LIN",
+            "frame_id": 57,
+            "publisher": "DME1",
+            "length": 2,
+            "signals": [
+                {
+                    "signal": "TARVL_RPM_EWP23_LIN",
+                    "offset": 0
+                },
+                {
+                    "signal": "CTR_CLU_EWP23_LIN",
+                    "offset": 8
+                }
+            ]
+        },
+        {
+            "name": "ST_EWP23_LIN",
+            "frame_id": 56,
+            "publisher": "EWP23",
+            "length": 8,
+            "signals": [
+                {
+                    "signal": "ST_TARVL_RPM_EWP23_LIN",
+                    "offset": 0
+                },
+                {
+                    "signal": "AVL_VL_RPM_EWP23_LIN",
+                    "offset": 8
+                },
+                {
+                    "signal": "U_EWP23_LIN",
+                    "offset": 16
+                },
+                {
+                    "signal": "TEMP_EWP23_LIN",
+                    "offset": 24
+                },
+                {
+                    "signal": "I_EWP23_LIN",
+                    "offset": 32
+                },
+                {
+                    "signal": "ST_RPM_MONI_EWP23_LIN",
+                    "offset": 42
+                },
+                {
+                    "signal": "ERR_ST_OTMP_EWP23_LIN",
+                    "offset": 46
+                },
+                {
+                    "signal": "ERR_ST_OCU_EWP23_LIN",
+                    "offset": 48
+                },
+                {
+                    "signal": "ERR_ST_DRYR_EWP23_LIN",
+                    "offset": 50
+                },
+                {
+                    "signal": "ERR_ST_U_EWP23_LIN",
+                    "offset": 52
+                },
+                {
+                    "signal": "ERR_ST_BLK_EWP23_LIN",
+                    "offset": 54
+                },
+                {
+                    "signal": "ERR_ST_ERR_EL_EWP23_LIN",
+                    "offset": 56
+                },
+                {
+                    "signal": "COMM_ERR_EWP23_LIN",
+                    "offset": 63
+                }
+            ]
+        }
+    ],
+    "diagnostic_frames": [],
+    "node_attributes": [
+        {
+            "name": "EWP23",
+            "lin_protocol": 2.1,
+            "configured_nad": 75,
+            "product_id": {
+                "supplier_id": 104,
+                "function_id": 0,
+                "variant": 0
+            },
+            "response_error": "COMM_ERR_EWP23_LIN",
+            "P2_min": 0.05,
+            "ST_min": 0.0,
+            "configurable_frames": [
+                "ST_EWP23_LIN",
+                "CTR_EWP23_LIN"
+            ]
+        }
+    ],
+    "schedule_tables": [
+        {
+            "name": "RUN_B_Simple",
+            "schedule": [
+                {
+                    "command": {
+                        "type": "frame",
+                        "frame": "ST_EWP23_LIN"
+                    },
+                    "delay": 10.0
+                },
+                {
+                    "command": {
+                        "type": "frame",
+                        "frame": "CTR_EWP23_LIN"
+                    },
+                    "delay": 10.0
+                }
+            ]
+        },
+        {
+            "name": "RUN_B",
+            "schedule": [
+                {
+                    "command": {
+                        "type": "frame",
+                        "frame": "ST_EWP23_LIN"
+                    },
+                    "delay": 10.0
+                },
+                {
+                    "command": {
+                        "type": "frame",
+                        "frame": "CTR_EWP23_LIN"
+                    },
+                    "delay": 10.0
+                },
+                {
+                    "command": {
+                        "type": "frame",
+                        "frame": "ST_EWP23_LIN"
+                    },
+                    "delay": 10.0
+                },
+                {
+                    "command": {
+                        "type": "frame",
+                        "frame": "CTR_EWP23_LIN"
+                    },
+                    "delay": 10.0
+                }
+            ]
+        }
+    ],
+    "signal_encoding_types": [
+        {
+            "name": "AVL_VL_RPM_EWP20_LIN",
+            "values": [
+                {
+                    "type": "physical",
+                    "min": 0,
+                    "max": 254,
+                    "scale": 1.0,
+                    "offset": 0.0,
+                    "unit": ""
+                },
+                {
+                    "type": "logical",
+                    "value": 255,
+                    "text": "Signal ung\u00fcltig"
+                }
+            ]
+        },
+        {
+            "name": "COMM_ERR_EWP20_LIN",
+            "values": [
+                {
+                    "type": "logical",
+                    "value": 0,
+                    "text": "kein Fehler"
+                },
+                {
+                    "type": "logical",
+                    "value": 1,
+                    "text": "Fehler aktiv"
+                }
+            ]
+        },
+        {
+            "name": "CTR_CLU_EWP23_LIN",
+            "values": [
+                {
+                    "type": "logical",
+                    "value": 0,
+                    "text": "Mechanischer Betrieb"
+                },
+                {
+                    "type": "logical",
+                    "value": 1,
+                    "text": "Elektrischer Betrieb"
+                },
+                {
+                    "type": "logical",
+                    "value": 2,
+                    "text": "Keine Aktion"
+                },
+                {
+                    "type": "logical",
+                    "value": 3,
+                    "text": "Signal ung\u00fcltig"
+                }
+            ]
+        },
+        {
+            "name": "ERR_ST_BLK_EWP20_LIN",
+            "values": [
+                {
+                    "type": "logical",
+                    "value": 0,
+                    "text": "Keine Blockierung"
+                },
+                {
+                    "type": "logical",
+                    "value": 1,
+                    "text": "Blockierung"
+                },
+                {
+                    "type": "logical",
+                    "value": 3,
+                    "text": "Signal ung\u00fcltig"
+                }
+            ]
+        },
+        {
+            "name": "ERR_ST_DRYR_EWP20_LIN",
+            "values": [
+                {
+                    "type": "logical",
+                    "value": 0,
+                    "text": "kein Trockenlauf"
+                },
+                {
+                    "type": "logical",
+                    "value": 1,
+                    "text": "Trockenlauf"
+                },
+                {
+                    "type": "logical",
+                    "value": 3,
+                    "text": "Signal ung\u00fcltig"
+                }
+            ]
+        },
+        {
+            "name": "ERR_ST_ERR_EL_EWP20_LIN",
+            "values": [
+                {
+                    "type": "logical",
+                    "value": 0,
+                    "text": "Kein interner Fehler erkannt"
+                },
+                {
+                    "type": "logical",
+                    "value": 1,
+                    "text": "Unplausible Temperatur-, Spannungs-, Strommessung erkannt"
+                },
+                {
+                    "type": "logical",
+                    "value": 3,
+                    "text": "Signal ung\u00fcltig"
+                }
+            ]
+        },
+        {
+            "name": "ERR_ST_OCU_EWP20_LIN",
+            "values": [
+                {
+                    "type": "logical",
+                    "value": 0,
+                    "text": "kein \u00dcberstrom"
+                },
+                {
+                    "type": "logical",
+                    "value": 1,
+                    "text": "\u00dcberstromabschaltung"
+                },
+                {
+                    "type": "logical",
+                    "value": 2,
+                    "text": "\u00dcberstromabregelung"
+                },
+                {
+                    "type": "logical",
+                    "value": 3,
+                    "text": "Signal ung\u00fcltig"
+                }
+            ]
+        },
+        {
+            "name": "ERR_ST_OTMP_EWP20_LIN",
+            "values": [
+                {
+                    "type": "logical",
+                    "value": 0,
+                    "text": "keine \u00dcbertemperatur"
+                },
+                {
+                    "type": "logical",
+                    "value": 1,
+                    "text": "\u00dcbertemperatur"
+                },
+                {
+                    "type": "logical",
+                    "value": 2,
+                    "text": "Abregeltemperatur"
+                },
+                {
+                    "type": "logical",
+                    "value": 3,
+                    "text": "Signal ung\u00fcltig"
+                }
+            ]
+        },
+        {
+            "name": "ERR_ST_U_EWP20_LIN",
+            "values": [
+                {
+                    "type": "logical",
+                    "value": 0,
+                    "text": "Versorgungsspannung in Ordnung"
+                },
+                {
+                    "type": "logical",
+                    "value": 1,
+                    "text": "Unter-/\u00dcberspannung"
+                },
+                {
+                    "type": "logical",
+                    "value": 3,
+                    "text": "Signal ung\u00fcltig"
+                }
+            ]
+        },
+        {
+            "name": "I_EWP20_LIN",
+            "values": [
+                {
+                    "type": "physical",
+                    "min": 0,
+                    "max": 254,
+                    "scale": 0.2,
+                    "offset": 0.0,
+                    "unit": "A"
+                },
+                {
+                    "type": "logical",
+                    "value": 255,
+                    "text": "Signal ung\u00fcltig"
+                }
+            ]
+        },
+        {
+            "name": "ST_RPM_MONI_EWP20_LIN",
+            "values": [
+                {
+                    "type": "logical",
+                    "value": 0,
+                    "text": "Drehzahl\u00fcberwachung"
+                },
+                {
+                    "type": "logical",
+                    "value": 1,
+                    "text": "keine Drehzahl\u00fcberwachung"
+                },
+                {
+                    "type": "logical",
+                    "value": 3,
+                    "text": "Signal ung\u00fcltig"
+                }
+            ]
+        },
+        {
+            "name": "ST_TARVL_RPM_EWP20_LIN",
+            "values": [
+                {
+                    "type": "physical",
+                    "min": 0,
+                    "max": 254,
+                    "scale": 1.0,
+                    "offset": 0.0,
+                    "unit": ""
+                },
+                {
+                    "type": "logical",
+                    "value": 255,
+                    "text": "Signal ung\u00fcltig"
+                }
+            ]
+        },
+        {
+            "name": "TARVL_RPM_EWP20_LIN",
+            "values": [
+                {
+                    "type": "physical",
+                    "min": 0,
+                    "max": 254,
+                    "scale": 1.0,
+                    "offset": 0.0,
+                    "unit": ""
+                },
+                {
+                    "type": "logical",
+                    "value": 255,
+                    "text": "Signal ung\u00fcltig"
+                }
+            ]
+        },
+        {
+            "name": "TEMP_EWP20_LIN",
+            "values": [
+                {
+                    "type": "physical",
+                    "min": 0,
+                    "max": 254,
+                    "scale": 1.0,
+                    "offset": -50.0,
+                    "unit": "\u00b0C"
+                },
+                {
+                    "type": "logical",
+                    "value": 255,
+                    "text": "Signal ung\u00fcltig"
+                }
+            ]
+        },
+        {
+            "name": "U_EWP20_LIN",
+            "values": [
+                {
+                    "type": "physical",
+                    "min": 0,
+                    "max": 254,
+                    "scale": 0.1,
+                    "offset": 0.0,
+                    "unit": "V"
+                },
+                {
+                    "type": "logical",
+                    "value": 255,
+                    "text": "Signal ung\u00fcltig"
+                }
+            ]
+        }
+    ],
+    "signal_representations": [
+        {
+            "encoding": "AVL_VL_RPM_EWP20_LIN",
+            "signals": [
+                "AVL_VL_RPM_EWP23_LIN"
+            ]
+        },
+        {
+            "encoding": "COMM_ERR_EWP20_LIN",
+            "signals": [
+                "COMM_ERR_EWP23_LIN"
+            ]
+        },
+        {
+            "encoding": "ERR_ST_BLK_EWP20_LIN",
+            "signals": [
+                "ERR_ST_BLK_EWP23_LIN"
+            ]
+        },
+        {
+            "encoding": "ERR_ST_DRYR_EWP20_LIN",
+            "signals": [
+                "ERR_ST_DRYR_EWP23_LIN"
+            ]
+        },
+        {
+            "encoding": "ERR_ST_ERR_EL_EWP20_LIN",
+            "signals": [
+                "ERR_ST_ERR_EL_EWP23_LIN"
+            ]
+        },
+        {
+            "encoding": "ERR_ST_OCU_EWP20_LIN",
+            "signals": [
+                "ERR_ST_OCU_EWP23_LIN"
+            ]
+        },
+        {
+            "encoding": "ERR_ST_OTMP_EWP20_LIN",
+            "signals": [
+                "ERR_ST_OTMP_EWP23_LIN"
+            ]
+        },
+        {
+            "encoding": "ERR_ST_U_EWP20_LIN",
+            "signals": [
+                "ERR_ST_U_EWP23_LIN"
+            ]
+        },
+        {
+            "encoding": "I_EWP20_LIN",
+            "signals": [
+                "I_EWP23_LIN"
+            ]
+        },
+        {
+            "encoding": "ST_RPM_MONI_EWP20_LIN",
+            "signals": [
+                "ST_RPM_MONI_EWP23_LIN"
+            ]
+        },
+        {
+            "encoding": "ST_TARVL_RPM_EWP20_LIN",
+            "signals": [
+                "ST_TARVL_RPM_EWP23_LIN"
+            ]
+        },
+        {
+            "encoding": "TARVL_RPM_EWP20_LIN",
+            "signals": [
+                "TARVL_RPM_EWP23_LIN"
+            ]
+        },
+        {
+            "encoding": "TEMP_EWP20_LIN",
+            "signals": [
+                "TEMP_EWP23_LIN"
+            ]
+        },
+        {
+            "encoding": "U_EWP20_LIN",
+            "signals": [
+                "U_EWP23_LIN"
+            ]
+        }
+    ]
+}

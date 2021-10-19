@@ -1,0 +1,4 @@
+Nodes{
+	Master:HCP4_uC2_1, 10 ms, 0.9 ms;
+	Slaves: HVH_L, KJS1, KJS2, KLE_1, KLE_2, MVH_L,PTC1, WP_1a;
+}
